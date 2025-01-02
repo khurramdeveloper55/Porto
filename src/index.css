@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Lexend", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+/* Initial State */
+.slide-up-h2,
+.slide-up-p,
+.slide-up-btn {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+/* Delayed Transitions */
+.slide-up-p {
+  transition: opacity 1s ease 0.5s, transform 1s ease 0.5s;
+}
+
+.slide-up-btn {
+  transition: opacity 1s ease 1s, transform 1s ease 1s;
+}
+
+/* Active State */
+.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slide-up-img {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.animate-img {
+  animation: fadeIn 3s ease forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

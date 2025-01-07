@@ -4,6 +4,12 @@ import { FaLock } from "react-icons/fa";
 import { TbClock24, TbTruckDelivery } from "react-icons/tb";
 import PopularCategories from "./PopularCategories";
 import ProductDeals from "./ProductDeals";
+import Deals from "./Deals";
+import Strip from "./Strip";
+import Testimonials from "./Testimonials";
+import Social from "./Social";
+import Cta from "./CTA";
+import Footer from "./Footer";
 
 export default function Home() {
   return (
@@ -36,6 +42,12 @@ export default function Home() {
       </div>
       <PopularCategories />
       <ProductDeals />
+      <Deals />
+      <Strip />
+      <Testimonials />
+      <Social />
+      <Cta />
+      <Footer />
     </>
   );
 }

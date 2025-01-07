@@ -9,6 +9,9 @@ body {
   font-optical-sizing: auto;
   font-style: normal;
 }
+#root {
+  max-width: 1140px;
+}
 /* Initial State */
 .slide-up-h2,
 .slide-up-p,
@@ -48,5 +51,12 @@ body {
   }
   100% {
     opacity: 1;
+  }
+}
+
+@media (min-width: 1200px) {
+  #root,
+  .container {
+    max-width: 1140px !important;
   }
 }

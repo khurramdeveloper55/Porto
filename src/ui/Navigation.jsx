@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 export default function Navigation() {
   return (
     <div>
-      <ul className="flex space-x-4 mb-5 gap-12 font-bold text-zinc-800 text-lg">
-        <Link to="/cables">Cables</Link>
+      <ul className="flex space-x-4 mb-5 gap-9 font-bold text-zinc-800 text-lg">
+        <Link to="/cases">Cases</Link>
         <Link to="/screenprotectors">Screen Protectors</Link>
         <Link to="/cables">Cables</Link>
         <Link to="/chargers">Chargers</Link>

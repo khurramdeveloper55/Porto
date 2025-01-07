@@ -8,6 +8,7 @@ import Cables from "./ui/products/Cables";
 import PowerBank from "./ui/products/PowerBank";
 import AppLayout from "./AppLayout";
 import ScreenProtectors from "./ui/products/ScreenProtectors";
+import ProductDetails from "./ui/products/ProductDetails";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/chargers" element={<Chargers />} />
           <Route path="/cables" element={<Cables />} />
           <Route path="/powerbank" element={<PowerBank />} />
+          <Route path="/product" element={<ProductDetails />} />
         </Route>
       </Routes>
     </BrowserRouter>

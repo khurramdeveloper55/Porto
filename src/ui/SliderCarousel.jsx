@@ -67,7 +67,7 @@ export default function SliderCarousel() {
               />
               <div className="pl-20 text-left">
                 <h2
-                  className={`text-5xl font-extrabold text-zinc-800 leading-11 slide-up-h2 ${
+                  className={`md:text-5xl text-3xl font-extrabold text-zinc-800 leading-11 slide-up-h2 ${
                     currentSlide === 0 ? "animate" : ""
                   }`}
                 >

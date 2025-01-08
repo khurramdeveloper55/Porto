@@ -7,9 +7,9 @@ export default function Deals() {
       <h2 className="text-left text-3xl mb-6 font-bold text-zinc-800">
         Hurry Up Deals
       </h2>
-      <div className="flex gap-4">
+      <div className="flex flex-col lg:flex-row gap-4">
         <div
-          className="w-1/2 flex justify-between items-center px-8 rounded-xl"
+          className="lg:w-1/2 w-full flex flex-col sm:flex-row  gap-4 sm:gap-0 justify-between items-center px-8 py-4 lg:py-0 rounded-xl"
           style={{
             backgroundImage: 'url("images/banner-bg-1.jpg")',
             backgroundSize: "cover",
@@ -27,7 +27,7 @@ export default function Deals() {
             <img src="images/banner-img-1.png" alt="" />
           </div>
         </div>
-        <div className="bg-violet-100 w-1/2 flex rounded-xl text-left p-4 items-center">
+        <div className="bg-violet-100 lg:w-1/2 w-full flex flex-col sm:flex-row gap-4 sm:gap-0 rounded-xl text-left p-4 items-center">
           <div className="py-6 px-8">
             <h2 className="font-bold text-4xl text-zinc-800 leading-10 mb-4">
               New 3 in 1 <br /> Wireless <br /> Charger

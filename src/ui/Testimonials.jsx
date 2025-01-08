@@ -16,6 +16,16 @@ export default function Testimonials() {
     prevArrow: currentSlide > 0 ? <CustomPrevArrow /> : null,
     nextArrow: currentSlide < totalSlides - 1 ? <CustomNextArrow /> : null,
     beforeChange: (oldIndex, newIndex) => setCurrentSlide(newIndex),
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: false,
+        },
+      },
+    ],
   };
 
   function CustomPrevArrow(props) {

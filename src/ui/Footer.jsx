@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <div className="flex text-left mt-12 items-start justify-between">
+    <div className="flex md:flex-row flex-col gap-8 md:gap-6 text-left mt-12 items-start justify-between">
       <div>
         <img src="images/logo.png" className="w-32 mb-3" alt="" />
         <p>Address: 1234 Street, Suite 500, New York, NY</p>
@@ -36,7 +36,7 @@ export default function Footer() {
                 placeholder="Email Address..."
                 className="border-neutral-200 border-solid rounded-3xl inline shadow-sm border py-2 pl-3 pr-32"
               />
-              <span className="absolute right-4 -top-2 bg-zinc-800 text-white rounded-md px-2 py-1">
+              <span className="absolute right-4 -top-[6px] bg-zinc-800 text-white rounded-md px-2 py-1">
                 Subscribe
               </span>
             </span>

@@ -24,11 +24,11 @@ export default function SliderCarousel() {
     const { className, onClick } = props;
     return (
       <button
-        className={`${className} custom-prev !text-black !text-xl w-24 h-24 z-50 absolute top-64 border -left-[50px]`}
+        className={`${className} custom-prev before:hidden !text-black !text-lg w-24 !left-[-18px] !top-[45%] h-24 z-50 absolute  border `}
         onClick={onClick}
         aria-label="Previous Slide"
       >
-        <span>
+        <span className="bg-white border-[1px] rounded-full shadow-custom  !w-10 pl-[10px] text-black pt-[10px] !h-10 inline-block">
           <GrPrevious />
         </span>
       </button>
@@ -39,11 +39,11 @@ export default function SliderCarousel() {
     const { className, onClick } = props;
     return (
       <button
-        className={`${className} custom-next !text-black !text-xl w-24 h-24 z-50 absolute top-64 -right[50px]`}
+        className={`${className} custom-next before:hidden !text-black !top-[45%] !right-0 !text-lg w-24 h-24 z-50 absolute  `}
         onClick={onClick}
         aria-label="Next Slide"
       >
-        <span>
+        <span className="bg-white border-[1px] rounded-full shadow-custom  !w-10 pl-[10px] text-black pt-[10px] !h-10 inline-block">
           <GrNext />
         </span>
       </button>
@@ -61,20 +61,20 @@ export default function SliderCarousel() {
             <div className="w-1/2 ">
               <img
                 src="images/slider/slide-dots.png"
-                className={`absolute top-16 left-10 slide-up-img  ${
+                className={`absolute lg:top-16 top-6 md:left-10 left-4 w-[100px] md:w-auto slide-up-img  ${
                   currentSlide === 0 ? "animate-img" : ""
                 }`}
               />
-              <div className="pl-20 text-left">
+              <div className="md:pl-20 pl-8 text-left">
                 <h2
-                  className={`md:text-5xl text-3xl font-extrabold text-zinc-800 leading-11 slide-up-h2 ${
+                  className={`lg:text-5xl md:text-3xl text-xl font-extrabold text-zinc-800 leading-11 slide-up-h2 ${
                     currentSlide === 0 ? "animate" : ""
                   }`}
                 >
                   New Deals <br /> Just Dropped
                 </h2>
                 <p
-                  className={`mt-4 text-neutral-500 slide-up-p ${
+                  className={`mt-4 text-neutral-500 slide-up-p md:block hidden ${
                     currentSlide === 0 ? "animate" : ""
                   }`}
                 >
@@ -82,7 +82,7 @@ export default function SliderCarousel() {
                   products added every week.
                 </p>
                 <span
-                  className={`mt-4 inline-block bg-indigo-600 font-bold text-lg text-white px-8 py-3 rounded-full slide-up-btn ${
+                  className={`mt-4 inline-block bg-indigo-600 font-bold md:text-lg text-sm text-white px-8 py-3 rounded-full slide-up-btn ${
                     currentSlide === 0 ? "animate" : ""
                   }`}
                 >
@@ -94,7 +94,7 @@ export default function SliderCarousel() {
               <img
                 src="images/slider/slide-img-1.png"
                 alt="Slide 1"
-                className="carousel-image w-[500px]"
+                className="carousel-image md:w-[500px] w-[200px]"
               />
             </div>
           </div>
@@ -104,7 +104,7 @@ export default function SliderCarousel() {
             className="flex items-center content-between rounded-lg max-h-[450px]"
             style={{ backgroundImage: 'url("images/slider/slider-bg-2.jpg")' }}
           >
-            <div className="w-[490px]  pt-12 pl-12">
+            <div className="md:w-[490px] w-[200px]  pt-12 md:pl-12 pl-2">
               <img
                 src="images/slider/slide-img-2.png"
                 alt="Slide 2"
@@ -113,21 +113,21 @@ export default function SliderCarousel() {
             </div>
             <div className="w-1/2 p-2 text-left">
               <h2
-                className={`text-5xl font-extrabold text-zinc-800 leading-11 slide-up-h2 ${
+                className={`lg:text-5xl md:text-3xl text-xl font-extrabold text-zinc-800 leading-11 slide-up-h2 ${
                   currentSlide === 1 ? "animate" : ""
                 }`}
               >
                 Apple Watch <br /> Edition <br /> Base Station
               </h2>
               <p
-                className={`mt-4 text-neutral-500 slide-up-p ${
+                className={`mt-4 text-neutral-500 slide-up-p md:block hidden ${
                   currentSlide === 1 ? "animate" : ""
                 }`}
               >
                 The ultimate charging hub for iPhone, Apple Watch, and AirPods.
               </p>
               <span
-                className={`mt-4 inline-block bg-indigo-600 font-bold text-lg text-white px-8 py-3 rounded-full slide-up-btn ${
+                className={`mt-4 inline-block bg-indigo-600 font-bold md:text-lg text-sm text-white px-8 py-3 rounded-full slide-up-btn ${
                   currentSlide === 1 ? "animate" : ""
                 }`}
               >

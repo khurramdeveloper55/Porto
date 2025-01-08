@@ -5,9 +5,9 @@ import { RiShareBoxFill } from "react-icons/ri";
 
 export default function Cta() {
   return (
-    <div className="flex gap-6 mt-16">
-      <div className="bg-violet-500 w-1/2 rounded-xl flex items-center gap-10 px-12 py-6">
-        <div>
+    <div className="flex lg:flex-row flex-col gap-6 mt-16">
+      <div className="bg-violet-500 lg:w-1/2 w-full rounded-xl flex lg:flex-row flex-col items-center lg:gap-10 gap-4 px-12 py-6">
+        <div className="hidden lg:inline">
           <img src="images/slide-dots-block.png" alt="" />
         </div>
         <div className="text-7xl text-white">
@@ -22,9 +22,9 @@ export default function Cta() {
           </p>
         </div>
       </div>
-      <div className="border-gray-200 border-2 flex items-center justify-around py-4 px-12  rounded-lg w-1/2">
+      <div className="border-gray-200 border-2 flex items-center gap-4 lg:gap-0 lg:flex-row flex-col justify-around py-4 px-12 w-full  rounded-lg lg:w-1/2">
         <div>
-          <h2 className="flex items-center text-2xl gap-2 font-semibold text-zinc-800">
+          <h2 className="flex items-center text-xl gap-2 font-semibold text-zinc-800">
             <FaPhoneAlt /> 123 456 7890
           </h2>
           <button className="flex items-center gap-1 mt-1 bg-indigo-50 text-zinc-800 px-4 py-2 rounded-lg">

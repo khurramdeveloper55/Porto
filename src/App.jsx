@@ -9,13 +9,14 @@ import PowerBank from "./ui/products/PowerBank";
 import AppLayout from "./AppLayout";
 import ScreenProtectors from "./ui/products/ScreenProtectors";
 import ProductDetails from "./ui/products/ProductDetails";
+import Home from "./ui/Home";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<AppLayout />}>
-          <Route index element={<Navigate replace to="/" />} />
+          <Route index element={<Home />} />
           <Route path="/magsafe" element={<MagSafe />} />
           <Route path="/screenprotectors" element={<ScreenProtectors />} />
           <Route path="/headphones" element={<HeadPhones />} />

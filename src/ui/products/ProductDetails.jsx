@@ -24,15 +24,15 @@ export default function ProductDetails() {
         </span>{" "}
         JBL TUNE 720BT
       </div>
-      <div className="flex gap-6">
-        <div className="w-1/2">
+      <div className="flex md:flex-row flex-col gap-6">
+        <div className="md:w-1/2 w-full">
           <img
             src="images/product-2-1-600x600.jpg"
             className="rounded-lg"
             alt=""
           />
         </div>
-        <div className="w-1/2">
+        <div className="md:w-1/2 w-full">
           <div className="text-left">
             <h2 className="text-3xl font-bold text-zinc-800">JBL Tune 720BT</h2>
             <div className="flex items-center gap-4 mb-4">
@@ -81,7 +81,7 @@ export default function ProductDetails() {
                   ADD TO WISHLIST
                 </button>
               </div>
-              <div className="flex items-center justify-center gap-2 text-neutral-500">
+              <div className="flex md:flex-row flex-col items-center justify-center gap-2 text-neutral-500">
                 Supported payment types:{" "}
                 <span className="text-4xl flex gap-2">
                   <FaCcVisa /> <FaCcPaypal /> <FaGooglePay />
@@ -97,8 +97,8 @@ export default function ProductDetails() {
           </div>
         </div>
       </div>
-      <div className="flex text-left gap-8 my-16">
-        <div className="w-1/2">
+      <div className="flex lg:flex-row flex-col text-left gap-8 my-16">
+        <div className="lg:w-1/2 w-full">
           <h3 className="text-3xl font-bold mb-3">Overview</h3>
           <p className="text-neutral-500 mb-6">
             The Galaxy A35 5G Silicone Case is the perfect blend of style and
@@ -116,7 +116,7 @@ export default function ProductDetails() {
             durable, providing long-lasting protection.
           </p>
         </div>
-        <div className="w-1/2">
+        <div className="lg:w-1/2 w-full">
           <h3 className="text-3xl font-bold mb-3">Details</h3>
           <div className="bg-neutral-100 rounded-sm text-sm pl-5 py-2">
             SPECIFICATIONS

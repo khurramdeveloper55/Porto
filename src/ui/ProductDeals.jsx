@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import { FaStar } from "react-icons/fa";
+import { FaRegHeart, FaStar } from "react-icons/fa";
+import { FaArrowRightLong } from "react-icons/fa6";
 import { GrNext, GrPrevious } from "react-icons/gr";
+import { IoIosSearch } from "react-icons/io";
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 
 export default function ProductDeals() {
@@ -66,7 +69,7 @@ export default function ProductDeals() {
 
       <Slider {...settings}>
         <div className="carousel-item">
-          <div className=" bg-neutral-100 mx-2 rounded-xl">
+          <div className=" bg-neutral-100 mx-2 rounded-xl relative group cursor-pointer">
             <div>
               <img
                 src="images/products/product-1.jpg"
@@ -86,6 +89,21 @@ export default function ProductDeals() {
                 <FaStar /> <FaStar /> <FaStar /> <FaStar /> <FaStar />
               </span>
               <p className="text-xl text-neutral-700 font-medium">$80 - $100</p>
+            </div>
+            <div className="absolute top-3 right-2 opacity-0 transform scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
+              <span className="flex flex-col gap-4">
+                <Link to="/product">
+                  <span className="bg-white border-[1px] rounded-full flex items-center justify-center shadow-custom w-10 h-10">
+                    <FaArrowRightLong />
+                  </span>
+                </Link>
+                <span className="bg-white border-[1px] rounded-full flex items-center justify-center shadow-custom w-10 h-10">
+                  <FaRegHeart />
+                </span>
+                <span className="bg-white border-[1px] rounded-full flex items-center justify-center shadow-custom w-10 h-10">
+                  <IoIosSearch />
+                </span>
+              </span>
             </div>
           </div>
         </div>

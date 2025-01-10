@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <div className="flex md:flex-row flex-col gap-8 md:gap-6 text-left mt-12 items-start justify-between">
       <div>
-        <img src="images/logo.png" className="w-32 mb-3" alt="" />
+        <img src="images/footer-logo.png" className="w-24 mb-3" alt="" />
         <p>Address: 1234 Street, Suite 500, New York, NY</p>
         <p>Get Directions</p>
         <p>Email: email.com</p>

@@ -12,12 +12,12 @@ export default function Header() {
       "
       >
         <div className="lg:inline inline-flex items-center gap-4">
-          <span className="lg:hidden inline text-2xl bg-indigo-50 p-3 rounded-md">
+          <span className="lg:hidden inline sm:text-2xl text-xl bg-indigo-50 sm:p-3 p-2 rounded-md">
             <RxHamburgerMenu />
           </span>
           <img
             src="images/logo.png"
-            className="w-36 h-8 inline"
+            className="sm:w-36  w-24  inline"
             alt="Porto Logo"
           />
         </div>
@@ -27,7 +27,7 @@ export default function Header() {
               <input
                 type="text"
                 placeholder="Search for products..."
-                className=" placeholder:text-sm w-full lg:w-auto border-neutral-200 border-solid rounded-3xl inline shadow-custom border py-3 pl-3 pr-40"
+                className=" placeholder:text-sm w-full lg:w-96 border-neutral-200 border-solid rounded-3xl inline shadow-custom border py-3 pl-3 "
               />
               <span className="absolute right-3 -top-[1.5px] text-2xl text-neutral-800">
                 <IoIosSearch />
@@ -35,24 +35,24 @@ export default function Header() {
             </span>
           </form>
         </div>
-        <div className="flex justify-between gap-4">
-          <span className="flex items-center gap-2">
+        <div className="flex justify-between sm:gap-4 gap-2">
+          <span className="items-center gap-2 hidden sm:flex">
             <span className="text-2xl bg-indigo-50 p-3 rounded-md">
               <FaRegHeart />
             </span>{" "}
             <span className="hidden lg:inline">Wishlist</span>
           </span>
           <span className="flex items-center gap-2">
-            <span className="text-2xl bg-indigo-50 p-3 rounded-md">
+            <span className="sm:text-2xl text-xl bg-indigo-50 sm:p-3 p-2 rounded-md">
               <FaRegUser />
             </span>
             <span className="hidden lg:inline">My Account</span>
           </span>
           <span className="flex items-center relative">
-            <span className="lg:text-3xl text-2xl bg-indigo-50 lg:p-4 p-3 rounded-md">
+            <span className="lg:text-3xl sm:text-2xl text-xl bg-indigo-50 lg:p-4 sm:p-3 p-2 rounded-md">
               <HiOutlineShoppingBag />
             </span>
-            <span className="absolute lg:top-3 top-2 lg:right-3 right-2 rounded-full text-xs bg-indigo-600 text-white w-4 h-4 leading-4 radius-md">
+            <span className="absolute lg:top-3 sm:top-2 top-1 lg:right-3 sm:right-2 right-1 rounded-full text-xs bg-indigo-600 text-white w-4 h-4 leading-4 radius-md">
               0
             </span>
           </span>

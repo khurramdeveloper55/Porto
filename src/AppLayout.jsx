@@ -2,8 +2,7 @@ import React from "react";
 import Header from "./ui/Header";
 import Navigation from "./ui/Navigation";
 import { Outlet } from "react-router-dom";
-import SliderCarousel from "./ui/SliderCarousel";
-import Home from "./ui/Home";
+import Footer from "./ui/Footer";
 
 export default function AppLayout() {
   return (
@@ -11,8 +10,7 @@ export default function AppLayout() {
       <Header />
       <Navigation />
       <Outlet />
-      <SliderCarousel />
-      <Home />
+      <Footer />
     </>
   );
 }

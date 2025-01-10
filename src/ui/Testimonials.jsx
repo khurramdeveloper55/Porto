@@ -32,11 +32,11 @@ export default function Testimonials() {
     const { className, onClick } = props;
     return (
       <button
-        className={`${className} custom-prev !text-black !text-xl w-24 h-24 z-50 absolute top-64 border -left-[50px]`}
+        className={`${className} custom-prev before:hidden !text-black !text-lg w-24 !left-[-18px] !top-[45%] h-24 z-50 absolute  border `}
         onClick={onClick}
         aria-label="Previous Slide"
       >
-        <span>
+        <span className="bg-white border-[1px] rounded-full shadow-custom  !w-10 pl-[10px] text-black pt-[10px] !h-10 inline-block">
           <GrPrevious />
         </span>
       </button>
@@ -47,11 +47,11 @@ export default function Testimonials() {
     const { className, onClick } = props;
     return (
       <button
-        className={`${className} custom-next !text-black !text-xl w-24 h-24 z-50 absolute top-64 -right[50px]`}
+        className={`${className} custom-next before:hidden !text-black !top-[45%] !right-0 !text-lg w-24 h-24 z-50 absolute  `}
         onClick={onClick}
         aria-label="Next Slide"
       >
-        <span>
+        <span className="bg-white border-[1px] rounded-full shadow-custom  !w-10 pl-[10px] text-black pt-[10px] !h-10 inline-block">
           <GrNext />
         </span>
       </button>

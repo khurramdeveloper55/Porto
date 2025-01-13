@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { FaRegHeart, FaStar } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
@@ -5,8 +6,14 @@ import { GrNext, GrPrevious } from "react-icons/gr";
 import { IoIosSearch } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
+import { getProducts } from "../services/apiProducts";
 
 export default function ProductDeals() {
+  const { data: products, isLoading } = useQuery({
+    queryKey: ["products"],
+    queryFn: getProducts,
+  });
+  console.log(products);
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalSlides = 2;
   const settings = {
@@ -61,6 +68,10 @@ export default function ProductDeals() {
     );
   }
 
+  if (!products || products.length === 0) {
+    return <p>No products available</p>;
+  }
+
   return (
     <div>
       <h2 className="text-3xl font-bold text-left mb-12 mt-12">
@@ -68,7 +79,52 @@ export default function ProductDeals() {
       </h2>
 
       <Slider {...settings}>
-        <div className="carousel-item">
+        {products.map((product) => (
+          <div className="carousel-item">
+            <div className=" bg-neutral-100 mx-2 rounded-xl relative group cursor-pointer">
+              <div>
+                <img
+                  src="images/products/product-1.jpg"
+                  className="rounded-xl"
+                  alt=""
+                />
+              </div>
+              <div className=" py-3 ">
+                <div className="flex gap-2 mt-2 mb-2 justify-center">
+                  <span className="w-5 h-5 rounded-full  bg-zinc-800 inline-block "></span>
+                  <span className="w-5 h-5 rounded-full  bg-neutral-500 inline-block "></span>
+                  <span className="w-5 h-5 rounded-full  bg-white inline-block "></span>
+                </div>
+                <span className="text-sm text-neutral-400">
+                  {product.category}
+                </span>
+                <h3 className="">{product.name}</h3>
+                <span className="flex gap-[1px] justify-center">
+                  <FaStar /> <FaStar /> <FaStar /> <FaStar /> <FaStar />
+                </span>
+                <p className="text-xl text-neutral-700 font-medium">
+                  {product.price}
+                </p>
+              </div>
+              <div className="absolute top-3 right-2 opacity-0 transform scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
+                <span className="flex flex-col gap-4">
+                  <Link to="/product">
+                    <span className="bg-white border-[1px] rounded-full flex items-center justify-center shadow-custom w-10 h-10">
+                      <FaArrowRightLong />
+                    </span>
+                  </Link>
+                  <span className="bg-white border-[1px] rounded-full flex items-center justify-center shadow-custom w-10 h-10">
+                    <FaRegHeart />
+                  </span>
+                  <span className="bg-white border-[1px] rounded-full flex items-center justify-center shadow-custom w-10 h-10">
+                    <IoIosSearch />
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
+        {/* <div className="carousel-item">
           <div className=" bg-neutral-100 mx-2 rounded-xl relative group cursor-pointer">
             <div>
               <img
@@ -202,7 +258,7 @@ export default function ProductDeals() {
               <p className="text-xl text-neutral-700 font-medium">$80 - $100</p>
             </div>
           </div>
-        </div>
+        </div> */}
       </Slider>
     </div>
   );

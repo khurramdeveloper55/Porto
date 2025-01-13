@@ -1,4 +1,3 @@
-import React from "react";
 import PopularCategories from "./PopularCategories";
 import ProductDeals from "./ProductDeals";
 import Deals from "./Deals";
@@ -7,7 +6,6 @@ import Testimonials from "./Testimonials";
 import Social from "./Social";
 import Cta from "./Cta";
 import SliderCarousel from "./SliderCarousel";
-import Footer from "./Footer";
 import ChooseUs from "./ChooseUs";
 
 export default function Home() {

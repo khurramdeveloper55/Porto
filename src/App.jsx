@@ -1,4 +1,5 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import HeadPhones from "./ui/products/HeadPhones";
 import MagSafe from "./ui/products/MagSafe";
@@ -12,22 +13,27 @@ import ProductDetails from "./ui/products/ProductDetails";
 import Home from "./ui/Home";
 
 function App() {
+  const queryClient = new QueryClient();
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<AppLayout />}>
-          <Route index element={<Home />} />
-          <Route path="/magsafe" element={<MagSafe />} />
-          <Route path="/screenprotectors" element={<ScreenProtectors />} />
-          <Route path="/headphones" element={<HeadPhones />} />
-          <Route path="/cases" element={<Cases />} />
-          <Route path="/chargers" element={<Chargers />} />
-          <Route path="/cables" element={<Cables />} />
-          <Route path="/powerbank" element={<PowerBank />} />
-          <Route path="/product" element={<ProductDetails />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<AppLayout />}>
+              <Route index element={<Home />} />
+              <Route path="/magsafe" element={<MagSafe />} />
+              <Route path="/screenprotectors" element={<ScreenProtectors />} />
+              <Route path="/headphones" element={<HeadPhones />} />
+              <Route path="/cases" element={<Cases />} />
+              <Route path="/chargers" element={<Chargers />} />
+              <Route path="/cables" element={<Cables />} />
+              <Route path="/powerbank" element={<PowerBank />} />
+              <Route path="/product" element={<ProductDetails />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </>
   );
 }
 

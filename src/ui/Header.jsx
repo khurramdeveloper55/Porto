@@ -3,6 +3,7 @@ import { FaRegHeart, FaRegUser } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { IoIosSearch } from "react-icons/io";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
@@ -15,11 +16,13 @@ export default function Header() {
           <span className="lg:hidden inline sm:text-2xl text-xl bg-indigo-50 sm:p-3 p-2 rounded-md">
             <RxHamburgerMenu />
           </span>
-          <img
-            src="images/logo.png"
-            className="sm:w-36  w-24  inline"
-            alt="Porto Logo"
-          />
+          <Link to="/">
+            <img
+              src="images/logo.png"
+              className="sm:w-36  w-24  inline"
+              alt="Porto Logo"
+            />
+          </Link>
         </div>
         <div className="inline lg:w-auto w-full lg:relative absolute lg:top-0 top-[65px] ">
           <form action="" className="inline">

@@ -11,6 +11,7 @@ import AppLayout from "./AppLayout";
 import ScreenProtectors from "./ui/products/ScreenProtectors";
 import ProductDetails from "./ui/products/ProductDetails";
 import Home from "./ui/Home";
+import CategoryPage from "./ui/products/CategoryPage";
 
 function App() {
   const queryClient = new QueryClient();
@@ -21,14 +22,7 @@ function App() {
           <Routes>
             <Route element={<AppLayout />}>
               <Route index element={<Home />} />
-              <Route path="/magsafe" element={<MagSafe />} />
-              <Route path="/screenprotectors" element={<ScreenProtectors />} />
-              <Route path="/headphones" element={<HeadPhones />} />
-              <Route path="/cases" element={<Cases />} />
-              <Route path="/chargers" element={<Chargers />} />
-              <Route path="/cables" element={<Cables />} />
-              <Route path="/powerbank" element={<PowerBank />} />
-              <Route path="/product" element={<ProductDetails />} />
+              <Route path="/:categoryName" element={<CategoryPage />} />
             </Route>
           </Routes>
         </BrowserRouter>

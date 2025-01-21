@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { FaRegHeart, FaStar } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { GrNext, GrPrevious } from "react-icons/gr";
-import { IoIosSearch } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { getProducts } from "../services/apiProducts";
+import { IoSearchSharp } from "react-icons/io5";
 
 export default function ProductDeals() {
   const { data: products, isLoading } = useQuery({
@@ -79,44 +79,52 @@ export default function ProductDeals() {
 
       <Slider {...settings}>
         {products.map((product) => (
-          <div className="carousel-item">
-            <div className=" bg-neutral-100 mx-2 rounded-xl relative group cursor-pointer">
-              <div>
+          <div className="carousel-item" key={product.id}>
+            <div className=" bg-neutral-100 mx-2 rounded-xl overflow-hidden  relative group">
+              <div className=" cursor-pointer">
+                <img src={product.image} className="rounded-xl" alt="" />
                 <img
-                  src="images/products/product-1.jpg"
-                  className="rounded-xl"
+                  src={product.image_alt}
+                  className="absolute top-0 left-0 rounded-xl object-cover opacity-0 hover:opacity-100 hover:scale-110 transition-transform duration-700"
                   alt=""
                 />
               </div>
-              <div className=" py-3 ">
-                <div className="flex gap-2 mt-2 mb-2 justify-center">
+              <div className=" py-3 px-4 ">
+                <div className="flex gap-2 my-2 justify-center">
                   <span className="w-5 h-5 rounded-full  bg-zinc-800 inline-block "></span>
                   <span className="w-5 h-5 rounded-full  bg-neutral-500 inline-block "></span>
                   <span className="w-5 h-5 rounded-full  bg-white inline-block "></span>
                 </div>
-                <span className="text-sm text-neutral-400">
-                  {product.category}
+                <span className="text-[10px] uppercase font-light text-neutral-400">
+                  <Link
+                    to={product.category.toLowerCase().replace(/\s+/g, "-")}
+                  >
+                    {product.category}
+                  </Link>
                 </span>
-                <h3 className="">{product.name}</h3>
-                <span className="flex gap-[1px] justify-center">
+                <h3 className="text-md font-medium mb-2  truncate">
+                  <Link to={`/product/${product.id}`}>{product.name}</Link>
+                </h3>
+                <span className="flex gap-[1px] text-neutral-500 mb-2 text-sm justify-center">
                   <FaStar /> <FaStar /> <FaStar /> <FaStar /> <FaStar />
                 </span>
-                <p className="text-xl text-neutral-700 font-medium">
-                  {product.price}
+                <p className="text-md text-neutral-700 font-medium">
+                  ${parseFloat(product.min_price).toFixed(2)} - $
+                  {parseFloat(product.max_price).toFixed(2)}
                 </p>
               </div>
               <div className="absolute top-3 right-2 opacity-0 transform scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
                 <span className="flex flex-col gap-4">
                   <Link to="/product">
-                    <span className="bg-white border-[1px] rounded-full flex items-center justify-center shadow-custom w-10 h-10">
+                    <span className="bg-white border-[1px] rounded-full flex items-center justify-center shadow-custom w-10 h-10 hover:bg-black hover:text-white  cursor-pointer transition-all duration-300">
                       <FaArrowRightLong />
                     </span>
                   </Link>
-                  <span className="bg-white border-[1px] rounded-full flex items-center justify-center shadow-custom w-10 h-10">
+                  <span className="bg-white border-[1px] rounded-full flex items-center justify-center shadow-custom w-10 h-10 hover:bg-black hover:text-white  cursor-pointer transition-all duration-300">
                     <FaRegHeart />
                   </span>
-                  <span className="bg-white border-[1px] rounded-full flex items-center justify-center shadow-custom w-10 h-10">
-                    <IoIosSearch />
+                  <span className="bg-white border-[1px] rounded-full flex  cursor-pointer items-center justify-center shadow-custom w-10 h-10 hover:bg-black hover:text-white transition-all duration-300">
+                    <IoSearchSharp />
                   </span>
                 </span>
               </div>

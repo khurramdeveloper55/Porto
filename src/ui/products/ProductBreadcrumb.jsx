@@ -1,8 +1,32 @@
 import React from "react";
 import { IoMdHome } from "react-icons/io";
 import { MdKeyboardArrowRight } from "react-icons/md";
+import { useParams } from "react-router-dom";
+import { fetchProductsByCategory } from "../../services/apiFetchProducts";
+import { useQuery } from "@tanstack/react-query";
 
 export default function ProductBreadcrumb() {
+  const { categoryName } = useParams();
+
+  const {
+    data: products,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["products", categoryName],
+    queryFn: () => fetchProductsByCategory(categoryName),
+    enabled: !!categoryName,
+  });
+
+  if (isLoading) return <p>Loading products...</p>;
+  if (error) return <p>Error fetching products: {error.message}</p>;
+
+  if (!products || products.length === 0) {
+    return <p>No products found in this category.</p>;
+  }
+
+  const firstProduct = products[0];
+
   return (
     <div className="flex justify-between items-center">
       <div className="text-left">
@@ -17,12 +41,14 @@ export default function ProductBreadcrumb() {
           <span className="text-lg">
             <MdKeyboardArrowRight />
           </span>
-          MAGSAFE
+          <span className="uppercase">{firstProduct.category}</span>
         </div>
-        <h2 className="text-5xl text-zinc-800 font-bold">MagSafe</h2>
+        <h2 className="text-5xl text-zinc-800 font-bold">
+          {firstProduct.category}
+        </h2>
       </div>
       <div>
-        <img src="images/cat-magsafe.png" alt="" />
+        <img src={firstProduct.breadcrumb} alt="" />
       </div>
     </div>
   );

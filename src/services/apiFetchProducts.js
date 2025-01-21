@@ -5,7 +5,7 @@ export async function fetchProductsByCategory(categoryName) {
   const { data: products, error } = await supabase
     .from("products")
     .select("*")
-    .ilike("category", lowerCaseCategoryName); // Filter by category_id
+    .ilike("category", lowerCaseCategoryName);
 
   if (error) {
     console.error("Error fetching products:", error.message);

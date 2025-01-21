@@ -1,10 +1,35 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { FaCcPaypal, FaCcVisa, FaGooglePay, FaStar } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
 import { IoMdHome } from "react-icons/io";
 import { MdKeyboardArrowRight } from "react-icons/md";
+import { useParams } from "react-router-dom";
+import { fetchProductDetails } from "../../services/apiProductDetails";
+import ProductSlider from "../ProductSlider";
 
 export default function ProductDetails() {
+  const { productName, productId } = useParams();
+
+  const {
+    data: product,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["products", productId],
+    queryFn: () => fetchProductDetails(productId),
+    enabled: !!productId,
+  });
+
+  // Handle loading state
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  // Handle error state
+  if (error) {
+    return <div>Error loading product details: {error.message}</div>;
+  }
   return (
     <>
       <div className="text-left text-neutral-400 text-xs flex items-center mb-4">
@@ -18,23 +43,20 @@ export default function ProductDetails() {
         <span className="text-lg">
           <MdKeyboardArrowRight />
         </span>
-        HEADPHONES{" "}
+        <span className="uppercase">{product.category}</span>
         <span className="text-lg">
           <MdKeyboardArrowRight />
         </span>{" "}
-        JBL TUNE 720BT
+        <span className="uppercase">{product.name}</span>
       </div>
       <div className="flex md:flex-row flex-col gap-6">
         <div className="md:w-1/2 w-full">
-          <img
-            src="images/product-2-1-600x600.jpg"
-            className="rounded-lg"
-            alt=""
-          />
+          <ProductSlider />
         </div>
+
         <div className="md:w-1/2 w-full">
           <div className="text-left">
-            <h2 className="text-3xl font-bold text-zinc-800">JBL Tune 720BT</h2>
+            <h2 className="text-3xl font-bold text-zinc-800">{product.name}</h2>
             <div className="flex items-center gap-4 mb-4">
               <span className="flex gap-[1px]">
                 <FaStar /> <FaStar /> <FaStar /> <FaStar /> <FaStar />
@@ -43,7 +65,7 @@ export default function ProductDetails() {
             </div>
             <div>
               <h3 className="text-2xl font-medium text-zinc-800">
-                $80.00 - $100.00
+                ${product.min_price} - ${product.max_price}
               </h3>
             </div>
             <p className="text-neutral-500 my-4">
@@ -53,7 +75,9 @@ export default function ProductDetails() {
               your smartphone.
             </p>
             <p className="text-neutral-500 text-sm">SKU: 1234567811</p>
-            <p className="text-neutral-500 text-sm">Category: HEADPHONES</p>
+            <p className="text-neutral-500 text-sm">
+              Category: <span className="uppercase">{product.category}</span>
+            </p>
             <div className="bg-indigo-50 w-full my-4 rounded-lg text-center py-8">
               <span>Color:</span>
               <div className="flex gap-2 mt-2 mb-5 justify-center">

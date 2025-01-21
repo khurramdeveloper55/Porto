@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import Slider from "react-slick";
 import { getCategories } from "../services/apiCategories";
+import { Link } from "react-router-dom";
 
 export default function PopularCategories() {
   const { data: categories, isLoading } = useQuery({
@@ -69,21 +70,31 @@ export default function PopularCategories() {
 
   return (
     <div>
-      <h2 className="text-3xl font-bold text-left mb-12">Popular Categories</h2>
+      <h2 className="text-3xl font-bold text-left mb-6">Popular Categories</h2>
 
       <Slider {...settings}>
         {categories.map((category) => (
           <div key={category.id} className="carousel-item ">
-            <div className="mb-2 mx-4">
+            <div className="mb-2 mx-4 overflow-hidden rounded-xl">
               <img
-                src="images/categories/category-1.jpg"
-                className="w-full rounded-xl"
+                src={category.image}
+                className="w-full rounded-xl cursor-pointer hover:scale-110 transition-transform duration-700"
                 alt=""
               />
             </div>
             <div>
-              <h3>{category.name}</h3>
-              <p>{category.products} Products</p>
+              <h3 className="text-zinc-800 text-lg font-semibold">
+                <Link
+                  to={`/${encodeURIComponent(
+                    category.name.toLowerCase().replace(/\s+/g, "-")
+                  )}`}
+                >
+                  {category.name}
+                </Link>
+              </h3>
+              <p className="text-neutral-500">
+                {category.product_count} Products
+              </p>
             </div>
           </div>
         ))}

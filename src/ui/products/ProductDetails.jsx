@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import { FaCcPaypal, FaCcVisa, FaGooglePay, FaStar } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
 import { IoMdHome } from "react-icons/io";
@@ -7,10 +7,21 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import { fetchProductDetails } from "../../services/apiProductDetails";
 import ProductSlider from "../ProductSlider";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToCart,
+  decreaseQuantity,
+  increaseQuantity,
+} from "../../services/cartSlice";
+import { TiTick } from "react-icons/ti";
 
 export default function ProductDetails() {
-  const { productName, productId } = useParams();
-
+  const { productId } = useParams();
+  const [selectedColor, setSelectedColor] = React.useState({});
+  const [quantity, setQuantity] = useState(1);
+  const [isAdded, setIsAdded] = useState(false);
+  const isDisabled = !selectedColor[productId];
+  const dispatch = useDispatch();
   const {
     data: product,
     isLoading,
@@ -30,6 +41,29 @@ export default function ProductDetails() {
   if (error) {
     return <div>Error loading product details: {error.message}</div>;
   }
+
+  const handleSelectedColor = (productID, color) => {
+    setSelectedColor((prev) => ({
+      ...prev,
+      [productID]: color,
+    }));
+  };
+
+  const handleAddToCart = () => {
+    dispatch(
+      addToCart({
+        id: product.id,
+        name: product.name,
+        price: parseFloat(selectedColor[product.id].price),
+        color: selectedColor[product.id].name,
+        quantity: quantity,
+        image: product.image,
+      })
+    );
+    setIsAdded(true);
+  };
+
+  const parsedColors = product?.colors?.map((color) => JSON.parse(color));
   return (
     <>
       <div className="text-left text-neutral-400 text-xs flex items-center mb-4">
@@ -65,7 +99,20 @@ export default function ProductDetails() {
             </div>
             <div>
               <h3 className="text-2xl font-medium text-zinc-800">
-                ${product.min_price} - ${product.max_price}
+                {product?.colors?.length > 0 ? (
+                  <>
+                    $
+                    {Math.min(
+                      ...product.colors.map((color) => JSON.parse(color).price)
+                    ).toFixed(2)}{" "}
+                    - $
+                    {Math.max(
+                      ...product.colors.map((color) => JSON.parse(color).price)
+                    ).toFixed(2)}
+                  </>
+                ) : (
+                  <p>Loading...</p>
+                )}
               </h3>
             </div>
             <p className="text-neutral-500 my-4">
@@ -81,20 +128,65 @@ export default function ProductDetails() {
             <div className="bg-indigo-50 w-full my-4 rounded-lg text-center py-8">
               <span>Color:</span>
               <div className="flex gap-2 mt-2 mb-5 justify-center">
-                <span className="w-10 h-10 rounded-full border-indigo-50 outline-double outline-neutral-200 outline-1 border-4 bg-zinc-800 inline-block "></span>
-                <span className="w-10 h-10 rounded-full border-indigo-50 outline-double outline-neutral-200 outline-1 border-4 bg-neutral-500 inline-block "></span>
-                <span className="w-10 h-10 rounded-full border-indigo-50 outline-double outline-neutral-200 outline-1 border-4 bg-white inline-block "></span>
+                {parsedColors?.map((color, index) => (
+                  <span
+                    key={index}
+                    className={`w-5 h-5 rounded-full  inline-block cursor-pointer `}
+                    style={{ backgroundColor: color.name }}
+                    onClick={() => handleSelectedColor(product.id, color)}
+                  ></span>
+                ))}
               </div>
-              <div className="flex justify-center mb-4">
+              {selectedColor[product.id] && (
+                <span>
+                  {selectedColor[product.id]?.price
+                    ? `$${parseFloat(selectedColor[product.id].price).toFixed(
+                        2
+                      )}`
+                    : "Select a color"}
+                </span>
+              )}
+              <div className="flex justify-center mt-2 mb-4">
                 <button className="bg-white w-32 h-12 px-4 rounded-full flex items-center justify-between">
-                  <span>-</span>
-                  <span>1</span>
-                  <span>+</span>
+                  <span
+                    onClick={() =>
+                      setQuantity((prev) => (prev > 1 ? prev - 1 : 1))
+                    }
+                  >
+                    -
+                  </span>
+                  <span>{quantity}</span>
+                  <span
+                    onClick={() =>
+                      setQuantity((prev) => (prev > 0 ? prev + 1 : 1))
+                    }
+                  >
+                    +
+                  </span>
                 </button>
               </div>
               <div className="mb-4">
-                <button className="px-16 py-4 bg-zinc-800 text-sm text-white rounded-full">
-                  ADD TO CART
+                <button
+                  className={`px-16 py-4 bg-zinc-800 ${
+                    isDisabled || isAdded
+                      ? "cursor-not-allowed opacity-50"
+                      : " cursor-pointer opacity-100"
+                  } text-sm text-white rounded-full ${
+                    isAdded || "bg-indigo-500"
+                  } `}
+                  onClick={handleAddToCart}
+                  disabled={isDisabled || isAdded}
+                >
+                  {isAdded ? (
+                    <span className="flex gap-2 items-center">
+                      ADDED TO CART{" "}
+                      <span className="text-xl">
+                        <TiTick />
+                      </span>
+                    </span>
+                  ) : (
+                    "ADD TO CART"
+                  )}
                 </button>
               </div>
               <div className="flex justify-center my-6">

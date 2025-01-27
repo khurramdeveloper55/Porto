@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaRegHeart, FaRegUser } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { IoIosSearch } from "react-icons/io";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link } from "react-router-dom";
+import CartItems from "./CartItems";
+import { useSelector } from "react-redux";
 
 export default function Header() {
+  const [showCart, setShowCart] = useState(false);
+  const cartItems = useSelector((state) => state.cart.items);
+  const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   return (
     <div className="container mx-auto mb-10">
       <div
@@ -51,14 +56,18 @@ export default function Header() {
             </span>
             <span className="hidden lg:inline">My Account</span>
           </span>
-          <span className="flex items-center relative">
+          <span
+            className="flex items-center relative cursor-pointer"
+            onClick={() => setShowCart((show) => !show)}
+          >
             <span className="lg:text-3xl sm:text-2xl text-xl bg-indigo-50 lg:p-4 sm:p-3 p-2 rounded-md">
               <HiOutlineShoppingBag />
             </span>
             <span className="absolute lg:top-3 sm:top-2 top-1 lg:right-3 sm:right-2 right-1 rounded-full text-xs bg-indigo-600 text-white w-4 h-4 leading-4 radius-md">
-              0
+              {totalQuantity}
             </span>
           </span>
+          {showCart && <CartItems setShowCart={setShowCart} />}
         </div>
       </div>
     </div>

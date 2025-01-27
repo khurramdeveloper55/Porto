@@ -9,11 +9,12 @@ import { getProducts } from "../services/apiProducts";
 import { IoSearchSharp } from "react-icons/io5";
 
 export default function ProductDeals() {
-  const { data: products, isLoading } = useQuery({
+  const { data: products = [], isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: getProducts,
   });
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [selectedColor, setSelectedColor] = useState({});
   const totalSlides = 2;
   const settings = {
     dots: false,
@@ -71,6 +72,13 @@ export default function ProductDeals() {
     return <p>No products available</p>;
   }
 
+  const handleSelectedColor = (productId, color) => {
+    setSelectedColor((prev) => ({
+      ...prev,
+      [productId]: color,
+    }));
+  };
+
   return (
     <div>
       <h2 className="text-3xl font-bold text-left mb-12 mt-12">
@@ -78,59 +86,77 @@ export default function ProductDeals() {
       </h2>
 
       <Slider {...settings}>
-        {products.map((product) => (
-          <div className="carousel-item" key={product.id}>
-            <div className=" bg-neutral-100 mx-2 rounded-xl overflow-hidden  relative group">
-              <div className=" cursor-pointer">
-                <img src={product.image} className="rounded-xl" alt="" />
-                <img
-                  src={product.image_alt}
-                  className="absolute top-0 left-0 rounded-xl object-cover opacity-0 hover:opacity-100 hover:scale-110 transition-transform duration-700"
-                  alt=""
-                />
-              </div>
-              <div className=" py-3 px-4 ">
-                <div className="flex gap-2 my-2 justify-center">
-                  <span className="w-5 h-5 rounded-full  bg-zinc-800 inline-block "></span>
-                  <span className="w-5 h-5 rounded-full  bg-neutral-500 inline-block "></span>
-                  <span className="w-5 h-5 rounded-full  bg-white inline-block "></span>
+        {products?.map((product) => {
+          const parsedColors = product.colors.map((color) => JSON.parse(color));
+          return (
+            <div className="carousel-item" key={product.id}>
+              <div className=" bg-neutral-100 mx-2 rounded-xl overflow-hidden  relative group">
+                <div className=" cursor-pointer">
+                  <img src={product.image} className="rounded-xl" alt="" />
+                  <img
+                    src={product.image_alt}
+                    className="absolute top-0 left-0 rounded-xl object-cover opacity-0 hover:opacity-100 hover:scale-110 transition-transform duration-700"
+                    alt=""
+                  />
                 </div>
-                <span className="text-[10px] uppercase font-light text-neutral-400">
-                  <Link
-                    to={product.category.toLowerCase().replace(/\s+/g, "-")}
-                  >
-                    {product.category}
-                  </Link>
-                </span>
-                <h3 className="text-md font-medium mb-2  truncate">
-                  <Link to={`/product/${product.id}`}>{product.name}</Link>
-                </h3>
-                <span className="flex gap-[1px] text-neutral-500 mb-2 text-sm justify-center">
-                  <FaStar /> <FaStar /> <FaStar /> <FaStar /> <FaStar />
-                </span>
-                <p className="text-md text-neutral-700 font-medium">
-                  ${parseFloat(product.min_price).toFixed(2)} - $
-                  {parseFloat(product.max_price).toFixed(2)}
-                </p>
-              </div>
-              <div className="absolute top-3 right-2 opacity-0 transform scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
-                <span className="flex flex-col gap-4">
-                  <Link to="/product">
+                <div className=" py-3 px-4 ">
+                  <div className="flex gap-2 my-2 justify-center">
+                    {parsedColors?.map((color) => (
+                      <span
+                        key={color}
+                        className={`w-5 h-5 rounded-full  inline-block cursor-pointer `}
+                        style={{ backgroundColor: color.name }}
+                        onClick={() => handleSelectedColor(product.id, color)}
+                      ></span>
+                    ))}
+                  </div>
+                  <span className="text-[10px] uppercase font-light text-neutral-400">
+                    <Link
+                      to={product.category.toLowerCase().replace(/\s+/g, "-")}
+                    >
+                      {product.category}
+                    </Link>
+                  </span>
+                  <h3 className="text-md font-medium mb-2  truncate">
+                    <Link to={`/product/${product.id}`}>{product.name}</Link>
+                  </h3>
+                  <span className="flex gap-[1px] text-neutral-500 mb-2 text-sm justify-center">
+                    <FaStar /> <FaStar /> <FaStar /> <FaStar /> <FaStar />
+                  </span>
+                  <p>
+                    Price: $
+                    {selectedColor[product.id]
+                      ? parseFloat(selectedColor[product.id].price).toFixed(2)
+                      : `${Math.min(
+                          ...product.colors.map(
+                            (color) => JSON.parse(color).price
+                          )
+                        ).toFixed(2)} - ${Math.max(
+                          ...product.colors.map(
+                            (color) => JSON.parse(color).price
+                          )
+                        ).toFixed(2)}`}
+                  </p>
+                </div>
+                <div className="absolute top-3 right-2 opacity-0 transform scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
+                  <span className="flex flex-col gap-4">
+                    <Link to="/product">
+                      <span className="bg-white border-[1px] rounded-full flex items-center justify-center shadow-custom w-10 h-10 hover:bg-black hover:text-white  cursor-pointer transition-all duration-300">
+                        <FaArrowRightLong />
+                      </span>
+                    </Link>
                     <span className="bg-white border-[1px] rounded-full flex items-center justify-center shadow-custom w-10 h-10 hover:bg-black hover:text-white  cursor-pointer transition-all duration-300">
-                      <FaArrowRightLong />
+                      <FaRegHeart />
                     </span>
-                  </Link>
-                  <span className="bg-white border-[1px] rounded-full flex items-center justify-center shadow-custom w-10 h-10 hover:bg-black hover:text-white  cursor-pointer transition-all duration-300">
-                    <FaRegHeart />
+                    <span className="bg-white border-[1px] rounded-full flex  cursor-pointer items-center justify-center shadow-custom w-10 h-10 hover:bg-black hover:text-white transition-all duration-300">
+                      <IoSearchSharp />
+                    </span>
                   </span>
-                  <span className="bg-white border-[1px] rounded-full flex  cursor-pointer items-center justify-center shadow-custom w-10 h-10 hover:bg-black hover:text-white transition-all duration-300">
-                    <IoSearchSharp />
-                  </span>
-                </span>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </Slider>
     </div>
   );

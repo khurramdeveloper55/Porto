@@ -28,9 +28,9 @@ export default function ShopProducts({ visibleCount, setVisibleCount }) {
       <div className="container mx-auto px-4">
         <h1 className="text-2xl font-bold my-4">Category </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.slice(0, visibleCount).map((product) => (
+          {products.slice(0, visibleCount).map((product, index) => (
             <div
-              key={product.id}
+              key={index}
               className="p-4 bg-gray-100 rounded shadow relative overflow-hidden"
             >
               <div className="relative mb-1 cursor-pointer">

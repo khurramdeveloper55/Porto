@@ -45,13 +45,17 @@ export default function Header() {
         </div>
         <div className="flex justify-between sm:gap-4 gap-2">
           <span className="items-center gap-2 hidden sm:flex">
-            <span className="text-2xl bg-indigo-50 p-3 rounded-md">
-              <FaRegHeart />
-            </span>{" "}
-            <span className="hidden lg:inline">Wishlist</span>
+            <Link to="/wishlist">
+              <span className="flex items-center gap-2">
+                <span className="text-2xl bg-indigo-50 p-3 inline-block rounded-md">
+                  <FaRegHeart />
+                </span>{" "}
+                <span className="hidden lg:inline-block">Wishlist</span>
+              </span>
+            </Link>
           </span>
           <span className="flex items-center gap-2">
-            <span className="sm:text-2xl text-xl bg-indigo-50 sm:p-3 p-2 rounded-md">
+            <span className="sm:text-2xl text-xl bg-indigo-50 sm:p-3 p-2 inline-block rounded-md">
               <FaRegUser />
             </span>
             <span className="hidden lg:inline">My Account</span>

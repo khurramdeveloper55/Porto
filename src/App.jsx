@@ -7,6 +7,7 @@ import Home from "./ui/Home";
 import CategoryPage from "./ui/products/CategoryPage";
 import ProductDetails from "./ui/products/ProductDetails";
 import ShopProducts from "./ui/products/ShopProducts";
+import WishList from "./ui/WishList";
 
 function App() {
   const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ function App() {
                   />
                 }
               />
+              <Route path="/wishlist" element={<WishList />} />
             </Route>
           </Routes>
         </BrowserRouter>

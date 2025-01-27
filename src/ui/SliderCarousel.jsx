@@ -86,7 +86,7 @@ export default function SliderCarousel() {
                     currentSlide === 0 ? "animate" : ""
                   }`}
                 >
-                  <Link>Shop Now</Link>
+                  <Link to="/shop">Shop Now</Link>
                 </span>
               </div>
             </div>
@@ -131,7 +131,7 @@ export default function SliderCarousel() {
                   currentSlide === 1 ? "animate" : ""
                 }`}
               >
-                <Link>Shop Now</Link>
+                <Link to="/shop">Shop Now</Link>
               </span>
             </div>
           </div>

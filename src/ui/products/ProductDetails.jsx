@@ -5,22 +5,23 @@ import { FiHeart } from "react-icons/fi";
 import { IoMdHome } from "react-icons/io";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { fetchProductDetails } from "../../services/apiProductDetails";
 import ProductSlider from "../ProductSlider";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addToCart,
-  decreaseQuantity,
-  increaseQuantity,
-} from "../../services/cartSlice";
+import { addToCart } from "../../services/cartSlice";
 import { TiTick } from "react-icons/ti";
+import { addToWishlist } from "../../services/wishlistSlice";
 
 export default function ProductDetails() {
   const { productId } = useParams();
-  const [selectedColor, setSelectedColor] = React.useState({});
+  const navigate = useNavigate();
+  const [selectedColor, setSelectedColor] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [isAdded, setIsAdded] = useState(false);
   const isDisabled = !selectedColor[productId];
+  const wishlist = useSelector((state) => state.wishlist.items);
+
   const dispatch = useDispatch();
   const {
     data: product,
@@ -42,6 +43,8 @@ export default function ProductDetails() {
     return <div>Error loading product details: {error.message}</div>;
   }
 
+  const isInWishlist = wishlist.some((item) => item.id === product.id);
+
   const handleSelectedColor = (productID, color) => {
     setSelectedColor((prev) => ({
       ...prev,
@@ -61,6 +64,22 @@ export default function ProductDetails() {
       })
     );
     setIsAdded(true);
+  };
+
+  const handleAddToWishlist = () => {
+    if (!isInWishlist) {
+      dispatch(
+        addToWishlist({
+          id: product.id,
+          name: product.name,
+          price: product.colors,
+          quantity: quantity,
+          image: product.image,
+        })
+      );
+    } else {
+      navigate("/wishlist");
+    }
   };
 
   const parsedColors = product?.colors?.map((color) => JSON.parse(color));
@@ -190,11 +209,14 @@ export default function ProductDetails() {
                 </button>
               </div>
               <div className="flex justify-center my-6">
-                <button className="text-sm flex gap-1 items-center">
+                <button
+                  className="text-sm flex gap-1 items-center"
+                  onClick={handleAddToWishlist}
+                >
                   <span className="text-lg">
                     <FiHeart />
                   </span>
-                  ADD TO WISHLIST
+                  {isInWishlist ? "Browse Wishlist" : "Add to Wishlist"}
                 </button>
               </div>
               <div className="flex md:flex-row flex-col items-center justify-center gap-2 text-neutral-500">

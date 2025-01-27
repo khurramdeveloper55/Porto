@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 import { GrNext, GrPrevious } from "react-icons/gr";
 
-export default function SliderCarousel() {
+export default function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalSlides = 2;
   const settings = {
@@ -81,13 +81,15 @@ export default function SliderCarousel() {
                   Save up to 70% off on headsets, cases, and so much more. New
                   products added every week.
                 </p>
-                <span
-                  className={`mt-4 inline-block bg-indigo-600 font-bold md:text-lg text-sm text-white px-8 py-3 rounded-full slide-up-btn ${
-                    currentSlide === 0 ? "animate" : ""
-                  }`}
-                >
-                  <Link to="/shop">Shop Now</Link>
-                </span>
+                <Link to="/shop">
+                  <span
+                    className={`mt-4 inline-block bg-indigo-600 font-bold md:text-lg text-sm text-white px-8 py-3 rounded-full slide-up-btn ${
+                      currentSlide === 0 ? "animate" : ""
+                    }`}
+                  >
+                    Shop Now
+                  </span>
+                </Link>
               </div>
             </div>
             <div className="w-1/2 pt-12">
@@ -126,13 +128,15 @@ export default function SliderCarousel() {
               >
                 The ultimate charging hub for iPhone, Apple Watch, and AirPods.
               </p>
-              <span
-                className={`mt-4 inline-block bg-indigo-600 font-bold md:text-lg text-sm text-white px-8 py-3 rounded-full slide-up-btn ${
-                  currentSlide === 1 ? "animate" : ""
-                }`}
-              >
-                <Link to="/shop">Shop Now</Link>
-              </span>
+              <Link to="/shop">
+                <span
+                  className={`mt-4 inline-block bg-indigo-600 font-bold md:text-lg text-sm text-white px-8 py-3 rounded-full slide-up-btn ${
+                    currentSlide === 1 ? "animate" : ""
+                  }`}
+                >
+                  Shop Now
+                </span>
+              </Link>
             </div>
           </div>
         </div>

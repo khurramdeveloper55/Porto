@@ -3,7 +3,7 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { LuMessageCircleQuestion } from "react-icons/lu";
 import { RiShareBoxFill } from "react-icons/ri";
 
-export default function Cta() {
+export default function ContactSupportCta() {
   return (
     <div className="flex lg:flex-row flex-col gap-6 mt-16">
       <div className="bg-violet-500 lg:w-1/2 w-full rounded-xl flex lg:flex-row flex-col items-center lg:gap-10 gap-4 px-12 py-6">

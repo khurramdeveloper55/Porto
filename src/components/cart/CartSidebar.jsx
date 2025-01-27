@@ -1,28 +1,13 @@
-import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   decreaseQuantity,
   increaseQuantity,
   removeFromCart,
-} from "../services/cartSlice";
-import { useQuery } from "@tanstack/react-query";
-import { fetchProductDetails } from "../services/apiProductDetails";
-import { useParams } from "react-router-dom";
+} from "../../redux/slices/cartSlice";
 
-export default function CartItems({ setShowCart }) {
-  const { productName, productId } = useParams();
-  const [selectedColor, setSelectedColor] = useState({});
+export default function CartSidebar({ setShowCart }) {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
-  const {
-    data: product,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["products", productId],
-    queryFn: () => fetchProductDetails(productId),
-    enabled: !!productId,
-  });
   return (
     <div className="fixed w-72 right-0 top-0 h-full z-[9999] bg-neutral-100 py-10 px-8">
       <span

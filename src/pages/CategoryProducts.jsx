@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import Deals from "../Deals";
+import FeaturedDeals from "../components/common/FeaturedDeals";
 import { FaStar } from "react-icons/fa";
-import { fetchProductsByCategory } from "../../services/apiFetchProducts";
-import ProductBreadcrumb from "./ProductBreadcrumb";
+import { fetchProductsByCategory } from "../api/products";
+import BreadcrumbNavigation from "./BreadcrumbNavigation";
 
-export default function CategoryPage() {
+export default function CategoryProducts() {
   const { categoryName } = useParams();
   const [selectedColor, setSelectedColor] = useState({});
   const {
@@ -35,8 +35,8 @@ export default function CategoryPage() {
 
   return (
     <>
-      <ProductBreadcrumb />
-      <Deals />
+      <BreadcrumbNavigation />
+      <FeaturedDeals />
       <div className="container mx-auto px-4">
         <h1 className="text-2xl font-bold my-4">Category {categoryName}</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

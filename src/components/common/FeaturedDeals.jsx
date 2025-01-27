@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Deals() {
+export default function FeaturedDeals() {
   return (
     <div className="my-16">
-      <h2 className="text-left text-3xl mb-6 font-bold text-zinc-800">
+      <h2 className="text-left text-3xl mb-8 font-bold text-zinc-800">
         Hurry Up Deals
       </h2>
       <div className="flex flex-col lg:flex-row gap-4">
@@ -19,9 +19,11 @@ export default function Deals() {
             <h2 className="font-bold text-4xl text-white leading-10 mb-4">
               AirPods <br /> Experience
             </h2>
-            <span className="inline-block bg-white font-bold text-lg text-indigo-600 px-8 py-3 rounded-full ">
-              <Link>Shop Now</Link>
-            </span>
+            <Link to="/shop">
+              <span className="inline-block bg-white font-bold text-lg text-indigo-600 px-8 py-3 rounded-full ">
+                Shop Now
+              </span>
+            </Link>
           </div>
           <div>
             <img src="images/banner-img-1.png" alt="" />
@@ -35,9 +37,12 @@ export default function Deals() {
             <p className="text-neutral-500 mb-4">
               Save up to 50% off on new arrivals.
             </p>
-            <span className="inline-block bg-indigo-600 font-bold text-lg text-white px-8 py-3 rounded-full ">
-              <Link>Shop Now</Link>
-            </span>
+            <Link to="/shop">
+              {" "}
+              <span className="inline-block bg-indigo-600 font-bold text-lg text-white px-8 py-3 rounded-full ">
+                Shop Now
+              </span>
+            </Link>
           </div>
           <div>
             <img src="images/banner-img-2.png" alt="" />

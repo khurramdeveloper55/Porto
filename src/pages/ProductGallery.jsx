@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { FaStar } from "react-icons/fa";
-import { getProducts } from "../../services/apiProducts";
 import { Link } from "react-router-dom";
-import Sorting from "../Sorting";
+import ProductSortingFilter from "../components/common/ProductSortingFilter";
 import { useSelector } from "react-redux";
-import { selectFilter } from "../../services/filterSlice";
+import { getProducts } from "../api/apiProducts";
+import { selectFilter } from "../redux/slices/filterSlice";
 
-export default function ShopProducts() {
+export default function ProductGallery() {
   const { visibleCount, minPrice, maxPrice, sortOption } =
     useSelector(selectFilter);
   const {
@@ -70,7 +70,7 @@ export default function ShopProducts() {
 
   return (
     <>
-      <Sorting />
+      <ProductSortingFilter />
       <div className="container mx-auto px-4">
         <h1 className="text-2xl font-bold my-4">Category </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

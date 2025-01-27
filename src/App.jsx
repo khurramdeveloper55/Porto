@@ -2,12 +2,12 @@ import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import AppLayout from "./AppLayout";
-import Home from "./ui/Home";
-import CategoryPage from "./ui/products/CategoryPage";
-import ProductDetails from "./ui/products/ProductDetails";
-import ShopProducts from "./ui/products/ShopProducts";
-import WishList from "./ui/WishList";
+import AppLayout from "./layouts/AppLayout";
+import ProductDetails from "./pages/ProductDetails";
+import ShopProducts from "./pages/ProductGallery";
+import WishList from "./components/wishlist/WishList";
+import HomePage from "./components/home/HomePage";
+import CategoryProducts from "./pages/CategoryProducts";
 
 function App() {
   const queryClient = new QueryClient();
@@ -18,8 +18,8 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route element={<AppLayout />}>
-              <Route index element={<Home />} />
-              <Route path="/:categoryName" element={<CategoryPage />} />
+              <Route index element={<HomePage />} />
+              <Route path="/:categoryName" element={<CategoryProducts />} />
               <Route path="/product/:productId" element={<ProductDetails />} />
               <Route
                 path="/shop"

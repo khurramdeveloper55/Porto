@@ -1,9 +1,9 @@
 import React, { useState, useRef } from "react";
-import { fetchProductImages } from "../services/apiFetchImages";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+import { fetchProductImages } from "../api/fetchImages";
 
-export default function ProductSlider() {
+export default function ProductDetailsSlider() {
   const [activeIndex, setActiveIndex] = useState(0);
   const carouselRef = useRef(null);
   const { productId } = useParams();

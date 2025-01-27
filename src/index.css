@@ -13,6 +13,9 @@ body {
 #root {
   max-width: 1140px;
 }
+.font-poppins {
+  font-family: "Poppins", sans-serif;
+}
 /* Initial State */
 .slide-up-h2,
 .slide-up-p,

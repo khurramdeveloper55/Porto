@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { FaRegHeart, FaRegUser } from "react-icons/fa";
-import { HiOutlineShoppingBag } from "react-icons/hi";
-import { IoIosSearch } from "react-icons/io";
+import { IoIosSearch, IoMdHeartEmpty } from "react-icons/io";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link } from "react-router-dom";
-import CartItems from "./CartItems";
 import { useSelector } from "react-redux";
+import { SlUser } from "react-icons/sl";
+import { BiShoppingBag } from "react-icons/bi";
+import CartSidebar from "../cart/CartSidebar";
 
 export default function Header() {
   const [showCart, setShowCart] = useState(false);
@@ -35,7 +35,7 @@ export default function Header() {
               <input
                 type="text"
                 placeholder="Search for products..."
-                className=" placeholder:text-sm w-full lg:w-96 border-neutral-200 border-solid rounded-3xl inline shadow-custom border py-3 pl-3 "
+                className=" placeholder:text-sm focus-visible:outline-0 placeholder:text-neutral-400 placeholder:font-light w-full lg:w-96 border-neutral-200 border-solid rounded-3xl inline shadow-custom border py-3 pl-3 "
               />
               <span className="absolute right-3 -top-[1.5px] text-2xl text-neutral-800">
                 <IoIosSearch />
@@ -43,20 +43,20 @@ export default function Header() {
             </span>
           </form>
         </div>
-        <div className="flex justify-between sm:gap-4 gap-2">
+        <div className="flex justify-between sm:gap-4 gap-2 ">
           <span className="items-center gap-2 hidden sm:flex">
             <Link to="/wishlist">
-              <span className="flex items-center gap-2">
-                <span className="text-2xl bg-indigo-50 p-3 inline-block rounded-md">
-                  <FaRegHeart />
+              <span className="flex items-center gap-2 group">
+                <span className="text-3xl bg-indigo-50 p-1 inline-block rounded-md group-hover:-translate-y-1 group-hover:transition-translate duration-300">
+                  <IoMdHeartEmpty />
                 </span>{" "}
-                <span className="hidden lg:inline-block">Wishlist</span>
+                <span className="hidden lg:inline-block  ">Wishlist</span>
               </span>
             </Link>
           </span>
-          <span className="flex items-center gap-2">
-            <span className="sm:text-2xl text-xl bg-indigo-50 sm:p-3 p-2 inline-block rounded-md">
-              <FaRegUser />
+          <span className="flex items-center gap-2 group cursor-pointer">
+            <span className="sm:text-2xl text-xl bg-indigo-50 sm:p-2 p-2 inline-block rounded-md group-hover:-translate-y-1 group-hover:transition-translate duration-300">
+              <SlUser />
             </span>
             <span className="hidden lg:inline">My Account</span>
           </span>
@@ -64,14 +64,14 @@ export default function Header() {
             className="flex items-center relative cursor-pointer"
             onClick={() => setShowCart((show) => !show)}
           >
-            <span className="lg:text-3xl sm:text-2xl text-xl bg-indigo-50 lg:p-4 sm:p-3 p-2 rounded-md">
-              <HiOutlineShoppingBag />
+            <span className="lg:text-3xl sm:text-2xl text-xl bg-indigo-50 duration-300  hover:text-indigo-600 lg:p-3 sm:p-3 p-2 rounded-md">
+              <BiShoppingBag />
             </span>
-            <span className="absolute lg:top-3 sm:top-2 top-1 lg:right-3 sm:right-2 right-1 rounded-full text-xs bg-indigo-600 text-white w-4 h-4 leading-4 radius-md">
+            <span className="absolute lg:top-2 sm:top-2 top-1 lg:right-2 sm:right-2 right-1 rounded-full text-xs bg-indigo-600 text-white w-4 h-4 leading-4 radius-md">
               {totalQuantity}
             </span>
           </span>
-          {showCart && <CartItems setShowCart={setShowCart} />}
+          {showCart && <CartSidebar setShowCart={setShowCart} />}
         </div>
       </div>
     </div>

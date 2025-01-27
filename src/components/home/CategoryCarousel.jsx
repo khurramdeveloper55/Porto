@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import Slider from "react-slick";
-import { getCategories } from "../services/apiCategories";
 import { Link } from "react-router-dom";
+import { getCategories } from "../../api/categories";
 
-export default function PopularCategories() {
+export default function CategoryCarousel() {
   const { data: categories, isLoading } = useQuery({
     queryKey: ["categories"],
     queryFn: getCategories,
@@ -70,7 +70,7 @@ export default function PopularCategories() {
 
   return (
     <div>
-      <h2 className="text-3xl font-bold text-left mb-6">Popular Categories</h2>
+      <h2 className="text-3xl font-bold text-left mb-7">Popular Categories</h2>
 
       <Slider {...settings}>
         {categories.map((category) => (
@@ -83,7 +83,7 @@ export default function PopularCategories() {
               />
             </div>
             <div>
-              <h3 className="text-zinc-800 text-lg font-semibold">
+              <h3 className="text-zinc-800 text-lg font-semibold hover:text-indigo-600">
                 <Link
                   to={`/${encodeURIComponent(
                     category.name.toLowerCase().replace(/\s+/g, "-")
@@ -92,7 +92,7 @@ export default function PopularCategories() {
                   {category.name}
                 </Link>
               </h3>
-              <p className="text-neutral-500">
+              <p className="text-neutral-500 font-normal text-sm">
                 {category.product_count} Products
               </p>
             </div>

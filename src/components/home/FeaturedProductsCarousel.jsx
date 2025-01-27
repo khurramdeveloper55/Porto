@@ -1,14 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { FaRegHeart, FaStar } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
-import { getProducts } from "../services/apiProducts";
-import { IoSearchSharp } from "react-icons/io5";
+import { IoMdHeartEmpty } from "react-icons/io";
+import { BiShoppingBag } from "react-icons/bi";
+import { getProducts } from "../../api/apiProducts";
 
-export default function ProductDeals() {
+export default function FeaturedProductsCarousel() {
   const { data: products = [], isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: getProducts,
@@ -81,7 +82,7 @@ export default function ProductDeals() {
 
   return (
     <div>
-      <h2 className="text-3xl font-bold text-left mb-12 mt-12">
+      <h2 className="text-3xl font-bold text-left mb-8 mt-16">
         Hurry Up Deals
       </h2>
 
@@ -104,34 +105,39 @@ export default function ProductDeals() {
                     {parsedColors?.map((color) => (
                       <span
                         key={color}
-                        className={`w-5 h-5 rounded-full  inline-block cursor-pointer `}
+                        className={`w-5 h-5 rounded-full  inline-block cursor-pointer ${
+                          selectedColor[product.id]?.name === color.name
+                            ? "outline outline-[1px] border-2 border-neutral-100 outline-black"
+                            : ""
+                        } `}
                         style={{ backgroundColor: color.name }}
                         onClick={() => handleSelectedColor(product.id, color)}
                       ></span>
                     ))}
                   </div>
-                  <span className="text-[10px] uppercase font-light text-neutral-400">
+                  <span className="text-[10px] uppercase font-light text-neutral-400 hover:text-neutral-800">
                     <Link
                       to={product.category.toLowerCase().replace(/\s+/g, "-")}
                     >
                       {product.category}
                     </Link>
                   </span>
-                  <h3 className="text-md font-medium mb-2  truncate">
+                  <h3 className="text-md font-medium mb-2  truncate blue-950">
                     <Link to={`/product/${product.id}`}>{product.name}</Link>
                   </h3>
                   <span className="flex gap-[1px] text-neutral-500 mb-2 text-sm justify-center">
                     <FaStar /> <FaStar /> <FaStar /> <FaStar /> <FaStar />
                   </span>
-                  <p>
-                    Price: $
+                  <p className="text-neutral-700 text-lg font-semibold mb-2">
                     {selectedColor[product.id]
-                      ? parseFloat(selectedColor[product.id].price).toFixed(2)
-                      : `${Math.min(
+                      ? `$${parseFloat(selectedColor[product.id].price).toFixed(
+                          2
+                        )}`
+                      : `$${Math.min(
                           ...product.colors.map(
                             (color) => JSON.parse(color).price
                           )
-                        ).toFixed(2)} - ${Math.max(
+                        ).toFixed(2)} - $${Math.max(
                           ...product.colors.map(
                             (color) => JSON.parse(color).price
                           )
@@ -140,16 +146,16 @@ export default function ProductDeals() {
                 </div>
                 <div className="absolute top-3 right-2 opacity-0 transform scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
                   <span className="flex flex-col gap-4">
-                    <Link to="/product">
+                    <Link to={`/product/${product.id}`}>
                       <span className="bg-white border-[1px] rounded-full flex items-center justify-center shadow-custom w-10 h-10 hover:bg-black hover:text-white  cursor-pointer transition-all duration-300">
                         <FaArrowRightLong />
                       </span>
                     </Link>
-                    <span className="bg-white border-[1px] rounded-full flex items-center justify-center shadow-custom w-10 h-10 hover:bg-black hover:text-white  cursor-pointer transition-all duration-300">
-                      <FaRegHeart />
+                    <span className="bg-white border-[1px] rounded-full text-2xl flex  cursor-pointer items-center justify-center shadow-custom w-10 h-10 hover:bg-black hover:text-white transition-all duration-300">
+                      <BiShoppingBag />
                     </span>
-                    <span className="bg-white border-[1px] rounded-full flex  cursor-pointer items-center justify-center shadow-custom w-10 h-10 hover:bg-black hover:text-white transition-all duration-300">
-                      <IoSearchSharp />
+                    <span className="bg-white border-[1px] text-2xl rounded-full flex items-center justify-center shadow-custom w-10 h-10 hover:bg-black hover:text-white  cursor-pointer transition-all duration-300">
+                      <IoMdHeartEmpty />
                     </span>
                   </span>
                 </div>

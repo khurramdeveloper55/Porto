@@ -6,12 +6,12 @@ import { IoMdHome } from "react-icons/io";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { fetchProductDetails } from "../../services/apiProductDetails";
-import ProductSlider from "../ProductSlider";
+import ProductDetailsSlider from "./ProductDetailsSlider";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../services/cartSlice";
 import { TiTick } from "react-icons/ti";
-import { addToWishlist } from "../../services/wishlistSlice";
+import { fetchProductDetails } from "../api/productDetails";
+import { addToWishlist } from "../redux/slices/wishlistSlice";
+import { addToCart } from "../redux/slices/cartSlice";
 
 export default function ProductDetails() {
   const { productId } = useParams();
@@ -104,7 +104,7 @@ export default function ProductDetails() {
       </div>
       <div className="flex md:flex-row flex-col gap-6">
         <div className="md:w-1/2 w-full">
-          <ProductSlider />
+          <ProductDetailsSlider />
         </div>
 
         <div className="md:w-1/2 w-full">

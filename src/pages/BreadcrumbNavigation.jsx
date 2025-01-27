@@ -2,10 +2,10 @@ import React from "react";
 import { IoMdHome } from "react-icons/io";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { useParams } from "react-router-dom";
-import { fetchProductsByCategory } from "../../services/apiFetchProducts";
 import { useQuery } from "@tanstack/react-query";
+import { fetchProductsByCategory } from "../api/products";
 
-export default function ProductBreadcrumb() {
+export default function BreadcrumbNavigation() {
   const { categoryName } = useParams();
 
   const {

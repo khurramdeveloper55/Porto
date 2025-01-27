@@ -1,7 +1,7 @@
 import React from "react";
 import Marquee from "react-fast-marquee";
 
-export default function Strip() {
+export default function PromoStrip() {
   return (
     <div className="my-16 bg-indigo-600 py-5 ">
       <span className="text-white text-xl">

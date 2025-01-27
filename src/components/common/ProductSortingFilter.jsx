@@ -1,26 +1,22 @@
 import React, { useState } from "react";
 import { BsGrid3X3GapFill } from "react-icons/bs";
 import { FaAngleDown, FaList } from "react-icons/fa";
-import { getCategories } from "../services/apiCategories";
-import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
   filterPrice,
   updateCount,
   updateSortOption,
-} from "../services/filterSlice";
+} from "../../redux/slices/filterSlice";
+import useCategories from "../../hooks/useCategories";
 
-export default function Sorting() {
+export default function ProductSortingFilter() {
   const [showFilter, setShowFilter] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [minPrice, setMinPrice] = useState(54);
   const [maxPrice, setMaxPrice] = useState(100);
-  const { data: categories, isLoading } = useQuery({
-    queryKey: ["categories"],
-    queryFn: getCategories,
-  });
+  const { categories, isLoading } = useCategories();
 
   const handleOnChange = (event) => {
     const selectedCategory = event.target.value;

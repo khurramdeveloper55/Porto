@@ -3,7 +3,7 @@ import { CiDollar } from "react-icons/ci";
 import { FaLock } from "react-icons/fa";
 import { TbClock24, TbTruckDelivery } from "react-icons/tb";
 
-export default function ChooseUs() {
+export default function ServiceBenefits() {
   return (
     <div className="py-16 flex md:flex-row flex-col justify-around items-center md:gap-0 gap-4 text-center">
       <div className="flex items-center">

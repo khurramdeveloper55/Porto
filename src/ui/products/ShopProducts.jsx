@@ -4,8 +4,12 @@ import { FaStar } from "react-icons/fa";
 import { getProducts } from "../../services/apiProducts";
 import { Link } from "react-router-dom";
 import Sorting from "../Sorting";
+import { useSelector } from "react-redux";
+import { selectFilter } from "../../services/filterSlice";
 
-export default function ShopProducts({ visibleCount, setVisibleCount }) {
+export default function ShopProducts() {
+  const { visibleCount, minPrice, maxPrice, sortOption } =
+    useSelector(selectFilter);
   const {
     data: products,
     isLoading,
@@ -22,13 +26,55 @@ export default function ShopProducts({ visibleCount, setVisibleCount }) {
     return <p>No products found in this category.</p>;
   }
 
+  const filteredProducts = products.filter((product) => {
+    const productMinPrice = Math.min(
+      ...product.colors.map((color) => JSON.parse(color).price)
+    );
+    const productMaxPrice = Math.max(
+      ...product.colors.map((color) => JSON.parse(color).price)
+    );
+
+    if (!minPrice && !maxPrice) {
+      return true;
+    }
+
+    return productMinPrice >= minPrice && productMaxPrice <= maxPrice;
+  });
+
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    switch (sortOption) {
+      case "A-Z":
+        return a.name.localeCompare(b.name);
+      case "Z-A":
+        return b.name.localeCompare(a.name);
+      case "price-low-high":
+        const aMinPrice = Math.min(
+          ...a.colors.map((color) => JSON.parse(color).price)
+        );
+        const bMinPrice = Math.min(
+          ...b.colors.map((color) => JSON.parse(color).price)
+        );
+        return aMinPrice - bMinPrice;
+      case "price-high-low":
+        const aMaxPrice = Math.max(
+          ...a.colors.map((color) => JSON.parse(color).price)
+        );
+        const bMaxPrice = Math.max(
+          ...b.colors.map((color) => JSON.parse(color).price)
+        );
+        return bMaxPrice - aMaxPrice;
+      default:
+        return 0;
+    }
+  });
+
   return (
     <>
-      <Sorting visibleCount={visibleCount} setVisibleCount={setVisibleCount} />
+      <Sorting />
       <div className="container mx-auto px-4">
         <h1 className="text-2xl font-bold my-4">Category </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.slice(0, visibleCount).map((product, index) => (
+          {sortedProducts.slice(0, visibleCount).map((product, index) => (
             <div
               key={index}
               className="p-4 bg-gray-100 rounded shadow relative overflow-hidden"
@@ -60,8 +106,12 @@ export default function ShopProducts({ visibleCount, setVisibleCount }) {
                 <FaStar /> <FaStar /> <FaStar /> <FaStar /> <FaStar />
               </span>
               <p>
-                Price: ${parseFloat(product.min_price).toFixed(2)} - $
-                {parseFloat(product.max_price).toFixed(2)}
+                Price: $
+                {`${Math.min(
+                  ...product.colors.map((color) => JSON.parse(color).price)
+                ).toFixed(2)} - ${Math.max(
+                  ...product.colors.map((color) => JSON.parse(color).price)
+                ).toFixed(2)}`}
               </p>
             </div>
           ))}

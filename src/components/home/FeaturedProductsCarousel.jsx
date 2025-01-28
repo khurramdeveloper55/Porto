@@ -8,67 +8,14 @@ import Slider from "react-slick";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { BiShoppingBag } from "react-icons/bi";
 import { getProducts } from "../../api/apiProducts";
+import CarouselWithArrows from "../common/CarouselWithArrows";
 
 export default function FeaturedProductsCarousel() {
-  const { data: products = [], isLoading } = useQuery({
+  const { data: products, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: getProducts,
   });
-  const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedColor, setSelectedColor] = useState({});
-  const totalSlides = 2;
-  const settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    arrows: true,
-    prevArrow: currentSlide > 0 ? <CustomPrevArrow /> : null,
-    nextArrow: currentSlide < totalSlides - 1 ? <CustomNextArrow /> : null,
-    beforeChange: (oldIndex, newIndex) => setCurrentSlide(newIndex),
-    responsive: [
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          arrows: false,
-        },
-      },
-    ],
-  };
-
-  function CustomPrevArrow(props) {
-    const { className, onClick } = props;
-    return (
-      <button
-        className={`${className} custom-prev before:hidden !text-black !text-lg w-24 !left-[-18px] !top-[50%] h-24 z-50 absolute  border `}
-        onClick={onClick}
-        aria-label="Previous Slide"
-      >
-        <span className="bg-white border-[1px] rounded-full shadow-custom  !w-10 pl-[10px] text-black pt-[10px] !h-10 inline-block">
-          <GrPrevious />
-        </span>
-      </button>
-    );
-  }
-
-  function CustomNextArrow(props) {
-    const { className, onClick } = props;
-    return (
-      <button
-        className={`${className} custom-next before:hidden !text-black !top-[50%] !right-0 !text-lg w-24 h-24 z-50 absolute  `}
-        onClick={onClick}
-        aria-label="Next Slide"
-      >
-        <span className="bg-white border-[1px] rounded-full shadow-custom  !w-10 pl-[10px] text-black pt-[10px] !h-10 inline-block">
-          <GrNext />
-        </span>
-      </button>
-    );
-  }
-
   if (!products || products.length === 0) {
     return <p>No products available</p>;
   }
@@ -86,7 +33,19 @@ export default function FeaturedProductsCarousel() {
         Hurry Up Deals
       </h2>
 
-      <Slider {...settings}>
+      <CarouselWithArrows
+        slidesToShow={4}
+        breakpoints={[
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              arrows: false,
+            },
+          },
+        ]}
+      >
         {products?.map((product) => {
           const parsedColors = product.colors.map((color) => JSON.parse(color));
           return (
@@ -102,9 +61,9 @@ export default function FeaturedProductsCarousel() {
                 </div>
                 <div className=" py-3 px-4 ">
                   <div className="flex gap-2 my-2 justify-center">
-                    {parsedColors?.map((color) => (
+                    {parsedColors?.map((color, index) => (
                       <span
-                        key={color}
+                        key={index}
                         className={`w-5 h-5 rounded-full  inline-block cursor-pointer ${
                           selectedColor[product.id]?.name === color.name
                             ? "outline outline-[1px] border-2 border-neutral-100 outline-black"
@@ -163,7 +122,7 @@ export default function FeaturedProductsCarousel() {
             </div>
           );
         })}
-      </Slider>
+      </CarouselWithArrows>
     </div>
   );
 }

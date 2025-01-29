@@ -83,7 +83,7 @@ export default function HeroSlider() {
                 </p>
                 <Link to="/shop">
                   <span
-                    className={`mt-4 inline-block bg-indigo-600 font-bold md:text-lg text-sm text-white px-8 py-3 rounded-full slide-up-btn ${
+                    className={`mt-4 inline-block bg-indigo-600 hover:bg-indigo-500 font-bold md:text-lg text-sm text-white px-8 py-3 rounded-full slide-up-btn ${
                       currentSlide === 0 ? "animate" : ""
                     }`}
                   >
@@ -130,7 +130,7 @@ export default function HeroSlider() {
               </p>
               <Link to="/shop">
                 <span
-                  className={`mt-4 inline-block bg-indigo-600 font-bold md:text-lg text-sm text-white px-8 py-3 rounded-full slide-up-btn ${
+                  className={`mt-4 inline-block bg-indigo-600 hover:bg-indigo-500 font-bold md:text-lg text-sm text-white px-8 py-3 rounded-full slide-up-btn ${
                     currentSlide === 1 ? "animate" : ""
                   }`}
                 >

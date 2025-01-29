@@ -71,7 +71,9 @@ export default function Header() {
               {totalQuantity}
             </span>
           </span>
-          {showCart && <CartSidebar setShowCart={setShowCart} />}
+          {showCart && (
+            <CartSidebar showCart={showCart} setShowCart={setShowCart} />
+          )}
         </div>
       </div>
     </div>

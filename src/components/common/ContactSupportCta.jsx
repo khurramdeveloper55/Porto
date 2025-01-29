@@ -2,6 +2,7 @@ import React from "react";
 import { FaPhoneAlt } from "react-icons/fa";
 import { LuMessageCircleQuestion } from "react-icons/lu";
 import { RiShareBoxFill } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 export default function ContactSupportCta() {
   return (
@@ -25,7 +26,7 @@ export default function ContactSupportCta() {
       <div className="border-gray-200 border-2 flex items-center gap-4 lg:gap-0 lg:flex-row flex-col justify-around py-4 px-12 w-full  rounded-lg lg:w-1/2">
         <div>
           <h2 className="flex items-center text-xl gap-2 font-semibold text-zinc-800">
-            <FaPhoneAlt /> 123 456 7890
+            <FaPhoneAlt /> <Link>123 456 7890</Link>
           </h2>
           <button className="flex items-center gap-1 mt-1 bg-indigo-50 text-zinc-800 px-4 py-2 rounded-lg">
             Online Help <RiShareBoxFill />
@@ -33,9 +34,11 @@ export default function ContactSupportCta() {
         </div>
         <div className="text-left">
           <p className="text-neutral-500">Monday to Saturday - 8am - 6pm</p>
-          <span className="text-violet-500 underline">
-            Frequently Asked Questions
-          </span>
+          <Link>
+            <span className="text-violet-500 underline">
+              Frequently Asked Questions
+            </span>
+          </Link>
         </div>
       </div>
     </div>

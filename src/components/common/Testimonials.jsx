@@ -26,24 +26,24 @@ export default function Testimonials() {
       >
         <div className="carousel-item">
           <div className=" flex items-center gap-4">
-            <div className="rounded-full w-24 h-24">
-              <img src="images/avatar-1.jpg" alt="" />
+            <div className="rounded-full flex items-center w-24 h-24">
+              <img src="images/avatar-1.jpg" className="rounded-full" alt="" />
             </div>
             <div className=" py-3">
               <h5 className="text-md font-bold text-zinc-800 text-left">
                 John Doe -{" "}
-                <span className="text-sm text-neutral-400">
+                <span className="text-sm text-neutral-500 font-light">
                   November 15, 2024
                 </span>
               </h5>
-              <h3 className="flex gap-1 mt-1">
+              <h3 className="flex gap-[1px] mt-1 text-sm text-red-400">
                 <FaStar />
                 <FaStar />
                 <FaStar />
                 <FaStar />
                 <FaStar />
               </h3>
-              <p className="text-md mt-4 text-left text-neutral-700 font-medium">
+              <p className="text-md mt-3 text-left text-neutral-500 font-light">
                 Love my new case—stylish and sturdy! Perfect fit for my phone.
                 Highly recommend!
               </p>
@@ -52,50 +52,50 @@ export default function Testimonials() {
         </div>
         <div className="carousel-item">
           <div className=" flex items-center gap-4">
-            <div className="rounded-full w-24 h-24">
-              <img src="images/avatar-1.jpg" alt="" />
+            <div className="rounded-full flex items-center w-24 h-24">
+              <img src="images/avatar-2.jpg" className="rounded-full" alt="" />
             </div>
             <div className=" py-3">
               <h5 className="text-md font-bold text-zinc-800 text-left">
-                John Doe -{" "}
-                <span className="text-sm text-neutral-400">
-                  November 15, 2024
+                Jessica Doe -{" "}
+                <span className="text-sm text-neutral-500 font-light">
+                  November 18, 2024
                 </span>
               </h5>
-              <h3 className="flex gap-1 mt-1">
+              <h3 className="flex gap-[1px] mt-1 text-sm text-red-400">
                 <FaStar />
                 <FaStar />
                 <FaStar />
                 <FaStar />
                 <FaStar />
               </h3>
-              <p className="text-md mt-4 text-left text-neutral-700 font-medium">
-                Love my new case—stylish and sturdy! Perfect fit for my phone.
-                Highly recommend!
+              <p className="text-md mt-3 text-left text-neutral-500 font-light">
+                The screen protector saved my phone! Great quality and easy to
+                apply. Very satisfied.
               </p>
             </div>
           </div>
         </div>
         <div className="carousel-item">
           <div className=" flex items-center gap-4">
-            <div className="rounded-full w-24 h-24">
-              <img src="images/avatar-1.jpg" alt="" />
+            <div className="rounded-full flex items-center w-24 h-24">
+              <img src="images/avatar-1.jpg" className="rounded-full" alt="" />
             </div>
             <div className=" py-3">
               <h5 className="text-md font-bold text-zinc-800 text-left">
                 John Doe -{" "}
-                <span className="text-sm text-neutral-400">
-                  November 15, 2024
+                <span className="text-sm text-neutral-500 font-light">
+                  November 22, 2024
                 </span>
               </h5>
-              <h3 className="flex gap-1 mt-1">
+              <h3 className="flex gap-[1px] mt-1 text-sm text-red-400">
                 <FaStar />
                 <FaStar />
                 <FaStar />
                 <FaStar />
                 <FaStar />
               </h3>
-              <p className="text-md mt-4 text-left text-neutral-700 font-medium">
+              <p className="text-md mt-3 text-left text-neutral-500 font-light">
                 Love my new case—stylish and sturdy! Perfect fit for my phone.
                 Highly recommend!
               </p>

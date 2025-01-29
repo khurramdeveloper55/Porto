@@ -12,6 +12,7 @@ import { TiTick } from "react-icons/ti";
 import { fetchProductDetails } from "../api/productDetails";
 import { addToWishlist } from "../redux/slices/wishlistSlice";
 import { addToCart } from "../redux/slices/cartSlice";
+import { HiMiniMinus, HiMiniPlus } from "react-icons/hi2";
 
 export default function ProductDetails() {
   const { productId } = useParams();
@@ -49,6 +50,13 @@ export default function ProductDetails() {
     setSelectedColor((prev) => ({
       ...prev,
       [productID]: color,
+    }));
+  };
+
+  const handleClearColor = (productID, color) => {
+    setSelectedColor((prev) => ({
+      ...prev,
+      [productID]: null,
     }));
   };
 
@@ -109,15 +117,21 @@ export default function ProductDetails() {
 
         <div className="md:w-1/2 w-full">
           <div className="text-left">
-            <h2 className="text-3xl font-bold text-zinc-800">{product.name}</h2>
+            <h2 className="text-3xl font-bold text-zinc-800 mb-1">
+              {product.name}
+            </h2>
             <div className="flex items-center gap-4 mb-4">
-              <span className="flex gap-[1px]">
+              <span className="flex gap-[1px] text-red-400">
                 <FaStar /> <FaStar /> <FaStar /> <FaStar /> <FaStar />
               </span>{" "}
-              <span>3 customer reviews</span> <span>Add a review</span>
+              <span className="text-neutral-500 text-sm">
+                3 customer reviews
+              </span>{" "}
+              <span className="text-neutral-500">|</span>
+              <span className="text-neutral-500 text-sm">Add a review</span>
             </div>
             <div>
-              <h3 className="text-2xl font-medium text-zinc-800">
+              <h3 className="text-2xl font-medium text-zinc-700">
                 {product?.colors?.length > 0 ? (
                   <>
                     $
@@ -140,29 +154,52 @@ export default function ProductDetails() {
               provide superior protection while maintaining the elegant look of
               your smartphone.
             </p>
-            <p className="text-neutral-500 text-sm">SKU: 1234567811</p>
-            <p className="text-neutral-500 text-sm">
-              Category: <span className="uppercase">{product.category}</span>
+            <p className="text-neutral-500 text-[12px]">
+              SKU: <span className="text-black font-semibold">1234567811</span>
+            </p>
+            <p className="text-neutral-500 text-[12px]">
+              Category:{" "}
+              <span className="uppercase text-black font-semibold">
+                {product.category}
+              </span>
+            </p>
+            <p className="text-neutral-500 text-[12px]">
+              Tag:{" "}
+              <span className="uppercase text-black font-semibold">Bundle</span>
             </p>
             <div className="bg-indigo-50 w-full my-4 rounded-lg text-center py-8">
               <span>Color:</span>
-              <div className="flex gap-2 mt-2 mb-5 justify-center">
+              <div className="flex gap-2 mt-2 mb-5 justify-center relative">
                 {parsedColors?.map((color, index) => (
-                  <span
-                    key={index}
-                    className={`w-5 h-5 rounded-full  inline-block cursor-pointer `}
-                    style={{ backgroundColor: color.name }}
-                    onClick={() => handleSelectedColor(product.id, color)}
-                  ></span>
+                  <>
+                    <span
+                      key={index}
+                      className={`w-6 h-6 rounded-full  inline-block cursor-pointer  cursor-pointer ${
+                        selectedColor[product.id]?.name === color.name
+                          ? "outline outline-[2px] border-2 border-neutral-100 outline-black"
+                          : ""
+                      } `}
+                      style={{ backgroundColor: color.name }}
+                      onClick={() => handleSelectedColor(product.id, color)}
+                    ></span>
+                    <span
+                      className={`absolute top-[30px] translate-x-[-30px] bg-zinc-800 text-white uppercase text-[12px] px-2 py-1 font-light cursor-pointer hidden ${
+                        selectedColor[product.id] && "!inline-block"
+                      }`}
+                      onClick={handleClearColor}
+                    >
+                      Clear
+                    </span>
+                  </>
                 ))}
               </div>
               {selectedColor[product.id] && (
-                <span>
+                <span className="mt-[20px] inline-block">
                   {selectedColor[product.id]?.price
                     ? `$${parseFloat(selectedColor[product.id].price).toFixed(
                         2
                       )}`
-                    : "Select a color"}
+                    : ""}
                 </span>
               )}
               <div className="flex justify-center mt-2 mb-4">
@@ -171,22 +208,24 @@ export default function ProductDetails() {
                     onClick={() =>
                       setQuantity((prev) => (prev > 1 ? prev - 1 : 1))
                     }
+                    className="text-xl text-black"
                   >
-                    -
+                    <HiMiniMinus />
                   </span>
                   <span>{quantity}</span>
                   <span
                     onClick={() =>
                       setQuantity((prev) => (prev > 0 ? prev + 1 : 1))
                     }
+                    className="text-xl text-black"
                   >
-                    +
+                    <HiMiniPlus />
                   </span>
                 </button>
               </div>
               <div className="mb-4">
                 <button
-                  className={`px-16 py-4 bg-zinc-800 ${
+                  className={`px-16 py-4 bg-zinc-800 hover:bg-indigo-500 ${
                     isDisabled || isAdded
                       ? "cursor-not-allowed opacity-50"
                       : " cursor-pointer opacity-100"
@@ -198,10 +237,7 @@ export default function ProductDetails() {
                 >
                   {isAdded ? (
                     <span className="flex gap-2 items-center">
-                      ADDED TO CART{" "}
-                      <span className="text-xl">
-                        <TiTick />
-                      </span>
+                      ADDED TO CART
                     </span>
                   ) : (
                     "ADD TO CART"

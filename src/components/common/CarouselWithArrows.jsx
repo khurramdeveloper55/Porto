@@ -8,7 +8,7 @@ export default function CarouselWithArrows({
   breakpoints = [],
 }) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const totalSlides = React.Children.count(children);
+  const totalSlides = 2;
   const settings = {
     dots: false,
     infinite: false,

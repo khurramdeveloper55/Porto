@@ -5,6 +5,7 @@ import FeaturedDeals from "../components/common/FeaturedDeals";
 import { FaStar } from "react-icons/fa";
 import { fetchProductsByCategory } from "../api/products";
 import BreadcrumbNavigation from "./BreadcrumbNavigation";
+import ContactSupportCta from "../components/common/ContactSupportCta";
 
 export default function CategoryProducts() {
   const { categoryName } = useParams();
@@ -36,10 +37,9 @@ export default function CategoryProducts() {
   return (
     <>
       <BreadcrumbNavigation />
-      <FeaturedDeals />
+      <FeaturedDeals showTitle={false} />
       <div className="container mx-auto px-4">
-        <h1 className="text-2xl font-bold my-4">Category {categoryName}</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-24">
           {products.map((product) => {
             const parsedColors = product.colors.map((color) =>
               JSON.parse(color)
@@ -47,7 +47,7 @@ export default function CategoryProducts() {
             return (
               <div
                 key={product.id}
-                className="p-4 bg-gray-100 rounded shadow relative overflow-hidden"
+                className="p-2 bg-neutral-100  rounded-xl  relative overflow-hidden"
               >
                 <div className="relative mb-1 cursor-pointer">
                   <img
@@ -65,30 +65,39 @@ export default function CategoryProducts() {
                   {parsedColors?.map((color, index) => (
                     <span
                       key={index}
-                      className={`w-5 h-5 rounded-full  inline-block cursor-pointer `}
+                      className={`w-5 h-5 rounded-full  inline-block cursor-pointer ${
+                        selectedColor[product.id]?.name === color.name
+                          ? "outline outline-[1px] border-2 border-neutral-100 outline-black"
+                          : ""
+                      } `}
                       style={{ backgroundColor: color.name }}
                       onClick={() => handleSelectedColor(product.id, color)}
                     ></span>
                   ))}
                 </div>
-                <span className="text-[10px] uppercase font-light text-neutral-400">
-                  {product.category}
+                <span className="text-[10px] uppercase font-light text-neutral-400 hover:text-neutral-800">
+                  <Link
+                    to={product.category.toLowerCase().replace(/\s+/g, "-")}
+                  >
+                    {product.category}
+                  </Link>
                 </span>
-                <h2 className="text-lg font-medium truncate mb-1">
+                <h2 className="text-md font-medium mb-2  truncate blue-950">
                   <Link to={`/product/${product.id}`}>{product.name}</Link>
                 </h2>
                 <span className="flex gap-[1px] text-neutral-500 mb-2 text-sm justify-center">
                   <FaStar /> <FaStar /> <FaStar /> <FaStar /> <FaStar />
                 </span>
-                <p>
-                  Price: $
+                <p className="text-neutral-700 text-lg font-semibold mb-2">
                   {selectedColor[product.id]
-                    ? parseFloat(selectedColor[product.id].price).toFixed(2)
-                    : `${Math.min(
+                    ? `$${parseFloat(selectedColor[product.id].price).toFixed(
+                        2
+                      )}`
+                    : `$${Math.min(
                         ...product.colors.map(
                           (color) => JSON.parse(color).price
                         )
-                      ).toFixed(2)} - ${Math.max(
+                      ).toFixed(2)} - $${Math.max(
                         ...product.colors.map(
                           (color) => JSON.parse(color).price
                         )
@@ -99,6 +108,8 @@ export default function CategoryProducts() {
           })}
         </div>
       </div>
+      <hr />
+      <ContactSupportCta />
     </>
   );
 }

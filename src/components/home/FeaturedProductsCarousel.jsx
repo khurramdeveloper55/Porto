@@ -2,9 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { GrNext, GrPrevious } from "react-icons/gr";
 import { Link } from "react-router-dom";
-import Slider from "react-slick";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { BiShoppingBag } from "react-icons/bi";
 import { getProducts } from "../../api/apiProducts";
@@ -28,10 +26,44 @@ export default function FeaturedProductsCarousel() {
   };
 
   return (
-    <div>
-      <h2 className="text-3xl font-bold text-left mb-8 mt-16">
-        Hurry Up Deals
-      </h2>
+    <div className="mt-16">
+      <div className="mb-8 flex items-center justify-between">
+        <h2 className="text-left text-3xl font-bold text-zinc-800">
+          Hurry Up Deals
+        </h2>
+        <div className="flex items-center gap-4">
+          <h3 className="text-2xl font-medium">Offer ends in:</h3>
+          <div className="flex gap-2 items-center">
+            <div className="bg-neutral-100 py-1 px-2 leading-0">
+              <span className="text-3xl font-semibold">185</span> <br />{" "}
+              <span className="font-light text-sm text-neutral-500 uppercase">
+                Days
+              </span>
+            </div>
+            <span className="text-3xl text-zinc-800">:</span>
+            <div className="bg-neutral-100 py-1 px-2 leading-0">
+              <span className="text-3xl font-semibold">24</span> <br />{" "}
+              <span className="font-light text-sm text-neutral-500 uppercase">
+                Hours
+              </span>
+            </div>
+            <span className="text-3xl text-zinc-800">:</span>
+            <div className="bg-neutral-100 py-1 px-2 leading-0">
+              <span className="text-3xl font-semibold">16</span> <br />{" "}
+              <span className="font-light text-sm text-neutral-500 uppercase">
+                Minutes
+              </span>
+            </div>
+            <span className="text-3xl text-zinc-800">:</span>
+            <div className="bg-neutral-100 py-1 px-2 leading-0">
+              <span className="text-3xl font-semibold">20</span> <br />{" "}
+              <span className="font-light text-sm text-neutral-500 uppercase">
+                Seconds
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <CarouselWithArrows
         slidesToShow={4}

@@ -1,4 +1,4 @@
-import PromoStrip from "../common/ContactSupportCta";
+import PromoStrip from "../common/PromoStrip";
 import ChooseUs from "../common/ServiceBenefits";
 import HeroSlider from "./HeroSlider";
 import CategoryCarousel from "./CategoryCarousel";

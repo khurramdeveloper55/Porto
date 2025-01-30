@@ -16,7 +16,9 @@ export default function CategoryCarousel() {
 
   return (
     <div className="mt-16">
-      <h2 className="text-3xl font-bold text-left mb-7">Popular Categories</h2>
+      <h2 className="md:text-3xl text-2xl font-bold md:text-left text-center mb-7  text-zinc-800">
+        Popular Categories
+      </h2>
       <CarouselWithArrows
         slidesToShow={6}
         breakpoints={[

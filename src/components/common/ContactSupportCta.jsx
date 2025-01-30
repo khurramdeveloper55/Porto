@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export default function ContactSupportCta() {
   return (
     <div className="flex lg:flex-row flex-col gap-6 mt-16">
-      <div className="bg-violet-500 lg:w-1/2 w-full rounded-xl flex lg:flex-row flex-col items-center lg:gap-10 gap-4 px-12 py-6">
+      <div className="bg-violet-500 lg:w-1/2 w-full rounded-xl flex lg:flex-row flex-col items-center lg:gap-10 gap-4 md:px-12 px-8 py-6">
         <div className="hidden lg:inline">
           <img src="images/slide-dots-block.png" alt="" />
         </div>
@@ -15,7 +15,7 @@ export default function ContactSupportCta() {
           <LuMessageCircleQuestion />
         </div>
         <div className="text-left">
-          <h2 className="text-3xl mb-1 font-medium text-white">
+          <h2 className="md:text-3xl text-2xl mb-1 font-medium text-white">
             Need Any Help?
           </h2>
           <p className="text-white">
@@ -23,7 +23,7 @@ export default function ContactSupportCta() {
           </p>
         </div>
       </div>
-      <div className="border-gray-200 border-2 flex items-center gap-4 lg:gap-0 lg:flex-row flex-col justify-around py-4 px-12 w-full  rounded-lg lg:w-1/2">
+      <div className="border-gray-200 border-2 flex items-center gap-4 lg:gap-0 lg:flex-row flex-col justify-around py-4 md:px-12 px-8 w-full  rounded-lg lg:w-1/2">
         <div>
           <h2 className="flex items-center text-xl gap-2 font-semibold text-zinc-800">
             <FaPhoneAlt /> <Link>123 456 7890</Link>

@@ -27,37 +27,43 @@ export default function FeaturedProductsCarousel() {
 
   return (
     <div className="mt-16">
-      <div className="mb-8 flex items-center justify-between">
-        <h2 className="text-left text-3xl font-bold text-zinc-800">
+      <div className="mb-8 flex items-center md:flex-row flex-col justify-between">
+        <h2 className="md:text-left text-center md:text-3xl text-2xl font-bold md:mb-0 mb-3  text-zinc-800">
           Hurry Up Deals
         </h2>
         <div className="flex items-center gap-4">
-          <h3 className="text-2xl font-medium">Offer ends in:</h3>
+          <h3 className="text-2xl font-medium md:block hidden text-zinc-800">
+            Offer ends in:
+          </h3>
           <div className="flex gap-2 items-center">
             <div className="bg-neutral-100 py-1 px-2 leading-0">
-              <span className="text-3xl font-semibold">185</span> <br />{" "}
-              <span className="font-light text-sm text-neutral-500 uppercase">
+              <span className="md:text-3xl text-2xl font-semibold">185</span>{" "}
+              <br />{" "}
+              <span className="font-light md:text-sm text-[12px] text-neutral-500 uppercase">
                 Days
               </span>
             </div>
-            <span className="text-3xl text-zinc-800">:</span>
+            <span className="md:text-3xl text-2xl text-zinc-800">:</span>
             <div className="bg-neutral-100 py-1 px-2 leading-0">
-              <span className="text-3xl font-semibold">24</span> <br />{" "}
-              <span className="font-light text-sm text-neutral-500 uppercase">
+              <span className="md:text-3xl text-2xl font-semibold">24</span>{" "}
+              <br />{" "}
+              <span className="font-light md:text-sm text-[12px] text-neutral-500 uppercase">
                 Hours
               </span>
             </div>
-            <span className="text-3xl text-zinc-800">:</span>
+            <span className="md:text-3xl text-2xl text-zinc-800">:</span>
             <div className="bg-neutral-100 py-1 px-2 leading-0">
-              <span className="text-3xl font-semibold">16</span> <br />{" "}
-              <span className="font-light text-sm text-neutral-500 uppercase">
+              <span className="md:text-3xl text-2xl font-semibold">16</span>{" "}
+              <br />{" "}
+              <span className="font-light md:text-sm text-[12px] text-neutral-500 uppercase">
                 Minutes
               </span>
             </div>
-            <span className="text-3xl text-zinc-800">:</span>
+            <span className="md:text-3xl text-2xl text-zinc-800">:</span>
             <div className="bg-neutral-100 py-1 px-2 leading-0">
-              <span className="text-3xl font-semibold">20</span> <br />{" "}
-              <span className="font-light text-sm text-neutral-500 uppercase">
+              <span className="md:text-3xl text-2xl font-semibold">20</span>{" "}
+              <br />{" "}
+              <span className="font-light md:text-sm text-[12px] text-neutral-500 uppercase">
                 Seconds
               </span>
             </div>

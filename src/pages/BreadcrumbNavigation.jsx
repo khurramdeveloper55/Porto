@@ -28,27 +28,33 @@ export default function BreadcrumbNavigation() {
   const firstProduct = products[0];
 
   return (
-    <div className="flex justify-between items-center gradient-bg relative md:py-16 py-6 mt-8">
-      <div className="text-left">
-        <div className="text-left text-neutral-400 text-xs flex items-center mb-4">
-          <span className="text-lg">
-            <IoMdHome />
-          </span>{" "}
-          <span className="text-lg">
-            <MdKeyboardArrowRight />
-          </span>{" "}
-          SHOP{" "}
-          <span className="text-lg">
-            <MdKeyboardArrowRight />
-          </span>
-          <span className="uppercase">{firstProduct.category}</span>
+    <div className="w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]  relative gradient-bg">
+      <div className="flex justify-between items-center container mx-auto relative md:py-16 py-6 mt-8">
+        <div className="text-left">
+          <div className="text-left text-neutral-400 text-xs flex items-center mb-4">
+            <span className="text-lg">
+              <IoMdHome />
+            </span>{" "}
+            <span className="text-lg">
+              <MdKeyboardArrowRight />
+            </span>{" "}
+            SHOP{" "}
+            <span className="text-lg">
+              <MdKeyboardArrowRight />
+            </span>
+            <span className="uppercase">{firstProduct.category}</span>
+          </div>
+          <h2 className="md:text-5xl text-2xl text-zinc-800 font-bold">
+            {firstProduct.category}
+          </h2>
         </div>
-        <h2 className="md:text-5xl text-2xl text-zinc-800 font-bold">
-          {firstProduct.category}
-        </h2>
-      </div>
-      <div className="absolute right-0 top-0">
-        <img src={firstProduct.breadcrumb} alt="" className=" w-32 md:w-full" />
+        <div className="absolute right-0 top-0">
+          <img
+            src={firstProduct.breadcrumb}
+            alt=""
+            className=" w-32 md:w-full"
+          />
+        </div>
       </div>
     </div>
   );

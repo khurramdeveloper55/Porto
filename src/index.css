@@ -4,6 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  overflow-x: hidden;
+}
 body {
   font-family: "Lexend", sans-serif;
   font-optical-sizing: auto;
@@ -65,8 +68,20 @@ body {
   border-radius: 10px;
 }
 
+.gradient-bg {
+  background-image: linear-gradient(-90deg, #f1f2fe 0, #f4f4f4 100%);
+}
+
 .visibility-hidden {
   visibility: hidden;
+}
+
+.cart-overflow::-webkit-scrollbar {
+  width: 0px;
+}
+
+.filter {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
 @media (min-width: 1200px) {
@@ -77,15 +92,13 @@ body {
 }
 
 @media (max-width: 767px) {
-  #root {
+  #root,
+  .container {
     padding: 1rem !important;
   }
+  .wishlist {
+    border: 1px solid #e7e7e7;
+    border-top: 4px solid #3740ea;
+    box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.05);
+  }
 }
-
-.cart-overflow::-webkit-scrollbar {
-  width: 0px;
-}
-
-/* .cart-overflow{
-  overflow-y: scroll;
-} */

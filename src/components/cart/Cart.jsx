@@ -1,0 +1,137 @@
+import React from "react";
+import { IoClose } from "react-icons/io5";
+import { MdKeyboardArrowRight } from "react-icons/md";
+import { Link } from "react-router-dom";
+
+export default function Cart() {
+  return (
+    <>
+      <div className="flex justify-center flex-col items-center py-6 ">
+        <div className="text-center text-neutral-400 text-xs flex flex-row justify-center items-center mb-0">
+          <span className="text-2xl font-semibold  text-indigo-500">
+            <Link to="/">Shopping Cart</Link>
+          </span>{" "}
+          <span className="text-2xl">
+            <MdKeyboardArrowRight />
+          </span>{" "}
+          <span className="text-2xl font-semibold ">Checkout</span>
+          <span className="text-2xl">
+            <MdKeyboardArrowRight />
+          </span>{" "}
+          <span className="text-2xl font-semibold ">Order Complete</span>
+        </div>
+      </div>
+
+      <div className="mb-16 flex gap-6">
+        <div className=" w-2/3">
+          <div className="md:flex mt-8 mb-2 hidden ">
+            <ul className="flex justify-around items-center w-full">
+              <li className="w-full flex-[2] text-center text-sm uppercase text-zinc-800 font-semibold">
+                Product
+              </li>
+              <li className="w-full flex-1 text-left text-sm uppercase text-zinc-800 font-semibold">
+                Price
+              </li>
+              <li className="w-full flex-1 text-left text-sm uppercase text-zinc-800 font-semibold">
+                Stock Status
+              </li>
+              <li className="w-full flex-1 text-left text-sm uppercase text-zinc-800 font-semibold">
+                Actions
+              </li>
+            </ul>
+          </div>
+          <hr className="md:block hidden" />
+          {/* {wishlist.map((item, index) => ( */}
+          <div className="flex mt-8">
+            <ul className="flex justify-around items-center md:flex-row flex-col gap-2 w-full wishlist md:px-0 px-3 md:py-0 py-8">
+              <li className="w-full flex-[2] md:text-md text-sm md:text-left text-center flex md:flex-row flex-col items-center md:gap-2 gap-4">
+                <span className=" relative">
+                  <span
+                    className="absolute -right-1 -top-2 cursor-pointer rounded-full z-[99999] p-[2px] text-sm"
+                    style={{ boxShadow: "0 2px 6px 0 rgba(0,0,0,0.4)" }}
+                  >
+                    <IoClose />
+                  </span>
+                  <img
+                    src="images/headphones/shop50-product-2-1-300x300.jpg"
+                    className="w-24"
+                    alt=""
+                  />
+                </span>
+                Galaxy S24 Ultra S Pen - Black
+              </li>
+              {/* <li className="w-full flex-1 md:text-left md:text-md text-sm text-center text-neutral-500">
+                {`$${Math.min(
+                  ...item.price.map((color) => JSON.parse(color).price)
+                ).toFixed(2)} - $${Math.max(
+                  ...item.price.map((color) => JSON.parse(color).price)
+                ).toFixed(2)}`}
+              </li> */}
+              <li className="w-full flex-1 md:text-left md:text-md text-sm text-center text-neutral-500">
+                $110 - $180
+              </li>
+              <li className="w-full flex-1 md:text-left md:text-md text-sm text-center">
+                In Stock
+              </li>
+              <li className="w-full flex-1 md:text-left text-center">
+                <button className=" bg-zinc-800 md:w-auto w-full uppercase md:text-md text-sm text-white px-6 py-3">
+                  <Link to="/">Link</Link>
+                </button>
+              </li>
+            </ul>
+          </div>
+          {/* ))} */}
+        </div>
+        <div className="w-1/3 text-left p-7 border-2 border-neutral-200">
+          <h4 className="uppercase font-semibold mb-6 text-zinc-800">
+            Cart Totals
+          </h4>
+          <div className="flex justify-between border-b-[1px] border-neutral-300 pb-3 mb-3">
+            <h5 className=" text-zinc-800 text-sm font-semibold">Subtotal</h5>
+            <span className="font-light text-neutral-500 text-sm">$126.00</span>
+          </div>
+          <div>
+            <h5 className="text-zinc-800 font-semibold mb-3">Shipping</h5>
+            <span className="text-sm mb-3 block text-neutral-500">
+              Flat Rate
+            </span>
+            <span className="text-sm text-neutral-500 mb-3 block">
+              Shipping to NY.
+            </span>
+            <input
+              type="text"
+              placeholder="United States (US)"
+              className="border-neutral-300 placeholder:text-sm pl-3 border-[1px] w-full py-2 rounded-md mb-2"
+            />
+            <input
+              type="text"
+              placeholder="New York"
+              className="border-neutral-300 placeholder:text-sm pl-3 border-[1px] w-full py-2 rounded-md mb-2"
+            />
+            <input
+              type="text"
+              placeholder="Town / City"
+              className="border-neutral-300 placeholder:text-sm pl-3 border-[1px] w-full py-2 rounded-md mb-2"
+            />
+            <input
+              type="text"
+              placeholder="ZIP Code"
+              className="border-neutral-300 placeholder:text-sm pl-3 border-[1px] w-full py-2 rounded-md mb-2"
+            />
+            <button className="bg-neutral-100 text-sm font-semibold uppercase py-2 px-2 mt-2 mb-4">
+              <Link>Update Totals</Link>
+            </button>
+          </div>
+          <hr />
+          <div className="mt-3 flex justify-between">
+            <span className="font-semibold text-zinc-800">Total</span>
+            <span className="text-xl font-semibold text-zinc-800">$126.00</span>
+          </div>
+          <button className="mt-5 bg-zinc-800 text-white py-3 w-full uppercase font-semibold">
+            <Link>Proceed To Checkout</Link>
+          </button>
+        </div>
+      </div>
+    </>
+  );
+}

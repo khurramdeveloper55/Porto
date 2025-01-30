@@ -24,7 +24,7 @@ export default function HeroSlider() {
     const { className, onClick } = props;
     return (
       <button
-        className={`${className} custom-prev before:hidden !text-black !text-lg w-24 !left-[-18px] !top-[45%] h-24 z-50 absolute  border `}
+        className={`${className} custom-prev before:hidden !text-black !text-lg w-24 !left-[-14px] !top-[45%] h-24 z-50 absolute  border `}
         onClick={onClick}
         aria-label="Previous Slide"
       >
@@ -39,7 +39,7 @@ export default function HeroSlider() {
     const { className, onClick } = props;
     return (
       <button
-        className={`${className} custom-next before:hidden !text-black !top-[45%] !right-0 !text-lg w-24 h-24 z-50 absolute  `}
+        className={`${className} custom-next before:hidden !text-black !top-[45%] !right-[6px] !text-lg w-24 h-24 z-50 absolute  `}
         onClick={onClick}
         aria-label="Next Slide"
       >
@@ -58,7 +58,7 @@ export default function HeroSlider() {
             className="flex items-center content-between rounded-lg  max-h-[450px]"
             style={{ backgroundImage: 'url("images/slider/slider-bg-1.jpg")' }}
           >
-            <div className="w-1/2 ">
+            <div className="w-1/2  md:h-auto h-[205px] md:block flex items-center">
               <img
                 src="images/slider/slide-dots.png"
                 className={`absolute lg:top-16 top-6 md:left-10 left-4 w-[100px] md:w-auto slide-up-img  ${
@@ -67,7 +67,7 @@ export default function HeroSlider() {
               />
               <div className="md:pl-20 pl-8 text-left">
                 <h2
-                  className={`lg:text-5xl md:text-3xl text-xl font-extrabold text-zinc-800 leading-11 slide-up-h2 ${
+                  className={`lg:text-5xl md:text-3xl text-base font-extrabold text-zinc-800 md:leading-11 leading-6 slide-up-h2 ${
                     currentSlide === 0 ? "animate" : ""
                   }`}
                 >
@@ -83,7 +83,7 @@ export default function HeroSlider() {
                 </p>
                 <Link to="/shop">
                   <span
-                    className={`mt-4 inline-block bg-indigo-600 hover:bg-indigo-500 font-bold md:text-lg text-sm text-white px-8 py-3 rounded-full slide-up-btn ${
+                    className={`mt-4 inline-block bg-indigo-600 hover:bg-indigo-500 font-bold md:text-lg text-[12px] text-white md:px-8 px-4 md:py-3 py-2 rounded-full slide-up-btn ${
                       currentSlide === 0 ? "animate" : ""
                     }`}
                   >
@@ -113,9 +113,9 @@ export default function HeroSlider() {
                 className="carousel-image"
               />
             </div>
-            <div className="w-1/2 p-2 text-left">
+            <div className="w-1/2 p-2 text-left md:h-auto h-[205px]  md:block flex justify-center flex-col">
               <h2
-                className={`lg:text-5xl md:text-3xl text-xl font-extrabold text-zinc-800 leading-11 slide-up-h2 ${
+                className={`lg:text-5xl md:text-3xl text-base font-extrabold text-zinc-800 md:leading-11 leading-6 slide-up-h2 ${
                   currentSlide === 1 ? "animate" : ""
                 }`}
               >
@@ -130,7 +130,7 @@ export default function HeroSlider() {
               </p>
               <Link to="/shop">
                 <span
-                  className={`mt-4 inline-block bg-indigo-600 hover:bg-indigo-500 font-bold md:text-lg text-sm text-white px-8 py-3 rounded-full slide-up-btn ${
+                  className={`mt-4 inline-block bg-indigo-600 hover:bg-indigo-500 font-bold md:text-lg text-[12px] text-white md:px-8 px-4 md:py-3 py-2 rounded-full slide-up-btn ${
                     currentSlide === 1 ? "animate" : ""
                   }`}
                 >

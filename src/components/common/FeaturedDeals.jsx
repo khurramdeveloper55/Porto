@@ -5,7 +5,7 @@ export default function FeaturedDeals({ showTitle = true }) {
   return (
     <div className="my-16">
       {showTitle && (
-        <h2 className="text-left text-3xl mb-8 font-bold text-zinc-800">
+        <h2 className="md:text-left text-center md:text-3xl text-2xl mb-8 font-bold text-zinc-800">
           Hurry Up Deals
         </h2>
       )}

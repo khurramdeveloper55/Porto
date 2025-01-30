@@ -71,13 +71,12 @@ export default function ProductGallery() {
   return (
     <>
       <ProductSortingFilter />
-      <div className="container mx-auto px-4">
-        <h1 className="text-2xl font-bold my-4">Category </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="container mx-auto px-4 mt-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {sortedProducts.slice(0, visibleCount).map((product, index) => (
             <div
               key={index}
-              className="p-4 bg-gray-100 rounded shadow relative overflow-hidden"
+              className="p-4 bg-gray-100 rounded relative overflow-hidden"
             >
               <div className="relative mb-1 cursor-pointer">
                 <img
@@ -99,14 +98,14 @@ export default function ProductGallery() {
               <span className="text-[10px] uppercase font-light text-neutral-400">
                 {product.category}
               </span>
-              <h2 className="text-lg font-medium truncate mb-1">
+              <h2 className="text-md text-zinc-800 font-medium truncate mb-1">
                 <Link to={`/product/${product.id}`}>{product.name}</Link>
               </h2>
               <span className="flex gap-[1px] text-neutral-500 mb-2 text-sm justify-center">
                 <FaStar /> <FaStar /> <FaStar /> <FaStar /> <FaStar />
               </span>
-              <p>
-                Price: $
+              <p className="text-neutral-500 font-semibold">
+                $
                 {`${Math.min(
                   ...product.colors.map((color) => JSON.parse(color).price)
                 ).toFixed(2)} - ${Math.max(

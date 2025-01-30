@@ -14,7 +14,7 @@ export default function Header() {
   return (
     <div className="container mx-auto mb-10">
       <div
-        className="flex justify-between items-center mb-[100px] lg:mb-0 relative
+        className="flex justify-between items-center mb-[55px] lg:mb-0 relative
       "
       >
         <div className="lg:inline inline-flex items-center gap-4">

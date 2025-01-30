@@ -9,6 +9,7 @@ import {
   updateSortOption,
 } from "../../redux/slices/filterSlice";
 import useCategories from "../../hooks/useCategories";
+import { IoIosArrowDown } from "react-icons/io";
 
 export default function ProductSortingFilter() {
   const [showFilter, setShowFilter] = useState(false);
@@ -43,30 +44,35 @@ export default function ProductSortingFilter() {
     <div className="flex justify-between">
       <div className="flex gap-4">
         <select
-          className="w-40 p-2 bg-neutral-100 text-neutral-400 border rounded cursor-pointer"
+          className="w-40 p-2 bg-neutral-100 text-sm text-neutral-400 border-0 rounded cursor-pointer"
           onChange={handleOnChange}
           defaultValue=""
         >
-          <option value="" defaultValue="">
+          <option value="" defaultValue="" className=" bg-white text-zinc-600">
             All Categories
           </option>
 
           {categories?.map((category) => (
-            <option key={category.id} value={category.name}>
+            <option
+              key={category.id}
+              value={category.name}
+              className=" bg-white text-zinc-600 cursor-pointer"
+            >
               {category.name}
             </option>
           ))}
         </select>
+
         <span
-          className="text-neutral-400 bg-neutral-100  relative flex w-40 justify-between items-center p-2"
+          className="text-neutral-400 bg-neutral-100 text-sm  border-0 rounded  relative flex w-40 justify-between items-center p-2"
           onClick={() => setShowFilter((show) => !show)}
         >
           Select Price
-          <span className="font-normal text-black">
-            <FaAngleDown />
+          <span className="font-normal text-neutral-400">
+            <IoIosArrowDown />
           </span>
           {showFilter && (
-            <div className="flex flex-col absolute left-0 top-[40px] w-64 z-20 space-y-2 p-2">
+            <div className="flex flex-col absolute filter bg-white left-0 top-[40px] w-48 z-20 space-y-2 p-2">
               <div
                 className="flex space-x-2"
                 onClick={(e) => e.stopPropagation()}
@@ -76,19 +82,19 @@ export default function ProductSortingFilter() {
                   placeholder="Min"
                   value={minPrice}
                   onChange={(e) => setMinPrice(e.target.value)}
-                  className="w-full p-2 border border-neutral-300 rounded-md"
+                  className="w-full px-2 py-1 border border-neutral-200"
                 />
                 <input
                   type="number"
                   placeholder="Max"
                   value={maxPrice}
                   onChange={(e) => setMaxPrice(e.target.value)}
-                  className="w-full p-2 border border-neutral-300 rounded-md"
+                  className="w-full px-2 py-1 border border-neutral-200"
                 />
               </div>
 
               <button
-                className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+                className="bg-neutral-100 text-zinc-800 text-sm uppercase py-2 px-4 hover:text-white hover:bg-indigo-500 duration-300"
                 onClick={handleFilter}
               >
                 Filter
@@ -96,27 +102,46 @@ export default function ProductSortingFilter() {
             </div>
           )}
         </span>
-        <span className="text-neutral-400 bg-neutral-100 flex w-40 justify-between items-center p-2">
-          Select Colors
-          <span className="font-normal text-black">
-            <FaAngleDown />
-          </span>
-        </span>
       </div>
       <div className="flex gap-4">
         <select
           defaultValue="default"
           onChange={handleUpdateSort}
-          className="w-40 bg-neutral-100"
+          className="w-40 bg-neutral-100 rounded text-zinc-800 text-sm"
         >
-          <option value="default">Default Sorting</option>
-          <option value="A-Z">SORT BY A TO Z</option>
-          <option value="Z-A">SORT BY Z TO A</option>
-          <option value="price-low-high">SORT BY PRICE: LOW TO HIGH</option>
-          <option value="price-high-low">SORT BY PRICE: HIGH TO LOW</option>
+          <option
+            value="default"
+            className="text-sm font-normal text-zinc-800 capitalize"
+          >
+            Default Sorting
+          </option>
+          <option
+            value="A-Z"
+            className="text-sm font-normal text-zinc-800 capitalize"
+          >
+            Sort By A To Z
+          </option>
+          <option
+            value="Z-A"
+            className="text-sm font-normal text-zinc-800 capitalize"
+          >
+            Sort By Z To A
+          </option>
+          <option
+            value="price-low-high"
+            className="text-sm font-normal text-zinc-800 capitalize"
+          >
+            Sort By Price: Low To High
+          </option>
+          <option
+            value="price-high-low"
+            className="text-sm font-normal text-zinc-800 capitalize"
+          >
+            Sort By Price: High To Low
+          </option>
         </select>
         <select
-          className="text-black bg-neutral-100 flex w-16 justify-between items-center p-2"
+          className="text-zinc-800 text-sm bg-neutral-100 rounded flex w-16 justify-between items-center p-2"
           onChange={(event) =>
             dispatch(updateCount(Number(event.target.value)))
           }
@@ -127,10 +152,10 @@ export default function ProductSortingFilter() {
           <option value="25">25</option>
           <option value="32">32</option>
         </select>
-        <span className="text-indigo-500 text-xl bg-neutral-100 flex justify-between items-center py-2 px-3">
+        <span className="text-indigo-500 cursor-pointer rounded text-xl bg-neutral-100 flex justify-between items-center py-2 px-3">
           <BsGrid3X3GapFill />
         </span>
-        <span className="text-black text-xl bg-neutral-100 flex justify-between items-center py-2 px-3">
+        <span className="text-black text-xl cursor-pointer rounded bg-neutral-100 flex justify-between items-center py-2 px-3">
           <FaList />
         </span>
       </div>

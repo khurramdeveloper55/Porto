@@ -3,12 +3,11 @@ import React, { useState } from "react";
 import { FaCcPaypal, FaCcVisa, FaGooglePay, FaStar } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
 import { IoMdHome } from "react-icons/io";
-import { MdKeyboardArrowRight } from "react-icons/md";
+import { MdKeyboardArrowRight, MdOutlineDone } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import ProductDetailsSlider from "./ProductDetailsSlider";
 import { useDispatch, useSelector } from "react-redux";
-import { TiTick } from "react-icons/ti";
 import { fetchProductDetails } from "../api/productDetails";
 import { addToWishlist } from "../redux/slices/wishlistSlice";
 import { addToCart } from "../redux/slices/cartSlice";
@@ -53,10 +52,10 @@ export default function ProductDetails() {
     }));
   };
 
-  const handleClearColor = (productID, color) => {
+  const handleClearColor = () => {
     setSelectedColor((prev) => ({
       ...prev,
-      [productID]: null,
+      [product.id]: null,
     }));
   };
 
@@ -110,6 +109,20 @@ export default function ProductDetails() {
         </span>{" "}
         <span className="uppercase">{product.name}</span>
       </div>
+      <h3 className="text-md text-left mb-2 flex gap-2 items-center">
+        {isAdded && (
+          <>
+            <span className="text-emerald-500 inline text-xl font-bold">
+              <MdOutlineDone />
+            </span>
+            <span className="font-bold">
+              {" "}
+              {quantity} x "{product.name}"
+            </span>{" "}
+            have been added to your cart
+          </>
+        )}
+      </h3>
       <div className="flex md:flex-row flex-col gap-6">
         <div className="md:w-1/2 w-full">
           <ProductDetailsSlider />
@@ -174,7 +187,8 @@ export default function ProductDetails() {
                   <>
                     <span
                       key={index}
-                      className={`w-6 h-6 rounded-full  inline-block cursor-pointer  cursor-pointer ${
+                      className={`w-6 h-6 rounded-full  inline-block cursor-pointer ${
+                        !isAdded &&
                         selectedColor[product.id]?.name === color.name
                           ? "outline outline-[2px] border-2 border-neutral-100 outline-black"
                           : ""
@@ -182,18 +196,20 @@ export default function ProductDetails() {
                       style={{ backgroundColor: color.name }}
                       onClick={() => handleSelectedColor(product.id, color)}
                     ></span>
-                    <span
-                      className={`absolute top-[30px] translate-x-[-30px] bg-zinc-800 text-white uppercase text-[12px] px-2 py-1 font-light cursor-pointer hidden ${
-                        selectedColor[product.id] && "!inline-block"
-                      }`}
-                      onClick={handleClearColor}
-                    >
-                      Clear
-                    </span>
+                    {selectedColor[product.id] &&
+                      !isAdded &&
+                      selectedColor[product.id].name === color.name && (
+                        <span
+                          className="absolute top-[30px] translate-x-[-30px] bg-zinc-800 text-white uppercase text-[12px] px-2 py-1 font-light cursor-pointer inline-block"
+                          onClick={handleClearColor}
+                        >
+                          Clear
+                        </span>
+                      )}
                   </>
                 ))}
               </div>
-              {selectedColor[product.id] && (
+              {selectedColor[product.id] && !isAdded && (
                 <span className="mt-[20px] inline-block">
                   {selectedColor[product.id]?.price
                     ? `$${parseFloat(selectedColor[product.id].price).toFixed(
@@ -249,10 +265,16 @@ export default function ProductDetails() {
                   className="text-sm flex gap-1 items-center"
                   onClick={handleAddToWishlist}
                 >
-                  <span className="text-lg">
-                    <FiHeart />
-                  </span>
-                  {isInWishlist ? "Browse Wishlist" : "Add to Wishlist"}
+                  {isInWishlist ? (
+                    <span className="text-sm">Browse Wishlist</span> // Only the text when in wishlist
+                  ) : (
+                    <>
+                      <span className="text-lg">
+                        <FiHeart />
+                      </span>
+                      <span>Add to Wishlist</span>
+                    </>
+                  )}
                 </button>
               </div>
               <div className="flex md:flex-row flex-col items-center justify-center gap-2 text-neutral-500">

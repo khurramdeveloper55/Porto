@@ -3,11 +3,13 @@ import { FaFacebook, FaPinterest, FaShare } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { MdEmail, MdKeyboardArrowRight } from "react-icons/md";
 import { RiTwitterXLine } from "react-icons/ri";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { removeFromWishlist } from "../../redux/slices/wishlistSlice";
 
 export default function WishList() {
   const wishlist = useSelector((state) => state.wishlist.items);
+  const dispatch = useDispatch();
   return (
     <>
       <div className=" w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]  relative">
@@ -52,6 +54,9 @@ export default function WishList() {
                   <span
                     className="absolute -right-1 -top-2 cursor-pointer rounded-full z-[99999] p-[2px] text-sm"
                     style={{ boxShadow: "0 2px 6px 0 rgba(0,0,0,0.4)" }}
+                    onClick={() =>
+                      dispatch(removeFromWishlist({ id: item.id }))
+                    }
                   >
                     <IoClose />
                   </span>

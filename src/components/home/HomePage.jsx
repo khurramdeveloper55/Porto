@@ -6,6 +6,7 @@ import FeaturedProductsCarousel from "./FeaturedProductsCarousel";
 import FeaturedDeals from "../common/FeaturedDeals";
 import ContactSupportCta from "../common/ContactSupportCta";
 import Testimonials from "../common/Testimonials";
+import { GrClose } from "react-icons/gr";
 
 export default function HomePage() {
   return (

@@ -9,6 +9,8 @@ import WishList from "./components/wishlist/WishList";
 import HomePage from "./components/home/HomePage";
 import CategoryProducts from "./pages/CategoryProducts";
 import Cart from "./components/cart/Cart";
+import Checkout from "./components/cart/Checkout";
+import Login from "./components/login/Login";
 
 function App() {
   const queryClient = new QueryClient();
@@ -33,6 +35,8 @@ function App() {
               />
               <Route path="/wishlist" element={<WishList />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/login" element={<Login />} />
             </Route>
           </Routes>
         </BrowserRouter>

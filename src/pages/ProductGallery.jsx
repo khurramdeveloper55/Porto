@@ -3,13 +3,17 @@ import React from "react";
 import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import ProductSortingFilter from "../components/common/ProductSortingFilter";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../api/apiProducts";
 import { selectFilter } from "../redux/slices/filterSlice";
+import { FaArrowRightLong } from "react-icons/fa6";
+import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 
 export default function ProductGallery() {
   const { visibleCount, minPrice, maxPrice, sortOption } =
     useSelector(selectFilter);
+  const dispatch = useDispatch();
+  const wishlist = useSelector((state) => state.wishlist.items);
   const {
     data: products,
     isLoading,
@@ -68,6 +72,24 @@ export default function ProductGallery() {
     }
   });
 
+  const isInWishlist = (id) => wishlist.some((item) => item.id === id);
+
+  const handleAddToWishlist = (product) => {
+    if (isInWishlist(product.id)) {
+      dispatch(removeFromWishlist({ id: product.id }));
+    } else {
+      dispatch(
+        addToWishlist({
+          id: product.id,
+          name: product.name,
+          price: product.colors,
+          quantity: 1,
+          image: product.image,
+        })
+      );
+    }
+  };
+
   return (
     <>
       <ProductSortingFilter />
@@ -76,7 +98,7 @@ export default function ProductGallery() {
           {sortedProducts.slice(0, visibleCount).map((product, index) => (
             <div
               key={index}
-              className="p-4 bg-gray-100 rounded relative overflow-hidden"
+              className="p-4 bg-gray-100 rounded relative overflow-hidden  group"
             >
               <div className="relative mb-1 cursor-pointer">
                 <img
@@ -112,6 +134,29 @@ export default function ProductGallery() {
                   ...product.colors.map((color) => JSON.parse(color).price)
                 ).toFixed(2)}`}
               </p>
+              <div className="absolute top-3 right-2 opacity-0 transform scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
+                <span className="flex flex-col gap-4">
+                  <Link to={`/product/${product.id}`}>
+                    <span className="bg-white border-[1px] rounded-full flex items-center justify-center shadow-custom w-10 h-10 hover:bg-black hover:text-white  cursor-pointer transition-all duration-300">
+                      <FaArrowRightLong />
+                    </span>
+                  </Link>
+                  <span
+                    className={`bg-white border-[1px] text-2xl rounded-full flex items-center justify-center shadow-custom w-10 h-10 hover:bg-black hover:text-white ${
+                      isInWishlist(product.id)
+                        ? "text-red-400  hover:text-red-400"
+                        : ""
+                    } cursor-pointer transition-all duration-300`}
+                    onClick={() => handleAddToWishlist(product)}
+                  >
+                    {isInWishlist(product.id) ? (
+                      <IoMdHeart />
+                    ) : (
+                      <IoMdHeartEmpty />
+                    )}
+                  </span>
+                </span>
+              </div>
             </div>
           ))}
         </div>

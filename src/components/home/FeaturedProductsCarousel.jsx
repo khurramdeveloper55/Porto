@@ -3,12 +3,18 @@ import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import { IoMdHeartEmpty } from "react-icons/io";
-import { BiShoppingBag } from "react-icons/bi";
+import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { getProducts } from "../../api/apiProducts";
 import CarouselWithArrows from "../common/CarouselWithArrows";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from "../../redux/slices/wishlistSlice";
 
 export default function FeaturedProductsCarousel() {
+  const dispatch = useDispatch();
+  const wishlist = useSelector((state) => state.wishlist.items);
   const { data: products, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: getProducts,
@@ -23,6 +29,24 @@ export default function FeaturedProductsCarousel() {
       ...prev,
       [productId]: color,
     }));
+  };
+
+  const isInWishlist = (id) => wishlist.some((item) => item.id === id);
+
+  const handleAddToWishlist = (product) => {
+    if (isInWishlist(product.id)) {
+      dispatch(removeFromWishlist({ id: product.id }));
+    } else {
+      dispatch(
+        addToWishlist({
+          id: product.id,
+          name: product.name,
+          price: product.colors,
+          quantity: 1,
+          image: product.image,
+        })
+      );
+    }
   };
 
   return (
@@ -148,11 +172,19 @@ export default function FeaturedProductsCarousel() {
                         <FaArrowRightLong />
                       </span>
                     </Link>
-                    <span className="bg-white border-[1px] rounded-full text-2xl flex  cursor-pointer items-center justify-center shadow-custom w-10 h-10 hover:bg-black hover:text-white transition-all duration-300">
-                      <BiShoppingBag />
-                    </span>
-                    <span className="bg-white border-[1px] text-2xl rounded-full flex items-center justify-center shadow-custom w-10 h-10 hover:bg-black hover:text-white  cursor-pointer transition-all duration-300">
-                      <IoMdHeartEmpty />
+                    <span
+                      className={`bg-white border-[1px] text-2xl rounded-full flex items-center justify-center shadow-custom w-10 h-10 hover:bg-black hover:text-white ${
+                        isInWishlist(product.id)
+                          ? "text-red-400  hover:text-red-400"
+                          : ""
+                      } cursor-pointer transition-all duration-300`}
+                      onClick={() => handleAddToWishlist(product)}
+                    >
+                      {isInWishlist(product.id) ? (
+                        <IoMdHeart />
+                      ) : (
+                        <IoMdHeartEmpty />
+                      )}
                     </span>
                   </span>
                 </div>

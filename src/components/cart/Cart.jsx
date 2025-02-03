@@ -1,9 +1,13 @@
 import React from "react";
 import { IoClose } from "react-icons/io5";
 import { MdKeyboardArrowRight } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { removeFromCart } from "../../redux/slices/cartSlice";
 
 export default function Cart() {
+  const cartItems = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch();
   return (
     <>
       <div className="flex justify-center flex-col items-center py-6 ">
@@ -41,46 +45,36 @@ export default function Cart() {
             </ul>
           </div>
           <hr className="md:block hidden" />
-          {/* {wishlist.map((item, index) => ( */}
-          <div className="flex mt-8">
-            <ul className="flex justify-around items-center md:flex-row flex-col gap-2 w-full wishlist md:px-0 px-3 md:py-0 py-8">
-              <li className="w-full flex-[2] md:text-md text-sm md:text-left text-center flex md:flex-row flex-col items-center md:gap-2 gap-4">
-                <span className=" relative">
-                  <span
-                    className="absolute -right-1 -top-2 cursor-pointer rounded-full z-[99999] p-[2px] text-sm"
-                    style={{ boxShadow: "0 2px 6px 0 rgba(0,0,0,0.4)" }}
-                  >
-                    <IoClose />
+          {cartItems.map((item) => (
+            <div className="flex mt-8">
+              <ul className="flex justify-around items-center md:flex-row flex-col gap-2 w-full wishlist md:px-0 px-3 md:py-0 py-8">
+                <li className="w-full flex-[2] md:text-md text-sm md:text-left text-center flex md:flex-row flex-col items-center md:gap-2 gap-4">
+                  <span className=" relative">
+                    <span
+                      className="absolute -right-1 -top-2 cursor-pointer rounded-full z-[99999] p-[2px] text-sm"
+                      style={{ boxShadow: "0 2px 6px 0 rgba(0,0,0,0.4)" }}
+                      onClick={() => dispatch(removeFromCart({ id: item.id }))}
+                    >
+                      <IoClose />
+                    </span>
+                    <img src={item.image} className="w-[96px]" alt="" />
                   </span>
-                  <img
-                    src="images/headphones/shop50-product-2-1-300x300.jpg"
-                    className="w-24"
-                    alt=""
-                  />
-                </span>
-                Galaxy S24 Ultra S Pen - Black
-              </li>
-              {/* <li className="w-full flex-1 md:text-left md:text-md text-sm text-center text-neutral-500">
-                {`$${Math.min(
-                  ...item.price.map((color) => JSON.parse(color).price)
-                ).toFixed(2)} - $${Math.max(
-                  ...item.price.map((color) => JSON.parse(color).price)
-                ).toFixed(2)}`}
-              </li> */}
-              <li className="w-full flex-1 md:text-left md:text-md text-sm text-center text-neutral-500">
-                $110 - $180
-              </li>
-              <li className="w-full flex-1 md:text-left md:text-md text-sm text-center">
-                In Stock
-              </li>
-              <li className="w-full flex-1 md:text-left text-center">
-                <button className=" bg-zinc-800 md:w-auto w-full uppercase md:text-md text-sm text-white px-6 py-3">
-                  <Link to="/">Link</Link>
-                </button>
-              </li>
-            </ul>
-          </div>
-          {/* ))} */}
+                  {item.name}
+                </li>
+                <li className="w-full flex-1 md:text-left md:text-md text-sm text-center text-neutral-500">
+                  ${item.price.toFixed(2)}
+                </li>
+                <li className="w-full flex-1 md:text-left md:text-md text-sm text-center">
+                  In Stock
+                </li>
+                <li className="w-full flex-1 md:text-left text-center">
+                  <button className=" bg-zinc-800 md:w-auto w-full uppercase md:text-md text-sm text-white px-6 py-3">
+                    <Link to="/">Link</Link>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          ))}
         </div>
         <div className="w-1/3 text-left p-7 border-2 border-neutral-200">
           <h4 className="uppercase font-semibold mb-6 text-zinc-800">
@@ -128,7 +122,7 @@ export default function Cart() {
             <span className="text-xl font-semibold text-zinc-800">$126.00</span>
           </div>
           <button className="mt-5 bg-zinc-800 text-white py-3 w-full uppercase font-semibold">
-            <Link>Proceed To Checkout</Link>
+            <Link to="/checkout">Proceed To Checkout</Link>
           </button>
         </div>
       </div>

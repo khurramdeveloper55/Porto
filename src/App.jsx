@@ -11,6 +11,8 @@ import CategoryProducts from "./pages/CategoryProducts";
 import Cart from "./components/cart/Cart";
 import Checkout from "./components/cart/Checkout";
 import Login from "./components/login/Login";
+import UserProfile from "./components/login/UserProfile";
+import ProtectedRoute from "./components/common/ProtectedRoute";
 
 function App() {
   const queryClient = new QueryClient();
@@ -35,8 +37,11 @@ function App() {
               />
               <Route path="/wishlist" element={<WishList />} />
               <Route path="/cart" element={<Cart />} />
-              <Route path="/checkout" element={<Checkout />} />
+              <Route element={<ProtectedRoute />}>
+                <Route path="/checkout" element={<Checkout />} />
+              </Route>
               <Route path="/login" element={<Login />} />
+              <Route path="/user" element={<UserProfile />} />
             </Route>
           </Routes>
         </BrowserRouter>

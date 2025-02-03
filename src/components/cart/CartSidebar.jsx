@@ -134,7 +134,7 @@ export default function CartSidebar({ showCart, setShowCart }) {
               <span className="text-sm font-bold">$114.00</span>
             </div>
             <button className="bg-neutral-200 text-[12px] py-3 uppercase hover:bg-neutral-100">
-              View Cart
+              <Link to="/cart">View Cart</Link>
             </button>
             <button className="bg-zinc-800 text-white py-3 uppercase text-[12px] hover:bg-zinc-700">
               Checkout

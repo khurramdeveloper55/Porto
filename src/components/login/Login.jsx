@@ -1,62 +1,25 @@
 import React, { useState } from "react";
 import { MdKeyboardArrowRight } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
-import supabase from "../../api/supabase";
+import { Link } from "react-router-dom";
+import { useLogin } from "../../hooks/useLogin";
+import { useSignup } from "../../hooks/useSignup";
 
 export default function Login() {
-  const [registerData, setRegisterData] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
-  });
-  const navigate = useNavigate();
-
-  const handleRegisterChange = (e) => {
-    setRegisterData({ ...registerData, [e.target.name]: e.target.value });
-  };
-  const handleLoginChange = (e) => {
-    setLoginData({ ...loginData, [e.target.name]: e.target.value });
+  const [email, setEmail] = useState("khurram@gmail.com");
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [password, setPassword] = useState("avenger2027");
+  const [registerPassword, setRegisterPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const { login, isLoading } = useLogin();
+  const { signup } = useSignup();
+  const handleRegister = () => {
+    signup({ username, email, password });
   };
 
-  const handleRegister = async () => {
-    const { error } = await supabase.auth.signUp({
-      email: registerData.email,
-      password: registerData.password,
-      options: {
-        data: { username: registerData.username },
-      },
-    });
-    if (error) {
-      alert("Registration failed: " + error.message);
-    } else {
-      alert("Registration successful! Please log in.");
-    }
-    setRegisterData({
-      username: "",
-      email: "",
-      password: "",
-    });
-  };
-
-  const handleLogin = async () => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email: loginData.email,
-      password: loginData.password,
-    });
-    if (error) {
-      alert("Login failed: " + error.message);
-    } else {
-      alert("Login successful!");
-      navigate("/shop");
-    }
-    setLoginData({
-      email: "",
-      password: "",
-    });
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (!email || !password) return;
+    login({ email, password });
   };
   return (
     <>
@@ -77,8 +40,11 @@ export default function Login() {
 
       <div className="my-16 flex gap-8">
         <div className="w-full">
-          <h2 className="text-2xl font-semibold text-left text-zinc-800 mb-3">
-            Login
+          <h2 className="text-2xl font-semibold text-left text-zinc-800 mb-3 flex gap-2">
+            Login{" "}
+            <span className="text-[15px] text-neutral-500 font-normal">
+              (Already have account)
+            </span>
           </h2>
           <div className="text-left mb-3">
             <label htmlFor="" className="text-neutral-500 ">
@@ -88,8 +54,8 @@ export default function Login() {
               type="text"
               name="email"
               className="w-full p-2 border-[1px]"
-              value={loginData.email}
-              onChange={handleLoginChange}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="text-left mb-3">
@@ -100,8 +66,8 @@ export default function Login() {
               type="password"
               name="password"
               className="w-full p-2 border-[1px]"
-              value={loginData.password}
-              onChange={handleLoginChange}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <button
@@ -123,8 +89,8 @@ export default function Login() {
               type="text"
               name="username"
               className="w-full p-2 border-[1px]"
-              value={registerData.username}
-              onChange={handleRegisterChange}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
           <div className="text-left mb-3">
@@ -135,8 +101,8 @@ export default function Login() {
               type="email"
               name="email"
               className="w-full p-2 border-[1px]"
-              value={registerData.email}
-              onChange={handleRegisterChange}
+              value={registerEmail}
+              onChange={(e) => setRegisterEmail(e.target.value)}
             />
           </div>
           <div className="text-left mb-3">
@@ -147,8 +113,8 @@ export default function Login() {
               type="password"
               name="password"
               className="w-full p-2 border-[1px]"
-              value={registerData.password}
-              onChange={handleRegisterChange}
+              value={registerPassword}
+              onChange={(e) => setRegisterPassword(e.target.value)}
             />
           </div>
           <button

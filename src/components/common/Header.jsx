@@ -54,12 +54,17 @@ export default function Header() {
               </span>
             </Link>
           </span>
-          <span className="flex items-center gap-2 group cursor-pointer">
-            <span className="sm:text-2xl text-xl bg-indigo-50 sm:p-2 p-2 inline-block rounded-md group-hover:-translate-y-1 group-hover:transition-translate duration-300">
-              <SlUser />
-            </span>
-            <span className="hidden lg:inline">My Account</span>
+          <span className="flex items-center">
+            <Link to="/login">
+              <span className="flex items-center gap-2 group cursor-pointer">
+                <span className="sm:text-2xl text-xl bg-indigo-50 sm:p-2 p-2 inline-block rounded-md group-hover:-translate-y-1 group-hover:transition-translate duration-300">
+                  <SlUser />
+                </span>
+                <span className="hidden lg:inline">My Account</span>
+              </span>
+            </Link>
           </span>
+
           <span
             className="flex items-center relative cursor-pointer"
             onClick={() => setShowCart((show) => !show)}

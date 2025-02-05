@@ -1,21 +1,9 @@
-import React, { useEffect, useState } from "react";
-
 export default function UserProfile() {
-  const [username, setUsername] = useState("");
-
-  useEffect(() => {
-    const savedUsername = localStorage.getItem("username");
-    if (savedUsername) {
-      setUsername(savedUsername);
-    }
-  });
   return (
     <>
       <div className=" w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]  relative">
         <div className="flex justify-center flex-col items-center bg-neutral-100 py-16 ">
-          <h2 className="block text-center text-3xl font-bold">
-            Welcome Back {username}
-          </h2>
+          <h2 className="block text-center text-3xl font-bold">Welcome Back</h2>
         </div>
       </div>
 

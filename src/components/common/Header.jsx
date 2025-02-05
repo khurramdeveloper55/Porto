@@ -6,9 +6,11 @@ import { useSelector } from "react-redux";
 import { SlUser } from "react-icons/sl";
 import { BiShoppingBag } from "react-icons/bi";
 import CartSidebar from "../cart/CartSidebar";
+import SideMenu from "./SideMenu";
 
 export default function Header() {
   const [showCart, setShowCart] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
   const cartItems = useSelector((state) => state.cart.items);
   const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   return (
@@ -18,9 +20,15 @@ export default function Header() {
       "
       >
         <div className="lg:inline inline-flex items-center gap-4">
-          <span className="lg:hidden inline sm:text-2xl text-xl bg-indigo-50 sm:p-3 p-2 rounded-md">
+          <span
+            className="lg:hidden inline sm:text-2xl text-xl bg-indigo-50 sm:p-3 p-2 rounded-md"
+            onClick={() => setShowMenu((show) => !show)}
+          >
             <RxHamburgerMenu />
           </span>
+          {showMenu && (
+            <SideMenu showMenu={showMenu} setShowMenu={setShowMenu} />
+          )}
           <Link to="/">
             <img
               src="images/logo.png"
@@ -72,7 +80,7 @@ export default function Header() {
             <span className="lg:text-3xl sm:text-2xl text-xl bg-indigo-50 duration-300  hover:text-indigo-600 lg:p-3 sm:p-3 p-2 rounded-md">
               <BiShoppingBag />
             </span>
-            <span className="absolute lg:top-2 sm:top-2 top-1 lg:right-2 sm:right-2 right-1 rounded-full text-xs bg-indigo-600 text-white w-4 h-4 leading-4 radius-md">
+            <span className="absolute lg:top-2 sm:top-2 top-1 lg:right-2 sm:right-2 right-1 rounded-full text-[10px] bg-indigo-600 text-white w-4 h-4 leading-4 radius-md">
               {totalQuantity}
             </span>
           </span>

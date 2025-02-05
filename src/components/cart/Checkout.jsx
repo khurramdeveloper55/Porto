@@ -2,13 +2,17 @@ import React from "react";
 import { HiMiniMinus, HiMiniPlus } from "react-icons/hi2";
 import { IoClose } from "react-icons/io5";
 import { MdKeyboardArrowRight } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { removeFromCart } from "../../redux/slices/cartSlice";
 
-export default function Cart() {
+export default function Checkout() {
+  const cartItems = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch();
   return (
     <>
       <div className="flex justify-center flex-col items-center py-6 ">
-        <div className="text-center text-neutral-400 text-xs flex flex-row justify-center items-center mb-0">
+        <div className="text-center text-neutral-400 text-xs flex md:flex-row flex-col justify-center items-center mb-4 md:mb-0">
           <span className="text-2xl font-semibold  text-indigo-500">
             <Link to="/">Shopping Cart</Link>
           </span>{" "}
@@ -23,15 +27,15 @@ export default function Cart() {
         </div>
       </div>
 
-      <div className="mb-16 flex gap-6">
-        <div className=" w-3/5">
+      <div className="mb-16 flex md:flex-row flex-col gap-6">
+        <div className=" md:w-3/5 w-full">
           <h2 className="text-2xl text-left font-bold text-zinc-800">
             Billing Details
           </h2>
 
           <div className="mt-4">
-            <div className="flex justify-between gap-3">
-              <div className="flex flex-col w-1/2 text-left gap-1">
+            <div className="md:flex inline-block w-full justify-between gap-3">
+              <div className="flex flex-col md:w-1/2 w-full text-left gap-1">
                 <label htmlFor="" className="text-neutral-500">
                   First name *
                 </label>
@@ -40,7 +44,7 @@ export default function Cart() {
                   className="border-[1px] border-neutral-200 py-2"
                 />
               </div>
-              <div className="flex flex-col w-1/2 text-left gap-1">
+              <div className="flex flex-col md:w-1/2 w-full text-left gap-1">
                 <label htmlFor="" className="text-neutral-500">
                   Last name *
                 </label>
@@ -116,44 +120,47 @@ export default function Cart() {
           </div>
         </div>
 
-        <div className="w-2/5 text-left p-7 border-2 border-neutral-200">
+        <div className="md:w-2/5 w-full text-left p-7 border-2 border-neutral-200">
           <h2 className="uppercase font-semibold mb-6 text-zinc-800">
             Your Order
           </h2>
           <div>
             <h2 className="uppercase font-semibold text-zinc-800">Product</h2>
             <div className="mt-2 pt-2 border-t-[1px] flex justify-between mb-10">
-              <div className="flex gap-3">
-                <img
-                  src="images/headphones/shop50-product-6-2-300x300.jpg"
-                  alt=""
-                  className="w-16"
-                />
-                <div className="flex flex-col items-start justify-between">
-                  <h3 className="text-sm">JBL Tune 720BT - Grey </h3>
-                  <div className="flex gap-2 items-center px-1 leading-7 border-zinc-200 border-[1px]">
-                    <span
-                      className="border-zinc-200 border-r-[1px] pr-1 cursor-pointer"
-                      style={{ display: "ruby" }}
-                    >
-                      <HiMiniMinus />
-                    </span>
-                    <span className="px-[2px]">1</span>
-                    <span
-                      className="border-zinc-200 border-l-[1px] pl-1 cursor-pointer ruby"
-                      style={{ display: "ruby" }}
-                    >
-                      <HiMiniPlus />
-                    </span>
+              {cartItems.map((item) => (
+                <>
+                  <div className="flex gap-3">
+                    <img src={item.image} alt="" className="w-16" />
+                    <div className="flex flex-col items-start justify-between">
+                      <h3 className="text-sm">{item.name} </h3>
+                      <div className="flex gap-2 items-center px-1 leading-7 border-zinc-200 border-[1px]">
+                        <span
+                          className="border-zinc-200 border-r-[1px] pr-1 cursor-pointer"
+                          style={{ display: "ruby" }}
+                        >
+                          <HiMiniMinus />
+                        </span>
+                        <span className="px-[2px]">1</span>
+                        <span
+                          className="border-zinc-200 border-l-[1px] pl-1 cursor-pointer ruby"
+                          style={{ display: "ruby" }}
+                        >
+                          <HiMiniPlus />
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div className="flex flex-col items-end justify-between">
-                <span className="cursor-pointer border-[1px] rounded-full z-[99999] p-[2px] text-sm">
-                  <IoClose />
-                </span>
-                <h3>$336.00</h3>
-              </div>
+                  <div className="flex flex-col items-end justify-between">
+                    <span
+                      className="cursor-pointer border-[1px] rounded-full z-[99999] p-[2px] text-sm"
+                      onClick={() => dispatch(removeFromCart({ id: item.id }))}
+                    >
+                      <IoClose />
+                    </span>
+                    <h3>$336.00</h3>
+                  </div>
+                </>
+              ))}
             </div>
           </div>
           <div className="flex justify-between border-b-[1px] border-neutral-300 pb-3 mb-3">
@@ -175,8 +182,8 @@ export default function Cart() {
             </div>
             <div>
               <h4>Payment methods</h4>
-              <span>Direct bank transfer</span>
-              <span>Check paymnts</span>
+              <span>Direct bank transfer</span> <br />
+              <span>Check paymnts</span> <br />
               <span>Cash on delivery</span>
             </div>
 

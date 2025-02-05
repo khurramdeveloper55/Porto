@@ -12,6 +12,7 @@ import { fetchProductDetails } from "../api/productDetails";
 import { addToWishlist } from "../redux/slices/wishlistSlice";
 import { addToCart } from "../redux/slices/cartSlice";
 import { HiMiniMinus, HiMiniPlus } from "react-icons/hi2";
+import Loader from "../components/common/Loader";
 
 export default function ProductDetails() {
   const { productId } = useParams();
@@ -35,7 +36,7 @@ export default function ProductDetails() {
 
   // Handle loading state
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   // Handle error state
@@ -157,7 +158,7 @@ export default function ProductDetails() {
                     ).toFixed(2)}
                   </>
                 ) : (
-                  <p>Loading...</p>
+                  <Loader />
                 )}
               </h3>
             </div>

@@ -4,7 +4,7 @@ import { signup as signupApi } from "../api/apiAuth";
 export function useSignup() {
   const { mutate: signup, isLoading } = useMutation({
     mutationFn: signupApi,
-    onSuccess: (user) => {
+    onSuccess: () => {
       alert("Account successfully created!");
     },
   });

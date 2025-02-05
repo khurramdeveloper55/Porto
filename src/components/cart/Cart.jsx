@@ -10,8 +10,8 @@ export default function Cart() {
   const dispatch = useDispatch();
   return (
     <>
-      <div className="flex justify-center flex-col items-center py-6 ">
-        <div className="text-center text-neutral-400 text-xs flex flex-row justify-center items-center mb-0">
+      <div className="md:flex inline-block justify-center flex-col items-center py-6 ">
+        <div className="text-center text-neutral-400 text-xs flex md:flex-row flex-col justify-center items-center mb-4 md:mb-0">
           <span className="text-2xl font-semibold  text-indigo-500">
             <Link to="/">Shopping Cart</Link>
           </span>{" "}
@@ -26,8 +26,8 @@ export default function Cart() {
         </div>
       </div>
 
-      <div className="mb-16 flex gap-6">
-        <div className=" w-2/3">
+      <div className="mb-16 md:flex block gap-6">
+        <div className=" md:w-2/3 w-full md:mb-0 mb-6">
           <div className="md:flex mt-8 mb-2 hidden ">
             <ul className="flex justify-around items-center w-full">
               <li className="w-full flex-[2] text-center text-sm uppercase text-zinc-800 font-semibold">
@@ -76,7 +76,7 @@ export default function Cart() {
             </div>
           ))}
         </div>
-        <div className="w-1/3 text-left p-7 border-2 border-neutral-200">
+        <div className="md:w-1/3 w-full text-left p-7 border-2 border-neutral-200">
           <h4 className="uppercase font-semibold mb-6 text-zinc-800">
             Cart Totals
           </h4>

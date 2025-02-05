@@ -6,6 +6,7 @@ import FeaturedProductsCarousel from "./FeaturedProductsCarousel";
 import FeaturedDeals from "../common/FeaturedDeals";
 import ContactSupportCta from "../common/ContactSupportCta";
 import Testimonials from "../common/Testimonials";
+import SideMenu from "../common/SideMenu";
 
 export default function HomePage() {
   return (
@@ -18,6 +19,7 @@ export default function HomePage() {
       <PromoStrip />
       <Testimonials />
       <ContactSupportCta />
+      <SideMenu />
     </>
   );
 }

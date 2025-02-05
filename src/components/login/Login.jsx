@@ -5,15 +5,16 @@ import { useLogin } from "../../hooks/useLogin";
 import { useSignup } from "../../hooks/useSignup";
 
 export default function Login() {
-  const [email, setEmail] = useState("khurram@gmail.com");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
-  const [password, setPassword] = useState("avenger2027");
   const [registerPassword, setRegisterPassword] = useState("");
   const [username, setUsername] = useState("");
   const { login, isLoading } = useLogin();
   const { signup } = useSignup();
-  const handleRegister = () => {
-    signup({ username, email, password });
+  const handleRegister = (e) => {
+    e.preventDefault();
+    return signup({ username, registerEmail, registerPassword });
   };
 
   const handleLogin = (e) => {
@@ -39,7 +40,7 @@ export default function Login() {
       </div>
 
       <div className="my-16 flex gap-8">
-        <div className="w-full">
+        <form className="w-full" onSubmit={handleLogin}>
           <h2 className="text-2xl font-semibold text-left text-zinc-800 mb-3 flex gap-2">
             Login{" "}
             <span className="text-[15px] text-neutral-500 font-normal">
@@ -72,12 +73,12 @@ export default function Login() {
           </div>
           <button
             className="uppercase w-full bg-zinc-800 font-semibold text-white mt-1 py-3"
-            onClick={handleLogin}
+            type="submit"
           >
             Login
           </button>
-        </div>
-        <div className="w-full">
+        </form>
+        <form onSubmit={handleRegister} className="w-full">
           <h2 className="text-2xl font-semibold text-left text-zinc-800 mb-3">
             Register
           </h2>
@@ -119,11 +120,11 @@ export default function Login() {
           </div>
           <button
             className="uppercase w-full bg-zinc-800 font-semibold text-white mt-1 py-3"
-            onClick={handleRegister}
+            type="submit"
           >
             Register
           </button>
-        </div>
+        </form>
       </div>
     </>
   );

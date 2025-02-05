@@ -113,7 +113,7 @@ export default function FeaturedProductsCarousel() {
           return (
             <div className="carousel-item" key={product.id}>
               <div className=" bg-neutral-100 mx-2 rounded-xl overflow-hidden  relative group">
-                <div className=" cursor-pointer">
+                <div className=" cursor-pointer flex items-center justify-center">
                   <img src={product.image} className="rounded-xl" alt="" />
                   <img
                     src={product.image_alt}

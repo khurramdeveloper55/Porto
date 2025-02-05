@@ -48,7 +48,7 @@ export default function CartSidebar({ showCart, setShowCart }) {
         }`}
       ></div>
       <div
-        className={`fixed w-80 right-0 top-0 h-full z-[9999] bg-white py-10 px-6 transform transition-transform duration-500 ease-in-out ${
+        className={`fixed w-72 right-0 top-0 h-full z-[9999] bg-white py-10 px-6 transform transition-transform duration-500 ease-in-out ${
           isTransitioning && showCart && !isClosing
             ? "translate-x-0"
             : "translate-x-full"
@@ -66,9 +66,9 @@ export default function CartSidebar({ showCart, setShowCart }) {
               <span>
                 {cartItems.length} {cartItems.length === 1 ? "ITEM" : "ITEMS"}
               </span>{" "}
-              <span className="hover:underline">
-                <Link>VIEW CART</Link>
-              </span>
+              <Link to="/cart">
+                <span className="hover:underline">VIEW CART</span>
+              </Link>
             </div>
             <div className="overflow-y-scroll h-[335px] cart-overflow">
               {cartItems === 0 ? (
@@ -133,12 +133,16 @@ export default function CartSidebar({ showCart, setShowCart }) {
               <span className="uppercase text-[12px] font-bold">Subtotal:</span>
               <span className="text-sm font-bold">$114.00</span>
             </div>
-            <button className="bg-neutral-200 text-[12px] py-3 uppercase hover:bg-neutral-100">
-              <Link to="/cart">View Cart</Link>
-            </button>
-            <button className="bg-zinc-800 text-white py-3 uppercase text-[12px] hover:bg-zinc-700">
-              Checkout
-            </button>
+            <Link to="/cart">
+              <button className="bg-neutral-200 w-full text-[12px] py-3 uppercase hover:bg-neutral-100">
+                View Cart
+              </button>
+            </Link>
+            <Link to="/checkout">
+              <button className="bg-zinc-800 w-full text-white py-3 uppercase text-[12px] hover:bg-zinc-700">
+                Checkout
+              </button>
+            </Link>
           </div>
         </div>
       </div>

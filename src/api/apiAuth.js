@@ -1,5 +1,5 @@
 import supabase from "./supabase";
-
+import { clearUser } from "../redux/slices/userSlice";
 export async function signup({ username, registerEmail, registerPassword }) {
   const email = registerEmail;
   const password = registerPassword;
@@ -41,3 +41,13 @@ export async function getCurrentUser() {
 
   return data?.user;
 }
+
+export const logout = () => async (dispatch) => {
+  const { error } = await supabase.auth.signOut();
+
+  if (error) {
+    console.error("Logout Error: ", error.message);
+    return;
+  }
+  dispatch(clearUser());
+};

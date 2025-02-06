@@ -7,7 +7,7 @@ export default function ProtectedRoute() {
   const { isLoading, isAuthenticated } = useUser();
   useEffect(
     function () {
-      if (!isAuthenticated && !isLoading) navigate("/login");
+      if (!isAuthenticated) navigate("/login");
     },
     [isAuthenticated, isLoading, navigate]
   );

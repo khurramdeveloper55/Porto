@@ -3,7 +3,12 @@ import { IoClose } from "react-icons/io5";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { removeFromCart } from "../../redux/slices/cartSlice";
+import {
+  decreaseQuantity,
+  increaseQuantity,
+  removeFromCart,
+} from "../../redux/slices/cartSlice";
+import { HiMiniMinus, HiMiniPlus } from "react-icons/hi2";
 
 export default function Cart() {
   const cartItems = useSelector((state) => state.cart.items);
@@ -37,10 +42,10 @@ export default function Cart() {
                 Price
               </li>
               <li className="w-full flex-1 text-left text-sm uppercase text-zinc-800 font-semibold">
-                Stock Status
+                Quantity
               </li>
               <li className="w-full flex-1 text-left text-sm uppercase text-zinc-800 font-semibold">
-                Actions
+                Subtotal
               </li>
             </ul>
           </div>
@@ -64,13 +69,27 @@ export default function Cart() {
                 <li className="w-full flex-1 md:text-left md:text-md text-sm text-center text-neutral-500">
                   ${item.price.toFixed(2)}
                 </li>
-                <li className="w-full flex-1 md:text-left md:text-md text-sm text-center">
-                  In Stock
+                <li className="flex gap-2 items-center px-1 leading-7 border-zinc-200 border-[1px]">
+                  <span
+                    className="border-zinc-200 border-r-[1px] pr-1 cursor-pointer"
+                    onClick={() => dispatch(decreaseQuantity({ id: item.id }))}
+                    style={{ display: "ruby" }}
+                  >
+                    <HiMiniMinus />
+                  </span>
+                  <span className="px-[2px]">{item.quantity}</span>
+                  <span
+                    className="border-zinc-200 border-l-[1px] pl-1 cursor-pointer ruby"
+                    onClick={() => dispatch(increaseQuantity({ id: item.id }))}
+                    style={{ display: "ruby" }}
+                  >
+                    <HiMiniPlus />
+                  </span>
                 </li>
                 <li className="w-full flex-1 md:text-left text-center">
-                  <button className=" bg-zinc-800 md:w-auto w-full uppercase md:text-md text-sm text-white px-6 py-3">
-                    <Link to="/">Link</Link>
-                  </button>
+                  <span className="  md:w-auto w-full uppercase md:text-md text-sm ">
+                    26
+                  </span>
                 </li>
               </ul>
             </div>

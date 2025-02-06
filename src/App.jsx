@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   QueryClient,
   QueryClientProvider,
@@ -19,6 +19,8 @@ import UserProfile from "./components/login/UserProfile";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import Loader from "./components/common/Loader";
 import OrderComplete from "./components/cart/OrderComplete";
+import { useDispatch } from "react-redux";
+import { fetchCurrentUser } from "./redux/slices/userSlice";
 
 const queryClient = new QueryClient();
 
@@ -31,12 +33,17 @@ function App() {
 }
 
 function MainApp() {
-  const isFetching = useIsFetching();
+  // const isFetching = useIsFetching();
   const [visibleCount, setVisibleCount] = useState(12);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
 
   return (
     <>
-      {isFetching ? <Loader /> : null}
+      {/* {isFetching ? <Loader /> : null} */}
       <BrowserRouter>
         <Routes>
           <Route element={<AppLayout />}>
@@ -58,7 +65,7 @@ function MainApp() {
               <Route path="/checkout" element={<Checkout />} />
             </Route>
             <Route path="/login" element={<Login />} />
-            <Route path="/done" element={<OrderComplete />} />
+            <Route path="/order" element={<OrderComplete />} />
             <Route path="/user" element={<UserProfile />} />
           </Route>
         </Routes>
@@ -66,42 +73,5 @@ function MainApp() {
     </>
   );
 }
-
-// function App() {
-//   const isFetching = useIsFetching();
-//   const [visibleCount, setVisibleCount] = useState(12);
-//   return (
-//     <>
-//       <QueryClientProvider client={queryClient}>
-//         {isFetching ? <Loader /> : null}
-//         <BrowserRouter>
-//           <Routes>
-//             <Route element={<AppLayout />}>
-//               <Route index element={<HomePage />} />
-//               <Route path="/:categoryName" element={<CategoryProducts />} />
-//               <Route path="/product/:productId" element={<ProductDetails />} />
-//               <Route
-//                 path="/shop"
-//                 element={
-//                   <ShopProducts
-//                     visibleCount={visibleCount}
-//                     setVisibleCount={setVisibleCount}
-//                   />
-//                 }
-//               />
-//               <Route path="/wishlist" element={<WishList />} />
-//               <Route path="/cart" element={<Cart />} />
-//               <Route element={<ProtectedRoute />}>
-//                 <Route path="/checkout" element={<Checkout />} />
-//               </Route>
-//               <Route path="/login" element={<Login />} />
-//               <Route path="/user" element={<UserProfile />} />
-//             </Route>
-//           </Routes>
-//         </BrowserRouter>
-//       </QueryClientProvider>
-//     </>
-//   );
-// }
 
 export default App;

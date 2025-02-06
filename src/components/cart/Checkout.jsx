@@ -126,9 +126,9 @@ export default function Checkout() {
           </h2>
           <div>
             <h2 className="uppercase font-semibold text-zinc-800">Product</h2>
-            <div className="mt-2 pt-2 border-t-[1px] flex justify-between mb-10">
+            <div className="mt-2 pt-2 border-t-[1px] flex-col flex justify-between mb-10">
               {cartItems.map((item) => (
-                <>
+                <div className="flex mb-6">
                   <div className="flex gap-3">
                     <img src={item.image} alt="" className="w-16" />
                     <div className="flex flex-col items-start justify-between">
@@ -159,7 +159,7 @@ export default function Checkout() {
                     </span>
                     <h3>$336.00</h3>
                   </div>
-                </>
+                </div>
               ))}
             </div>
           </div>
@@ -188,7 +188,7 @@ export default function Checkout() {
             </div>
 
             <button className="mt-5 bg-zinc-800 text-white py-3 w-full uppercase font-semibold">
-              <Link>Place Order</Link>
+              <Link to="/order">Place Order</Link>
             </button>
           </div>
         </div>

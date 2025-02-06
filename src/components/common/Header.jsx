@@ -12,6 +12,7 @@ export default function Header() {
   const [showCart, setShowCart] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const cartItems = useSelector((state) => state.cart.items);
+  const user = useSelector((state) => state.user.user);
   const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   return (
     <div className="container mx-auto mb-10">
@@ -63,7 +64,7 @@ export default function Header() {
             </Link>
           </span>
           <span className="flex items-center">
-            <Link to="/login">
+            <Link to={user ? "/user" : "/login"}>
               <span className="flex items-center gap-2 group cursor-pointer">
                 <span className="sm:text-2xl text-xl bg-indigo-50 sm:p-2 p-2 inline-block rounded-md group-hover:-translate-y-1 group-hover:transition-translate duration-300">
                   <SlUser />

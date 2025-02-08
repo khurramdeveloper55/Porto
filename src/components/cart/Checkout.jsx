@@ -9,11 +9,24 @@ import {
   increaseQuantity,
   removeFromCart,
 } from "../../redux/slices/cartSlice";
+import { useForm } from "react-hook-form";
 
 export default function Checkout() {
   const cartItems = useSelector((state) => state.cart.items);
   const subtotal = useSelector((state) => state.cart.subtotal);
   const dispatch = useDispatch();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (e, data) => {
+    e.preventDefault();
+    console.log("Order placed successfully!", data);
+  };
+
   return (
     <>
       <div className="flex justify-center flex-col items-center py-6 ">
@@ -34,7 +47,10 @@ export default function Checkout() {
         </div>
       </div>
 
-      <div className="mb-16 flex md:flex-row flex-col gap-6">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="mb-16 flex md:flex-row flex-col gap-6"
+      >
         <div className=" md:w-3/5 w-full">
           <h2 className="text-2xl text-left font-bold text-zinc-800">
             Billing Details
@@ -47,18 +63,34 @@ export default function Checkout() {
                   First name *
                 </label>
                 <input
+                  {...register("firstName", {
+                    required: "First name is required",
+                  })}
                   type="text"
                   className="border-[1px] border-neutral-200 py-2"
                 />
+                {errors.firstName && (
+                  <span className="text-red-500 text-sm">
+                    {errors.firstName.message}
+                  </span>
+                )}
               </div>
               <div className="flex flex-col md:w-1/2 w-full text-left gap-1">
                 <label htmlFor="" className="text-neutral-500">
                   Last name *
                 </label>
                 <input
+                  {...register("lastName", {
+                    required: "Last name is required",
+                  })}
                   type="text"
                   className="border-[1px] border-neutral-200 py-2"
                 />
+                {errors.lastName && (
+                  <span className="text-red-500 text-sm">
+                    {errors.lastName.message}
+                  </span>
+                )}
               </div>
             </div>
             <div className="w-full flex flex-col gap-1 mt-3 text-left">
@@ -120,9 +152,21 @@ export default function Checkout() {
                 Phone *
               </label>
               <input
+                {...register("phone", {
+                  required: "Phone is required",
+                  pattern: {
+                    value: /^[0-9]+$/,
+                    message: "Please enter a valid phone number",
+                  },
+                })}
                 type="text"
                 className="border-[1px] border-neutral-200 py-2"
               />
+              {errors.phone && (
+                <span className="text-red-500 text-sm">
+                  {errors.phone.message}
+                </span>
+              )}
             </div>
           </div>
         </div>
@@ -195,19 +239,16 @@ export default function Checkout() {
                 ${subtotal.toFixed(2)}
               </span>
             </div>
-            {/* <div>
-              <h4>Payment methods</h4>
-              <span>Direct bank transfer</span> <br />
-              <span>Check paymnts</span> <br />
-              <span>Cash on delivery</span>
-            </div> */}
 
-            <button className="mt-5 bg-zinc-800 text-white py-3 w-full uppercase font-semibold">
+            <button
+              type="submit"
+              className="mt-5 bg-zinc-800 text-white py-3 w-full uppercase font-semibold"
+            >
               <Link to="/order">Place Order</Link>
             </button>
           </div>
         </div>
-      </div>
+      </form>
     </>
   );
 }

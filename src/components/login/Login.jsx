@@ -39,7 +39,7 @@ export default function Login() {
         </div>
       </div>
 
-      <div className="my-16 flex gap-8">
+      <div className="my-16 flex md:flex-row flex-col gap-8">
         <form className="w-full" onSubmit={handleLogin}>
           <h2 className="text-2xl font-semibold text-left text-zinc-800 mb-3 flex gap-2">
             Login{" "}

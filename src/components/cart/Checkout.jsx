@@ -4,22 +4,29 @@ import { IoClose } from "react-icons/io5";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { removeFromCart } from "../../redux/slices/cartSlice";
+import {
+  decreaseQuantity,
+  increaseQuantity,
+  removeFromCart,
+} from "../../redux/slices/cartSlice";
 
 export default function Checkout() {
   const cartItems = useSelector((state) => state.cart.items);
+  const subtotal = useSelector((state) => state.cart.subtotal);
   const dispatch = useDispatch();
   return (
     <>
       <div className="flex justify-center flex-col items-center py-6 ">
         <div className="text-center text-neutral-400 text-xs flex md:flex-row flex-col justify-center items-center mb-4 md:mb-0">
-          <span className="text-2xl font-semibold  text-indigo-500">
-            <Link to="/">Shopping Cart</Link>
+          <span className="text-2xl font-semibold ">
+            <Link to="/cart">Shopping Cart</Link>
           </span>{" "}
           <span className="text-2xl">
             <MdKeyboardArrowRight />
           </span>{" "}
-          <span className="text-2xl font-semibold ">Checkout</span>
+          <span className="text-2xl font-semibold text-indigo-500 ">
+            <Link to="/">Checkout</Link>
+          </span>
           <span className="text-2xl">
             <MdKeyboardArrowRight />
           </span>{" "}
@@ -135,14 +142,20 @@ export default function Checkout() {
                       <h3 className="text-sm">{item.name} </h3>
                       <div className="flex gap-2 items-center px-1 leading-7 border-zinc-200 border-[1px]">
                         <span
-                          className="border-zinc-200 border-r-[1px] pr-1 cursor-pointer"
+                          className="border-zinc-200 border-r-[1px]  p-[2px] cursor-pointer"
+                          onClick={() =>
+                            dispatch(decreaseQuantity({ id: item.id }))
+                          }
                           style={{ display: "ruby" }}
                         >
                           <HiMiniMinus />
                         </span>
                         <span className="px-[2px]">1</span>
                         <span
-                          className="border-zinc-200 border-l-[1px] pl-1 cursor-pointer ruby"
+                          className="border-zinc-200 border-l-[1px] p-[2px] cursor-pointer ruby"
+                          onClick={() =>
+                            dispatch(increaseQuantity({ id: item.id }))
+                          }
                           style={{ display: "ruby" }}
                         >
                           <HiMiniPlus />
@@ -157,7 +170,7 @@ export default function Checkout() {
                     >
                       <IoClose />
                     </span>
-                    <h3>$336.00</h3>
+                    <h3>${(item.price * item.quantity).toFixed(2)}</h3>
                   </div>
                 </div>
               ))}
@@ -165,7 +178,9 @@ export default function Checkout() {
           </div>
           <div className="flex justify-between border-b-[1px] border-neutral-300 pb-3 mb-3">
             <h5 className=" text-zinc-800 text-sm font-semibold">Subtotal</h5>
-            <span className="font-semibold text-zinc-800 text-sm">$126.00</span>
+            <span className="font-semibold text-zinc-800 text-sm">
+              ${subtotal.toFixed(2)}
+            </span>
           </div>
           <div>
             <h5 className="text-zinc-800 text-sm font-semibold mb-3">
@@ -177,15 +192,15 @@ export default function Checkout() {
             <div className="flex justify-between  pb-3 mb-3">
               <h5 className=" text-zinc-800 text-md font-semibold">Total</h5>
               <span className="font-semibold text-zinc-800 text-xl">
-                $126.00
+                ${subtotal.toFixed(2)}
               </span>
             </div>
-            <div>
+            {/* <div>
               <h4>Payment methods</h4>
               <span>Direct bank transfer</span> <br />
               <span>Check paymnts</span> <br />
               <span>Cash on delivery</span>
-            </div>
+            </div> */}
 
             <button className="mt-5 bg-zinc-800 text-white py-3 w-full uppercase font-semibold">
               <Link to="/order">Place Order</Link>

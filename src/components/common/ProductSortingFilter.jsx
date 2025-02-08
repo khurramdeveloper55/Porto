@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { BsGrid3X3GapFill } from "react-icons/bs";
-import { FaList } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
+  clearFilter,
   filterPrice,
+  selectFilter,
   updateCount,
   updateSortOption,
 } from "../../redux/slices/filterSlice";
@@ -18,9 +18,16 @@ export default function ProductSortingFilter() {
   const [showFilterSide, setShowFilterSide] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [minPrice, setMinPrice] = useState(54);
-  const [maxPrice, setMaxPrice] = useState(100);
+  const filterState = useSelector(selectFilter);
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
   const { categories, isLoading } = useCategories();
+
+  const isFiltered =
+    filterState.minPrice !== "" ||
+    filterState.maxPrice !== "" ||
+    filterState.sortOption !== "default" ||
+    filterState.visibleCount !== 12;
 
   const handleOnChange = (event) => {
     const selectedCategory = event.target.value;
@@ -45,8 +52,16 @@ export default function ProductSortingFilter() {
 
   return (
     <>
-      <div className="flex justify-between">
+      <div className="flex justify-between md:flex-row flex-col items-center md:gap-0 gap-6">
         <div className="flex items-center gap-4">
+          {isFiltered && (
+            <span
+              className="bg-zinc-800 text-sm uppercase py-2 px-4 text-white cursor-pointer"
+              onClick={() => dispatch(clearFilter())}
+            >
+              Reset All Filter
+            </span>
+          )}
           <span
             className="md:hidden items-center flex gap-2 w-20 p-2 bg-neutral-100 text-sm text-zinc-800 border-0 rounded cursor-pointer"
             onClick={() => setShowFilterSide((show) => !show)}
@@ -169,12 +184,6 @@ export default function ProductSortingFilter() {
             <option value="25">25</option>
             <option value="32">32</option>
           </select>
-          <span className="text-indigo-500 md:flex hidden cursor-pointer rounded text-xl bg-neutral-100  justify-between items-center py-2 px-3">
-            <BsGrid3X3GapFill />
-          </span>
-          <span className="text-black text-xl cursor-pointer rounded bg-neutral-100 md:flex hidden justify-between items-center py-2 px-3">
-            <FaList />
-          </span>
         </div>
       </div>
       {showFilterSide && (

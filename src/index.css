@@ -11,7 +11,7 @@ body {
   font-family: "Lexend", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
 }
 #root {
   max-width: 1140px;
@@ -101,4 +101,8 @@ body {
     border-top: 4px solid #3740ea;
     box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.05);
   }
+}
+
+input:focus-visible {
+  outline: 0px;
 }

@@ -109,7 +109,7 @@ export default function CategoryProducts() {
       <FeaturedDeals showTitle={false} />
       <ProductSortingFilter />
       <div className="container mx-auto px-4 mt-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:mb-24 mb-12">
           {sortedProducts.slice(0, visibleCount).map((product) => {
             const parsedColors = product.colors.map((color) =>
               JSON.parse(color)

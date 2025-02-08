@@ -12,18 +12,21 @@ import { HiMiniMinus, HiMiniPlus } from "react-icons/hi2";
 
 export default function Cart() {
   const cartItems = useSelector((state) => state.cart.items);
+  const subtotal = useSelector((state) => state.cart.subtotal);
   const dispatch = useDispatch();
   return (
     <>
       <div className="md:flex inline-block justify-center flex-col items-center py-6 ">
         <div className="text-center text-neutral-400 text-xs flex md:flex-row flex-col justify-center items-center mb-4 md:mb-0">
           <span className="text-2xl font-semibold  text-indigo-500">
-            <Link to="/">Shopping Cart</Link>
+            <Link to="/cart">Shopping Cart</Link>
           </span>{" "}
           <span className="text-2xl">
             <MdKeyboardArrowRight />
           </span>{" "}
-          <span className="text-2xl font-semibold ">Checkout</span>
+          <span className="text-2xl font-semibold ">
+            <Link to="/checkout">Checkout</Link>
+          </span>
           <span className="text-2xl">
             <MdKeyboardArrowRight />
           </span>{" "}
@@ -69,26 +72,32 @@ export default function Cart() {
                 <li className="w-full flex-1 md:text-left md:text-md text-sm text-center text-neutral-500">
                   ${item.price.toFixed(2)}
                 </li>
-                <li className="flex gap-2 items-center px-1 leading-7 border-zinc-200 border-[1px]">
-                  <span
-                    className="border-zinc-200 border-r-[1px] pr-1 cursor-pointer"
-                    onClick={() => dispatch(decreaseQuantity({ id: item.id }))}
-                    style={{ display: "ruby" }}
-                  >
-                    <HiMiniMinus />
-                  </span>
-                  <span className="px-[2px]">{item.quantity}</span>
-                  <span
-                    className="border-zinc-200 border-l-[1px] pl-1 cursor-pointer ruby"
-                    onClick={() => dispatch(increaseQuantity({ id: item.id }))}
-                    style={{ display: "ruby" }}
-                  >
-                    <HiMiniPlus />
+                <li className="flex gap-2 w-full flex-1 items-center md:justify-normal justify-center px-1 leading-7 ">
+                  <span className="border-[1px] border-zinc-200">
+                    <span
+                      className="border-zinc-200 border-r-[1px]  p-[5px] cursor-pointer"
+                      onClick={() =>
+                        dispatch(decreaseQuantity({ id: item.id }))
+                      }
+                      style={{ display: "ruby" }}
+                    >
+                      <HiMiniMinus />
+                    </span>
+                    <span className="px-[6px]">{item.quantity}</span>
+                    <span
+                      className="border-zinc-200 border-l-[1px] p-[5px] cursor-pointer ruby"
+                      onClick={() =>
+                        dispatch(increaseQuantity({ id: item.id }))
+                      }
+                      style={{ display: "ruby" }}
+                    >
+                      <HiMiniPlus />
+                    </span>
                   </span>
                 </li>
                 <li className="w-full flex-1 md:text-left text-center">
                   <span className="  md:w-auto w-full uppercase md:text-md text-sm ">
-                    26
+                    ${(item.price * item.quantity).toFixed(2)}
                   </span>
                 </li>
               </ul>
@@ -101,7 +110,9 @@ export default function Cart() {
           </h4>
           <div className="flex justify-between border-b-[1px] border-neutral-300 pb-3 mb-3">
             <h5 className=" text-zinc-800 text-sm font-semibold">Subtotal</h5>
-            <span className="font-light text-neutral-500 text-sm">$126.00</span>
+            <span className="font-light text-neutral-500 text-sm">
+              ${subtotal.toFixed(2)}
+            </span>
           </div>
           <div>
             <h5 className="text-zinc-800 font-semibold mb-3">Shipping</h5>
@@ -138,11 +149,15 @@ export default function Cart() {
           <hr />
           <div className="mt-3 flex justify-between">
             <span className="font-semibold text-zinc-800">Total</span>
-            <span className="text-xl font-semibold text-zinc-800">$126.00</span>
+            <span className="text-xl font-semibold text-zinc-800">
+              ${subtotal.toFixed(2)}
+            </span>
           </div>
-          <button className="mt-5 bg-zinc-800 text-white py-3 w-full uppercase font-semibold">
-            <Link to="/checkout">Proceed To Checkout</Link>
-          </button>
+          <Link to="/checkout">
+            <button className="mt-5 bg-zinc-800 text-white py-3 w-full uppercase font-semibold">
+              Proceed To Checkout
+            </button>
+          </Link>
         </div>
       </div>
     </>

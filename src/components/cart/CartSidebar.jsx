@@ -12,6 +12,7 @@ import { HiMiniMinus, HiMiniPlus } from "react-icons/hi2";
 
 export default function CartSidebar({ showCart, setShowCart }) {
   const cartItems = useSelector((state) => state.cart.items);
+  const subtotal = useSelector((state) => state.cart.subtotal);
   const dispatch = useDispatch();
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -48,7 +49,7 @@ export default function CartSidebar({ showCart, setShowCart }) {
         }`}
       ></div>
       <div
-        className={`fixed w-72 right-0 top-0 h-full z-[9999] bg-white py-10 px-6 transform transition-transform duration-500 ease-in-out ${
+        className={`fixed w-72 right-0 top-0 h-full z-[99999999] bg-white py-10 px-6 transform transition-transform duration-500 ease-in-out ${
           isTransitioning && showCart && !isClosing
             ? "translate-x-0"
             : "translate-x-full"
@@ -131,7 +132,7 @@ export default function CartSidebar({ showCart, setShowCart }) {
           <div className="flex flex-col gap-2 ">
             <div className="flex justify-between mb-4 items-center">
               <span className="uppercase text-[12px] font-bold">Subtotal:</span>
-              <span className="text-sm font-bold">$114.00</span>
+              <span className="text-sm font-bold">${subtotal.toFixed(2)}</span>
             </div>
             <Link to="/cart">
               <button className="bg-neutral-200 w-full text-[12px] py-3 uppercase hover:bg-neutral-100">

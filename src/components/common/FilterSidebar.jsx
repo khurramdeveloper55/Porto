@@ -10,8 +10,8 @@ export default function FilterSidebar({ showFilterSide, setShowFilterSide }) {
   const { categories, isLoading } = useCategories();
   const [filterClosing, setFilterClosing] = useState(false);
   const [filterTransitioning, setFilterTransitioning] = useState(false);
-  const [minPrice, setMinPrice] = useState(54);
-  const [maxPrice, setMaxPrice] = useState(100);
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -52,7 +52,7 @@ export default function FilterSidebar({ showFilterSide, setShowFilterSide }) {
         }`}
       ></div>
       <div
-        className={`fixed w-80 left-0 top-0 h-full z-[9999] bg-white pb-6 pt-10 px-6 cart-overflow  transform transition-transform duration-500 ease-in-out ${
+        className={`fixed w-64 left-0 top-0 h-full z-[9999] bg-white pb-6 pt-10 px-6 cart-overflow  transform transition-transform duration-500 ease-in-out ${
           filterTransitioning && showFilterSide && !filterClosing
             ? "translate-x-0"
             : "-translate-x-full"

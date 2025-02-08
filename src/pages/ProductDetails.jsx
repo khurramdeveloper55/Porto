@@ -93,7 +93,7 @@ export default function ProductDetails() {
   const parsedColors = product?.colors?.map((color) => JSON.parse(color));
   return (
     <>
-      <div className="text-left text-neutral-400 text-xs flex items-center mb-4">
+      <div className="text-left text-neutral-400 text-xs flex md:flex-row flex-col items-center mb-4">
         <span className="text-lg">
           <IoMdHome />
         </span>{" "}
@@ -110,7 +110,7 @@ export default function ProductDetails() {
         </span>{" "}
         <span className="uppercase">{product.name}</span>
       </div>
-      <h3 className="text-md text-left mb-2 flex gap-2 items-center">
+      <h3 className="md:text-md text-[12px]  text-left mb-2 flex  gap-2 items-center">
         {isAdded && (
           <>
             <span className="text-emerald-500 inline text-xl font-bold">

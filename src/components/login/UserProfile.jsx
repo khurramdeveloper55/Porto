@@ -95,9 +95,11 @@ export default function UserProfile() {
             </div>
           </div>
           <div className="text-center mt-4">
-            <button className="mt-3 uppercase py-3 px-7 bg-zinc-800 text-white">
-              Shop Now
-            </button>
+            <Link to="/shop">
+              <button className="mt-3 uppercase py-3 px-7 bg-zinc-800 text-white">
+                Shop Now
+              </button>
+            </Link>
           </div>
         </div>
       </div>

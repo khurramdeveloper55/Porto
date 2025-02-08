@@ -8,9 +8,10 @@ import { getProducts } from "../api/apiProducts";
 import { selectFilter } from "../redux/slices/filterSlice";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
+import Pagination from "../components/common/Pagination";
 
 export default function ProductGallery() {
-  const { visibleCount, minPrice, maxPrice, sortOption } =
+  const { visibleCount, minPrice, maxPrice, sortOption, currentPage } =
     useSelector(selectFilter);
   const dispatch = useDispatch();
   const wishlist = useSelector((state) => state.wishlist.items);
@@ -72,6 +73,12 @@ export default function ProductGallery() {
     }
   });
 
+  const startIndex = (currentPage - 1) * visibleCount;
+  const paginatedProducts = sortedProducts.slice(
+    startIndex,
+    startIndex + visibleCount
+  );
+
   const isInWishlist = (id) => wishlist.some((item) => item.id === id);
 
   const handleAddToWishlist = (product) => {
@@ -93,9 +100,9 @@ export default function ProductGallery() {
   return (
     <>
       <ProductSortingFilter />
-      <div className="container mx-auto px-4 mt-16">
+      <div className="container mx-auto px-4 mt-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {sortedProducts.slice(0, visibleCount).map((product, index) => (
+          {paginatedProducts.map((product, index) => (
             <div
               key={index}
               className="p-4 bg-gray-100 rounded relative overflow-hidden  group"
@@ -161,6 +168,7 @@ export default function ProductGallery() {
           ))}
         </div>
       </div>
+      <Pagination totalProducts={sortedProducts.length} />
     </>
   );
 }

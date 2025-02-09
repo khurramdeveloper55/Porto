@@ -284,12 +284,14 @@ export default function Checkout() {
               </span>
             </div>
 
-            <button
-              type="submit"
-              className="mt-5 bg-zinc-800 text-white py-3 w-full uppercase font-semibold"
-            >
-              <Link to="/order">Place Order</Link>
-            </button>
+            <Link to="/order">
+              <button
+                type="submit"
+                className="mt-5 bg-zinc-800 text-white py-3 w-full uppercase font-semibold"
+              >
+                Place Order
+              </button>
+            </Link>
           </div>
         </div>
       </form>

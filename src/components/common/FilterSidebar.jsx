@@ -74,6 +74,7 @@ export default function FilterSidebar({ showFilterSide, setShowFilterSide }) {
               className="text-left uppercase py-2 text-neutral-500 text-[12px]"
             >
               <Link
+                onClick={handleFilterClose}
                 to={`/${encodeURIComponent(
                   category.name.toLowerCase().replace(/\s+/g, "-")
                 )}`}
@@ -107,7 +108,10 @@ export default function FilterSidebar({ showFilterSide, setShowFilterSide }) {
 
           <button
             className="bg-neutral-100 w-full text-zinc-800 text-sm font-light uppercase py-2  px-4 hover:text-white hover:bg-indigo-500 duration-300"
-            onClick={handleFilter}
+            onClick={() => {
+              handleFilter();
+              handleFilterClose();
+            }}
           >
             Filter
           </button>

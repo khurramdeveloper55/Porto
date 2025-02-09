@@ -50,7 +50,7 @@ function MainApp() {
           <Route element={<AppLayout />}>
             <Route index element={<HomePage />} />
             <Route path="/:categoryName" element={<CategoryProducts />} />
-            <Route path="/product/:productId" element={<ProductDetails />} />
+            <Route path="/product/:productName" element={<ProductDetails />} />
             <Route
               path="/shop"
               element={

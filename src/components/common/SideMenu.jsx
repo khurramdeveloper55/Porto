@@ -67,6 +67,7 @@ export default function SideMenu({ showMenu, setShowMenu }) {
               className="text-left border-b-[1px] py-3 text-zinc-800 text-sm px-6"
             >
               <Link
+                onClick={handleMenuClose}
                 to={`/${encodeURIComponent(
                   category.name.toLowerCase().replace(/\s+/g, "-")
                 )}`}

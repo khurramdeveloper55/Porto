@@ -97,7 +97,14 @@ export default function WishList() {
                   </li>
                   <li className="w-full flex-1 md:text-left text-center">
                     <button className=" bg-zinc-800 md:w-auto w-full uppercase md:text-md text-sm text-white px-6 py-3">
-                      <Link to={`/product/${item.id}`}>Select Options</Link>
+                      <Link
+                        to={`/product/${encodeURIComponent(
+                          item.name.toLowerCase().replace(/\s+/g, "-")
+                        )}`}
+                        state={{ productId: item.id }}
+                      >
+                        Select Options
+                      </Link>
                     </button>
                   </li>
                 </ul>

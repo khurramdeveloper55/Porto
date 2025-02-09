@@ -4,7 +4,7 @@ import { FaCcPaypal, FaCcVisa, FaGooglePay, FaStar } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
 import { IoMdHome } from "react-icons/io";
 import { MdKeyboardArrowRight, MdOutlineDone } from "react-icons/md";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import ProductDetailsSlider from "./ProductDetailsSlider";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +15,9 @@ import { HiMiniMinus, HiMiniPlus } from "react-icons/hi2";
 import Loader from "../components/common/Loader";
 
 export default function ProductDetails() {
-  const { productId } = useParams();
+  const { productName } = useParams();
+  const location = useLocation();
+  const productId = location.state?.productId;
   const navigate = useNavigate();
   const [selectedColor, setSelectedColor] = useState({});
   const [quantity, setQuantity] = useState(1);

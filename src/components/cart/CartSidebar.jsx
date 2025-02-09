@@ -67,7 +67,7 @@ export default function CartSidebar({ showCart, setShowCart }) {
               <span>
                 {cartItems.length} {cartItems.length === 1 ? "ITEM" : "ITEMS"}
               </span>{" "}
-              <Link to="/cart">
+              <Link to="/cart" onClick={handleClose}>
                 <span className="hover:underline">VIEW CART</span>
               </Link>
             </div>
@@ -136,12 +136,12 @@ export default function CartSidebar({ showCart, setShowCart }) {
               <span className="uppercase text-[12px] font-bold">Subtotal:</span>
               <span className="text-sm font-bold">${subtotal.toFixed(2)}</span>
             </div>
-            <Link to="/cart">
+            <Link to="/cart" onClick={handleClose}>
               <button className="bg-neutral-200 w-full text-[12px] py-3 uppercase hover:bg-neutral-100">
                 View Cart
               </button>
             </Link>
-            <Link to="/checkout">
+            <Link to="/checkout" onClick={handleClose}>
               <button className="bg-zinc-800 w-full text-white py-3 uppercase text-[12px] hover:bg-zinc-700">
                 Checkout
               </button>

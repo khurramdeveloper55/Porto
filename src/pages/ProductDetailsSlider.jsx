@@ -1,13 +1,16 @@
 import React, { useState, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { fetchProductImages } from "../api/fetchImages";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 export default function ProductDetailsSlider() {
   const [activeIndex, setActiveIndex] = useState(0);
   const carouselRef = useRef(null);
-  const { productId } = useParams();
+  const { productName } = useParams();
+
+  const location = useLocation();
+  const productId = location.state?.productId;
   const {
     data: productImages,
     isLoading,

@@ -93,8 +93,13 @@ export default function Header() {
               style={{ boxShadow: "0 10px 20px 5px #0000000f" }}
             >
               {searchResults.map((product) => (
-                <Link key={product.id} to={`/product/${product.id}`}>
-                  <div className="flex items-center hover:bg-neutral-100 px-4 gap-2 justify-around py-2 border-b-[1px] border-neutral-200">
+                <Link
+                  to={`/product/${encodeURIComponent(
+                    product.name.toLowerCase().replace(/\s+/g, "-")
+                  )}`}
+                  state={{ productId: product.id }}
+                >
+                  <div className="flex md:flex-row flex-col items-center hover:bg-neutral-100 px-4 gap-2 justify-around py-2 border-b-[1px] border-neutral-200">
                     <div>
                       <img
                         src={product.image}
@@ -102,7 +107,7 @@ export default function Header() {
                         className="max-w-12 rounded-full"
                       />
                     </div>
-                    <div className="text-neutral-500 text-sm text-left">
+                    <div className="text-neutral-500 text-sm md:text-left text-center">
                       {product.name}
                     </div>
                     <div className="text-neutral-500 text-sm whitespace-nowrap">

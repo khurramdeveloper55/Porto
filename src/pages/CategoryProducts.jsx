@@ -154,7 +154,14 @@ export default function CategoryProducts() {
                   </Link>
                 </span>
                 <h2 className="text-md font-medium mb-2  truncate blue-950">
-                  <Link to={`/product/${product.id}`}>{product.name}</Link>
+                  <Link
+                    to={`/product/${encodeURIComponent(
+                      product.name.toLowerCase().replace(/\s+/g, "-")
+                    )}`}
+                    state={{ productId: product.id }}
+                  >
+                    {product.name}
+                  </Link>
                 </h2>
                 <span className="flex gap-[1px] text-neutral-500 mb-2 text-sm justify-center">
                   <FaStar /> <FaStar /> <FaStar /> <FaStar /> <FaStar />

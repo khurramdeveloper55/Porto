@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectFilter } from "../redux/slices/filterSlice";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { FaArrowRightLong } from "react-icons/fa6";
+import Loader from "../components/common/Loader";
 
 export default function CategoryProducts() {
   const { categoryName } = useParams();
@@ -29,7 +30,7 @@ export default function CategoryProducts() {
     enabled: !!categoryName,
   });
 
-  if (isLoading) return <p>Loading products...</p>;
+  if (isLoading) return <Loader />;
   if (error) return <p>Error fetching products: {error.message}</p>;
 
   if (!products || products.length === 0) {

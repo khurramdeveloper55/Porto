@@ -10,8 +10,8 @@ export default function Login() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [username, setUsername] = useState("");
-  const { login, isLoading } = useLogin();
-  const { signup } = useSignup();
+  const { login, isLoading: loginLoading } = useLogin();
+  const { signup, isLoading: signUpLoading } = useSignup();
   const handleRegister = (e) => {
     e.preventDefault();
     return signup({ username, registerEmail, registerPassword });
@@ -72,10 +72,13 @@ export default function Login() {
             />
           </div>
           <button
-            className="uppercase w-full bg-zinc-800 font-semibold text-white mt-1 py-3"
+            className={`uppercase w-full bg-zinc-800 font-semibold ${
+              loginLoading ? "opacity-30" : "opacity-100"
+            } text-white mt-1 py-3`}
             type="submit"
+            disabled={loginLoading}
           >
-            Login
+            {loginLoading ? "Please Wait" : "Login"}
           </button>
         </form>
         <form onSubmit={handleRegister} className="w-full">
@@ -119,10 +122,13 @@ export default function Login() {
             />
           </div>
           <button
-            className="uppercase w-full bg-zinc-800 font-semibold text-white mt-1 py-3"
+            className={`uppercase w-full bg-zinc-800 font-semibold ${
+              signUpLoading ? "opacity-30" : "opacity-100"
+            } text-white mt-1 py-3`}
             type="submit"
+            disabled={signUpLoading}
           >
-            Register
+            {signUpLoading ? "Please Wait" : "Register"}
           </button>
         </form>
       </div>

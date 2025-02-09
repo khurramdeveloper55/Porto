@@ -9,6 +9,8 @@ import { selectFilter } from "../redux/slices/filterSlice";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import Pagination from "../components/common/Pagination";
+import Loader from "../components/common/Loader";
+import CategoryCarousel from "../components/home/CategoryCarousel";
 
 export default function ProductGallery() {
   const { visibleCount, minPrice, maxPrice, sortOption, currentPage } =
@@ -24,7 +26,7 @@ export default function ProductGallery() {
     queryFn: getProducts,
   });
 
-  if (isLoading) return <p>Loading products...</p>;
+  if (isLoading) return <Loader />;
   if (error) return <p>Error fetching products: {error.message}</p>;
 
   if (!products || products.length === 0) {
@@ -99,6 +101,8 @@ export default function ProductGallery() {
 
   return (
     <>
+      <CategoryCarousel showTitle={false} />
+      <div className="my-8"></div>
       <ProductSortingFilter />
       <div className="container mx-auto px-4 mt-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

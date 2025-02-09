@@ -21,6 +21,7 @@ import Loader from "./components/common/Loader";
 import OrderComplete from "./components/cart/OrderComplete";
 import { useDispatch } from "react-redux";
 import { fetchCurrentUser } from "./redux/slices/userSlice";
+import { Toaster } from "react-hot-toast";
 
 const queryClient = new QueryClient();
 
@@ -70,6 +71,7 @@ function MainApp() {
           </Route>
         </Routes>
       </BrowserRouter>
+      <Toaster />
     </>
   );
 }

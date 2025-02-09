@@ -72,8 +72,10 @@ export default function CartSidebar({ showCart, setShowCart }) {
               </Link>
             </div>
             <div className="overflow-y-scroll h-[335px] cart-overflow">
-              {cartItems === 0 ? (
-                <p>No items in the cart</p>
+              {cartItems.length === 0 ? (
+                <p className="text-sm text-neutral-500 mt-2 font-light">
+                  No products in the cart.
+                </p>
               ) : (
                 cartItems.map((item, index) => (
                   <div
@@ -81,7 +83,7 @@ export default function CartSidebar({ showCart, setShowCart }) {
                     className="flex justify-between items-center gap-2 my-4 relative"
                   >
                     <span
-                      className="absolute right-[2px] -top-2 cursor-pointer rounded-full z-[99999] p-[2px] text-sm"
+                      className="absolute right-[2px] top-0 cursor-pointer rounded-full z-[99999] p-[2px] text-sm"
                       onClick={() => dispatch(removeFromCart({ id: item.id }))}
                       style={{ boxShadow: "0 2px 6px 0 rgba(0,0,0,0.4)" }}
                     >
@@ -122,7 +124,7 @@ export default function CartSidebar({ showCart, setShowCart }) {
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-20 object-cover rounded-md right-2 relative"
+                      className="max-w-16 object-cover rounded-md right-2 relative"
                     />
                   </div>
                 ))

@@ -110,7 +110,7 @@ export default function ProductDetailsSlider() {
         </div>
       </section>
       <section className="thumbnail-carousel relative">
-        <ul className="carousel__slider flex w-64 gap-4" ref={carouselRef}>
+        <ul className="carousel__slider flex max-w-64 gap-4" ref={carouselRef}>
           {images.map((image, index) => (
             <li
               key={index}

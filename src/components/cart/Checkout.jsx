@@ -108,8 +108,16 @@ export default function Checkout() {
               </label>
               <input
                 type="text"
+                {...register("country", {
+                  required: "Country / Region is required",
+                })}
                 className="border-[1px] border-neutral-200 py-2"
               />
+              {errors.country && (
+                <span className="text-red-500 text-sm">
+                  {errors.country.message}
+                </span>
+              )}
             </div>
             <div className="w-full flex flex-col gap-1 mt-3 text-left">
               <label htmlFor="" className="text-neutral-500">
@@ -117,8 +125,16 @@ export default function Checkout() {
               </label>
               <input
                 type="text"
+                {...register("address", {
+                  required: "Street address is required",
+                })}
                 className="border-[1px] border-neutral-200 py-2"
               />
+              {errors.address && (
+                <span className="text-red-500 text-sm">
+                  {errors.address.message}
+                </span>
+              )}
             </div>
             <div className="w-full flex flex-col gap-1 mt-3 text-left">
               <label htmlFor="" className="text-neutral-500">
@@ -126,8 +142,16 @@ export default function Checkout() {
               </label>
               <input
                 type="text"
+                {...register("city", {
+                  required: "Town / City is required",
+                })}
                 className="border-[1px] border-neutral-200 py-2"
               />
+              {errors.city && (
+                <span className="text-red-500 text-sm">
+                  {errors.city.message}
+                </span>
+              )}
             </div>
             <div className="w-full flex flex-col gap-1 mt-3 text-left">
               <label htmlFor="" className="text-neutral-500">
@@ -135,8 +159,16 @@ export default function Checkout() {
               </label>
               <input
                 type="text"
+                {...register("state", {
+                  required: "State is required",
+                })}
                 className="border-[1px] border-neutral-200 py-2"
               />
+              {errors.state && (
+                <span className="text-red-500 text-sm">
+                  {errors.state.message}
+                </span>
+              )}
             </div>
             <div className="w-full flex flex-col gap-1 mt-3 text-left">
               <label htmlFor="" className="text-neutral-500">
@@ -144,8 +176,16 @@ export default function Checkout() {
               </label>
               <input
                 type="text"
+                {...register("zipCode", {
+                  required: "Zip Code is required",
+                })}
                 className="border-[1px] border-neutral-200 py-2"
               />
+              {errors.zipCode && (
+                <span className="text-red-500 text-sm">
+                  {errors.zipCode.message}
+                </span>
+              )}
             </div>
             <div className="w-full flex flex-col gap-1 mt-3 text-left">
               <label htmlFor="" className="text-neutral-500">
@@ -180,8 +220,12 @@ export default function Checkout() {
             <div className="mt-2 pt-2 border-t-[1px] flex-col flex justify-between mb-10">
               {cartItems.map((item) => (
                 <div className="flex mb-6">
-                  <div className="flex gap-3">
-                    <img src={item.image} alt="" className="w-16" />
+                  <div className="flex gap-3 items-center">
+                    <img
+                      src={item.image}
+                      alt=""
+                      className="max-w-12 max-h-12"
+                    />
                     <div className="flex flex-col items-start justify-between">
                       <h3 className="text-sm">{item.name} </h3>
                       <div className="flex gap-2 items-center px-1 leading-7 border-zinc-200 border-[1px]">
